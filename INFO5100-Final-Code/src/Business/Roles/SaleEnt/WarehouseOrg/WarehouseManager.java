@@ -4,10 +4,24 @@
  */
 package Business.Roles.SaleEnt.WarehouseOrg;
 
+import Business.CommerceSystem;
+import Business.Roles.Role;
+import Business.UserAccount.UserAccount;
+import UI.WarehouseManagerWorkArea.WarehouseManagerAreaJPanel;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Ekoxier
  */
-public class WarehouseManager {
-    
+public class WarehouseManager extends Role {
+
+    public WarehouseManager() {
+        super(Role.Type.WarehouseManager);
+    }
+
+    @Override
+    public JPanel createWorkArea(UserAccount account, CommerceSystem business, Role role) {
+        return new WarehouseManagerAreaJPanel(account, business, this);
+    }
 }

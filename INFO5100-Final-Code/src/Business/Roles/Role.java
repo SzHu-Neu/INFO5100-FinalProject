@@ -27,6 +27,7 @@ public abstract class Role {
         TransportationDriver,
         ProductManager,
     }
+    
     private Type role;
 
     public Role(Type role) {
