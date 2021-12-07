@@ -1,7 +1,7 @@
 package Business.Order;
 
 import Business.Item.Item;
-import Business.PurchaseEnt.UserOrg.Customer;
+import Business.Roles.PurchaseEnt.UserOrg.Customer;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -30,6 +30,6 @@ public class Order {
     }
 
     private int getTotalPrice() {
-        return 1;
+        return -1;
     }
 }

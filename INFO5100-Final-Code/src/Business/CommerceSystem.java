@@ -1,10 +1,10 @@
 package Business;
 
-
-import Business.DeliveryEnt.DeliveryEntDirectory;
-import Business.FactoryEnt.FactoryEntDirectory;
-import Business.PurchaseEnt.PurchaseEntDirectory;
-import Business.SaleEnt.SaleEntDirectory;
+import Business.Roles.DeliveryEnt.DeliveryEntDirectory;
+import Business.Roles.FactoryEnt.FactoryEntDirectory;
+import Business.Roles.PurchaseEnt.PurchaseEntDirectory;
+import Business.Roles.SaleEnt.SaleEntDirectory;
+import Business.UserAccount.UserAccountDirectory;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -17,11 +17,14 @@ import Business.SaleEnt.SaleEntDirectory;
 public class CommerceSystem {
 
     private static CommerceSystem cSystem;
-    private FactoryEntDirectory factoryEntDirctory;
+
+    private UserAccountDirectory userAccountDirectory;
+    private FactoryEntDirectory factoryEntDirectory;
     private DeliveryEntDirectory deliveryEntDirectory;
     private PurchaseEntDirectory purchaseEntDirectory;
     private SaleEntDirectory saleEntDirectory;
 
+    //    Singleton
     public static CommerceSystem getInstance() {
         if (cSystem == null) {
             cSystem = new CommerceSystem();
@@ -31,9 +34,30 @@ public class CommerceSystem {
     }
 
     private CommerceSystem() {
-        this.factoryEntDirctory = new FactoryEntDirectory();
+        this.factoryEntDirectory = new FactoryEntDirectory();
         this.deliveryEntDirectory = new DeliveryEntDirectory();
         this.purchaseEntDirectory = new PurchaseEntDirectory();
         this.saleEntDirectory = new SaleEntDirectory();
+        this.userAccountDirectory = new UserAccountDirectory();
+    }
+
+    public UserAccountDirectory getUserAccountDirectory() {
+        return userAccountDirectory;
+    }
+
+    public FactoryEntDirectory getFactoryEntDirectory() {
+        return factoryEntDirectory;
+    }
+
+    public DeliveryEntDirectory getDeliveryEntDirectory() {
+        return deliveryEntDirectory;
+    }
+
+    public PurchaseEntDirectory getPurchaseEntDirectory() {
+        return purchaseEntDirectory;
+    }
+
+    public SaleEntDirectory getSaleEntDirectory() {
+        return saleEntDirectory;
     }
 }
