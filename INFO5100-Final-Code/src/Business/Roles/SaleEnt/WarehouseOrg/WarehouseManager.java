@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Business.Item;
+package Business.Roles.SaleEnt.WarehouseOrg;
 
 /**
  *
  * @author Ekoxier
  */
-public class Item {
+public class WarehouseManager {
     
 }

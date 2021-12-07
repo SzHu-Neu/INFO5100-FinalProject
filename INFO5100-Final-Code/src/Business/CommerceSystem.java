@@ -19,6 +19,7 @@ public class CommerceSystem {
     private static CommerceSystem cSystem;
 
     private UserAccountDirectory userAccountDirectory;
+    
     private FactoryEntDirectory factoryEntDirectory;
     private DeliveryEntDirectory deliveryEntDirectory;
     private PurchaseEntDirectory purchaseEntDirectory;

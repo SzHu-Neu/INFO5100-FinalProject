@@ -15,14 +15,14 @@ import javax.swing.JPanel;
  *
  * @author raunak
  */
-public class ShopManagerWorkAreaJPanel extends WorkArea {
+public class ShopManagerAreaJPanel extends WorkArea {
 
     private ShopManager shopManager;
 
     /**
      * Creates new form AdminWorkAreaJPanel
      */
-    public ShopManagerWorkAreaJPanel(UserAccount account, CommerceSystem business, Role role) {
+    public ShopManagerAreaJPanel(UserAccount account, CommerceSystem business, Role role) {
         super(account, business, role);
         this.setBackground(Color.PINK);
         this.shopManager = (ShopManager) role;
@@ -61,10 +61,10 @@ public class ShopManagerWorkAreaJPanel extends WorkArea {
         });
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enterpriseLabel.setText("Restaurant :");
+        enterpriseLabel.setText("Shop :");
 
         enterpriseLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enterpriseLabel1.setText("Restaurant Admin Panel");
+        enterpriseLabel1.setText("Shop manager Panel");
 
         jLabel2.setText("Name:");
 
@@ -105,7 +105,7 @@ public class ShopManagerWorkAreaJPanel extends WorkArea {
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jButton1))))
-                .addContainerGap())
+                .addContainerGap(403, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,7 +122,7 @@ public class ShopManagerWorkAreaJPanel extends WorkArea {
                 .addComponent(manageOrdersJButton)
                 .addGap(18, 18, 18)
                 .addComponent(manageMenuJButton)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(241, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

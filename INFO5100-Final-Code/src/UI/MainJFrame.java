@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package UI;
 
 import Business.CommerceSystem;
@@ -13,10 +9,6 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-/**
- *
- * @author Lingfeng
- */
 public class MainJFrame extends javax.swing.JFrame {
 
     /**
@@ -129,8 +121,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 throw new Exception("Unexisted Account");
             }
             Role curRole = curUser.getRole();
-//            JPanel jpn = curRole.createWorkArea(container, curUser, system);
-//            this.jSplitPane1.setRightComponent(jpn);
+            JPanel jpn = curRole.createWorkArea(curUser, system, curRole);
+            this.jSplitPane1.setRightComponent(jpn);
             userNameJTextField.setEnabled(false);
             passwordField.setEnabled(false);
             this.loginJButton.setEnabled(false);

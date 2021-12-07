@@ -7,7 +7,7 @@ package Business.Roles.SaleEnt.ShopOrg;
 import Business.CommerceSystem;
 import Business.Roles.Role;
 import Business.UserAccount.UserAccount;
-import UI.ShopManagerWorkArea.ShopManagerWorkAreaJPanel;
+import UI.ShopManagerWorkArea.ShopManagerAreaJPanel;
 import javax.swing.JPanel;
 
 /**
@@ -22,6 +22,6 @@ public class ShopManager extends Role {
 
     @Override
     public JPanel createWorkArea(UserAccount account, CommerceSystem business, Role role) {
-        return new ShopManagerWorkAreaJPanel(account, business, this);
+        return new ShopManagerAreaJPanel(account, business, this);
     }
 }
