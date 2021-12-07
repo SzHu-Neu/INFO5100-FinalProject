@@ -8,6 +8,6 @@ package Business.Roles.DeliveryEnt;
  *
  * @author Ekoxier
  */
-public class DeliveryEntDirectory {
-//    public 
+public class DeliveryEnt {
+    
 }

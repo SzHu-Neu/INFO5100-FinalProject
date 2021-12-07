@@ -1,15 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package UI.CustomerWorkArea;
 
-
 import Business.CommerceSystem;
+import Business.Order.Item;
 import Business.Order.Order;
 import Business.Roles.PurchaseEnt.UserOrg.Customer;
 import Business.Roles.Role;
-import Business.Roles.SaleEnt.ShopOrg.Shop;
+import Business.Roles.SaleEnt.ShopOrg.ShopOrg;
 
 import Business.UserAccount.UserAccount;
 import UI.WorkArea;
@@ -19,11 +15,11 @@ import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-
 
 /**
  *
@@ -31,10 +27,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CustomerAreaJPanel extends WorkArea {
 
-    private ArrayList<Shop> shops;
+    private ArrayList<ShopOrg> shops;
     private Order curOrder;
     private Customer curCustomer;
-    private Shop selectedShop;
+    private ShopOrg selectedShop;
 
     /**
      * Creates new form DoctorWorkAreaJPanel
@@ -43,8 +39,8 @@ public class CustomerAreaJPanel extends WorkArea {
      * @param business
      * @param role
      */
-    public CustomerAreaJPanel(JPanel userProcessContainer, UserAccount account, CommerceSystem business, Role role) {
-        super( account, business, role);
+    public CustomerAreaJPanel(UserAccount account, CommerceSystem business, Role role) {
+        super(account, business, role);
         initComponents();
         this.setBackground(Color.cyan);
         this.numberJSpinner.setModel(new SpinnerNumberModel(1, 1, 10, 1));
@@ -55,8 +51,8 @@ public class CustomerAreaJPanel extends WorkArea {
         this.placeOrderJButton.setEnabled(false);
         this.curCustomer = (Customer) role;
         this.curOrder = new Order(this.curCustomer);
-        DefaultComboBoxModel restaurantComboBoxModel = new DefaultComboBoxModel(business.getRestaurantDirectory().getRests().toArray());
-        this.restaurantJComboBox.setModel(restaurantComboBoxModel);
+        DefaultComboBoxModel restaurantComboBoxModel = new DefaultComboBoxModel();
+        this.shopJComboBox.setModel(restaurantComboBoxModel);
 //        this.selectedRest = (Restaurant) this.restaurantJComboBox.getSelectedItem();
         this.refreshMenuTable();
 
@@ -102,22 +98,22 @@ public class CustomerAreaJPanel extends WorkArea {
     }
 
     private void refreshMenuTable() {
-        this.selectedRest = (Restaurant) this.restaurantJComboBox.getSelectedItem();
-        int tableColumnNum = this.selectedRest.getMenu().getItems().size();
+        this.selectedShop = (ShopOrg) this.shopJComboBox.getSelectedItem();
+        int tableColumnNum = this.selectedShop.getSaleItemList().size();
         Object rowDataItems[][] = new Object[tableColumnNum][2];
         for (int idx = 0; idx < tableColumnNum; idx++) {
-            rowDataItems[idx][0] = this.selectedRest.getMenu().getItems().get(idx).getName(); // Name
-            rowDataItems[idx][1] = this.selectedRest.getMenu().getItems().get(idx).getPrice(); // Price
+            rowDataItems[idx][0] = this.selectedShop.getSaleItemList().get(idx).getName(); // Name
+            rowDataItems[idx][1] = this.selectedShop.getSaleItemList().get(idx).getPrice(); // Price
         }
         Object MenuColNames[] = {"Name", "Price"};
-        this.menuJtable.setModel(new DefaultTableModel(rowDataItems, MenuColNames) {
+        this.saleJtable.setModel(new DefaultTableModel(rowDataItems, MenuColNames) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         }
         );
-        ListSelectionModel cellSelectionModel = this.menuJtable.getSelectionModel();
+        ListSelectionModel cellSelectionModel = this.saleJtable.getSelectionModel();
         cellSelectionModel.clearSelection();
         cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
@@ -138,9 +134,9 @@ public class CustomerAreaJPanel extends WorkArea {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        menuJtable = new javax.swing.JTable();
+        saleJtable = new javax.swing.JTable();
         enterpriseLabel = new javax.swing.JLabel();
-        restaurantJComboBox = new javax.swing.JComboBox<String>();
+        shopJComboBox = new javax.swing.JComboBox<String>();
         jScrollPane2 = new javax.swing.JScrollPane();
         orderJtable = new javax.swing.JTable();
         menuJLable = new javax.swing.JLabel();
@@ -152,7 +148,7 @@ public class CustomerAreaJPanel extends WorkArea {
         jLabel2 = new javax.swing.JLabel();
         numberJSpinner = new javax.swing.JSpinner();
 
-        menuJtable.setModel(new javax.swing.table.DefaultTableModel(
+        saleJtable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -168,15 +164,15 @@ public class CustomerAreaJPanel extends WorkArea {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(menuJtable);
+        jScrollPane1.setViewportView(saleJtable);
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setText("CustomerPanel");
 
-        restaurantJComboBox.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        restaurantJComboBox.addActionListener(new java.awt.event.ActionListener() {
+        shopJComboBox.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        shopJComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                restaurantJComboBoxActionPerformed(evt);
+                shopJComboBoxActionPerformed(evt);
             }
         });
 
@@ -203,7 +199,7 @@ public class CustomerAreaJPanel extends WorkArea {
         });
         jScrollPane2.setViewportView(orderJtable);
 
-        menuJLable.setText("Menu");
+        menuJLable.setText("Sale Items");
 
         addToOrderJButton.setText("Add");
         addToOrderJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -262,7 +258,7 @@ public class CustomerAreaJPanel extends WorkArea {
                                     .addGap(18, 18, 18)
                                     .addComponent(addToOrderJButton))
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(restaurantJComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(shopJComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(83, 83, 83)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -273,8 +269,8 @@ public class CustomerAreaJPanel extends WorkArea {
                             .addComponent(minusNumberJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(27, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(149, 149, 149)
-                .addComponent(menuJLable, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(144, 144, 144)
+                .addComponent(menuJLable)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(280, 280, 280))
@@ -287,11 +283,11 @@ public class CustomerAreaJPanel extends WorkArea {
                     .addComponent(checkAllOrderJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
-                .addComponent(restaurantJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(shopJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(menuJLable)
-                    .addComponent(jLabel2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(menuJLable))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -369,7 +365,7 @@ public class CustomerAreaJPanel extends WorkArea {
     }//GEN-LAST:event_placeOrderJButtonActionPerformed
 
     private void addToOrderJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToOrderJButtonActionPerformed
-        int selectedIndex = this.menuJtable.getSelectedRow();
+        int selectedIndex = this.saleJtable.getSelectedRow();
         if (selectedIndex == -1) {
             // Selected first
         }
@@ -380,7 +376,7 @@ public class CustomerAreaJPanel extends WorkArea {
         this.refreshOrderTable();
     }//GEN-LAST:event_addToOrderJButtonActionPerformed
 
-    private void restaurantJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restaurantJComboBoxActionPerformed
+    private void shopJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shopJComboBoxActionPerformed
         // TODO add your handling code here:
         // Refresh Menu and new order
 
@@ -388,7 +384,7 @@ public class CustomerAreaJPanel extends WorkArea {
         this.curOrder = new Order(this.curCustomer);
         this.refreshOrderTable();
         this.refreshMenuTable();
-    }//GEN-LAST:event_restaurantJComboBoxActionPerformed
+    }//GEN-LAST:event_shopJComboBoxActionPerformed
 
     private void orderJtableFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_orderJtableFocusLost
         // TODO add your handling code here:
@@ -404,11 +400,11 @@ public class CustomerAreaJPanel extends WorkArea {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel menuJLable;
-    private javax.swing.JTable menuJtable;
     private javax.swing.JButton minusNumberJButton;
     private javax.swing.JSpinner numberJSpinner;
     private javax.swing.JTable orderJtable;
     private javax.swing.JButton placeOrderJButton;
-    private javax.swing.JComboBox<String> restaurantJComboBox;
+    private javax.swing.JTable saleJtable;
+    private javax.swing.JComboBox<String> shopJComboBox;
     // End of variables declaration//GEN-END:variables
 }

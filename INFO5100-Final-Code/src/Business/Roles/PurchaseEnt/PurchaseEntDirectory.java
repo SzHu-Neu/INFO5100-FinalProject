@@ -4,16 +4,23 @@
  */
 package Business.Roles.PurchaseEnt;
 
-import Business.Roles.SaleEnt.CustServiceOrg.CustServiceOrg;
-import Business.Roles.SaleEnt.FinanceOrg.FinanceOrg;
-import Business.Roles.SaleEnt.WarehouseOrg.WarehouseOrg;
+import java.util.ArrayList;
 
 /**
  *
  * @author Ekoxier
  */
 public class PurchaseEntDirectory {
-    public CustServiceOrg custServiceOrg;
-    public FinanceOrg financeOrg;
-    public WarehouseOrg warehouseOrg;
+
+    private ArrayList<PurchaseEnt> purchaseEntList;
+
+    public PurchaseEntDirectory() {
+        this.purchaseEntList = new ArrayList<PurchaseEnt>();
+    }
+
+    public PurchaseEnt createPurchaseEnt() {
+        PurchaseEnt tmp = new PurchaseEnt();
+        purchaseEntList.add(tmp);
+        return tmp;
+    }
 }
