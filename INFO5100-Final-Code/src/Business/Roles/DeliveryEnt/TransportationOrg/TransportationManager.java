@@ -4,10 +4,23 @@
  */
 package Business.Roles.DeliveryEnt.TransportationOrg;
 
+import Business.CommerceSystem;
+import Business.Roles.Role;
+import Business.UserAccount.UserAccount;
+import UI.TransportationManagerWorkArea.TransportationManagerAreaJPanel;
+import javax.swing.JPanel;
+
 /**
  *
- * @author Ekoxier
+ * @author sichengzhou
  */
-public class TransportationManager {
-    
+public class TransportationManager extends Role{
+   public TransportationManager() {
+        super(Role.Type.TransportationManager);
+    }
+
+    @Override
+    public JPanel createWorkArea(UserAccount account, CommerceSystem business, Role role) {
+        return new TransportationManagerAreaJPanel(account, business, this);
+    }
 }

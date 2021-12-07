@@ -4,10 +4,23 @@
  */
 package Business.Roles.SaleEnt.CustServiceOrg;
 
+import Business.CommerceSystem;
+import Business.Roles.Role;
+import Business.UserAccount.UserAccount;
+import UI.ServicePersonnelWorkArea.ServicePersonnelAreaJPanel;
+import javax.swing.JPanel;
+
 /**
  *
- * @author Ekoxier
+ * @author sichengzhou
  */
-public class ServicePersonnel {
-//    sdsadsadsad
+public class ServicePersonnel extends Role {
+  public ServicePersonnel() {
+         super(Role.Type.ServicePersonnel);
+    }
+
+    @Override
+    public JPanel createWorkArea(UserAccount account, CommerceSystem business, Role role) {
+        return new ServicePersonnelAreaJPanel(account, business, this);
+    }
 }

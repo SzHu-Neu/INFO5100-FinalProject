@@ -6,8 +6,9 @@ package Business.Roles.SaleEnt.CustServiceOrg;
 
 /**
  *
- * @author Ekoxier
+ * @author sichengzhou
  */
-public class CustServiceOrg {
+public class CustServiceOrg{
+    
     
 }

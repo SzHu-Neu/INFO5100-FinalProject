@@ -4,10 +4,23 @@
  */
 package Business.Roles.FactoryEnt.ProductOrg;
 
+import Business.CommerceSystem;
+import Business.Roles.Role;
+import Business.UserAccount.UserAccount;
+import UI.ProductManagerWorkArea.ProductManagerAreaJPanel;
+import javax.swing.JPanel;
+
 /**
  *
- * @author Ekoxier
+ * @author sichengzhou
  */
-public class ProductManager {
-    
+public class ProductManager extends Role {
+    public ProductManager() {
+        super(Role.Type.ProductManager);
+    }
+
+    @Override
+    public JPanel createWorkArea(UserAccount account, CommerceSystem business, Role role) {
+        return new ProductManagerAreaJPanel(account, business, this);
+    }
 }

@@ -4,10 +4,23 @@
  */
 package Business.Roles.DeliveryEnt.TransportationOrg;
 
+import Business.CommerceSystem;
+import Business.Roles.Role;
+import Business.UserAccount.UserAccount;
+import UI.DriverWorkArea.DriverAreaJPanel;
+import javax.swing.JPanel;
+
 /**
  *
- * @author Ekoxier
+ * @author sichengzhou
  */
-public class Driver {
-    
+public class Driver extends Role {
+   public Driver() {
+        super(Role.Type.Driver);
+    }
+
+    @Override
+    public JPanel createWorkArea(UserAccount account, CommerceSystem business, Role role) {
+        return new DriverAreaJPanel(account, business, this);
+    }
 }

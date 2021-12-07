@@ -4,10 +4,24 @@
  */
 package Business.Roles.SaleEnt.FinanceOrg;
 
+import Business.CommerceSystem;
+import Business.Roles.Role;
+import Business.UserAccount.UserAccount;
+import UI.AccountantWorkArea.AccountantAreaJPanel;
+import javax.swing.JPanel;
+
 /**
  *
- * @author Ekoxier
+ * @author sichengzhou
  */
-public class Accountant {
-    
+public class Accountant extends Role {
+
+    public Accountant() {
+        super(Role.Type.Accountant);
+    }
+
+    @Override
+    public JPanel createWorkArea(UserAccount account, CommerceSystem business, Role role) {
+        return new AccountantAreaJPanel(account, business, this);
+    }
 }

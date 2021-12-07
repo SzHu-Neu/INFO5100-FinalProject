@@ -20,12 +20,14 @@ public abstract class Role {
         WarehouseManager,
         ShopManager,
         Accountant,
-        CustomerService,
-        DistributionDeliver,
+        ServicePersonnel,
+        DistributionDelivers,
         DistributionManager,
-        TrasportationManager,
-        TransportationDriver,
+        TransportationManager,
+        Driver,
         ProductManager,
+        
+       
     }
     
     private Type role;

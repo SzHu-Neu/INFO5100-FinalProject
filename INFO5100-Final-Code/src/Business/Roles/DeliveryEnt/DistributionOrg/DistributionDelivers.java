@@ -4,10 +4,23 @@
  */
 package Business.Roles.DeliveryEnt.DistributionOrg;
 
+import Business.CommerceSystem;
+import Business.Roles.Role;
+import Business.UserAccount.UserAccount;
+import UI.DistributionDeliversWorkArea.DistributionDeliversAreaJPanel;
+import javax.swing.JPanel;
+
 /**
  *
- * @author Ekoxier
+ * @author sichengzhou
  */
-public class DistributionDelivers {
-    
+public class DistributionDelivers extends Role{
+    public DistributionDelivers() {
+        super(Role.Type.DistributionDelivers);
+    }
+    @Override
+    public JPanel createWorkArea(UserAccount account, CommerceSystem business, Role role) {
+        return new DistributionDeliversAreaJPanel(account, business, this);
+    }
 }
+
