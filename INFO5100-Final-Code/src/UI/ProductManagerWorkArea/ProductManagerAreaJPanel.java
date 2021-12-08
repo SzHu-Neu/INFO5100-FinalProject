@@ -6,8 +6,8 @@
 package UI.ProductManagerWorkArea;
 
 import Business.CommerceSystem;
-import Business.Roles.FactoryEnt.ProductOrg.ProductManager;
 import Business.Roles.Role;
+import Business.Roles.FactoryEnt.ProductOrg.ProductManager;
 import Business.UserAccount.UserAccount;
 import UI.WorkArea;
 
