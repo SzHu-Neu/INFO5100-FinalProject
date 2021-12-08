@@ -4,10 +4,12 @@
  */
 package Business.Roles.SaleEnt;
 
+import Business.Order.SaleMenuItem;
 import Business.Roles.SaleEnt.CustServiceOrg.CustServiceOrg;
 import Business.Roles.SaleEnt.FinanceOrg.FinanceOrg;
 import Business.Roles.SaleEnt.ShopOrg.ShopOrg;
 import Business.Roles.SaleEnt.WarehouseOrg.WarehouseOrg;
+import java.util.ArrayList;
 
 /**
  *
@@ -39,9 +41,14 @@ public class SaleEnt {
 
     public SaleEnt(String name) {
         this.name = name;
-        this.shopOrg = new ShopOrg();
-        this.financeOrg = new FinanceOrg();
-        this.custServiceOrg = new CustServiceOrg();
-        this.warhouseOrg = new WarehouseOrg();
+        this.shopOrg = new ShopOrg(this);
+        this.financeOrg = new FinanceOrg(this);
+        this.custServiceOrg = new CustServiceOrg(this);
+        this.warhouseOrg = new WarehouseOrg(this);
+    }
+
+    // notify the warehouse to in stock
+    public void notifyWareHouse(SaleMenuItem item) {
+        this.warhouseOrg.addNeedInStockItems(item);
     }
 }

@@ -1,6 +1,7 @@
 package Business.Order;
 
 import Business.Roles.PurchaseEnt.UserOrg.Customer;
+import Business.Roles.SaleEnt.ShopOrg.ShopOrg;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,24 +17,38 @@ import java.util.Map;
  */
 public class Order {
 
-    // 
-    public enum StatusCode {
-    }
     private Customer customer; // Customer who ordered
-    private HashMap<Item, Integer> orderItemInfo;
-    private Date orderDate;
-    private StatusCode status;
+    private ShopOrg shop; // In which shop
+
+    private HashMap<SaleMenuItem, Integer> orderItemInfo;
+    private ArrayList<DeliverItem> deliverItemsInfo;
+    private Date checkoutDate;
 
     public Order(Customer customer) {
         this.customer = customer;
-        this.orderItemInfo = new HashMap<Item, Integer>();
+        this.shop = null;
+        this.orderItemInfo = new HashMap<SaleMenuItem, Integer>();
+        this.deliverItemsInfo = new ArrayList<DeliverItem>();
+        this.checkoutDate = null;
     }
 
-    public HashMap<Item, Integer> getOrderItemInfo() {
+    public HashMap<SaleMenuItem, Integer> getOrderItemInfo() {
         return orderItemInfo;
     }
 
-    public void addOrderItem(Item item, int itemNumber) {
+    public Date getCheckoutDate() {
+        return checkoutDate;
+    }
+
+    public void setCheckoutDate(Date checkoutDate) {
+        this.checkoutDate = checkoutDate;
+    }
+
+    public void setShop(ShopOrg shop) {
+        this.shop = shop;
+    }
+
+    public void addOrderItem(SaleMenuItem item, int itemNumber) {
         if (this.orderItemInfo.containsKey(item)) {
             int newNumber = this.orderItemInfo.get(item) + itemNumber;
             this.orderItemInfo.put(item, newNumber);
@@ -42,7 +57,7 @@ public class Order {
         }
     }
 
-    public void delOrderItemByOne(Item item) {
+    public void delOrderItemByOne(SaleMenuItem item) {
         int curNum = this.orderItemInfo.get(item);
         if (curNum == 1) {
             this.orderItemInfo.put(item, curNum - 1);
@@ -52,12 +67,37 @@ public class Order {
 
     }
 
+    // get thet total price of this order;
     public int getTotalPrice() {
         int price = 0;
-        for (Map.Entry<Item, Integer> entry : this.orderItemInfo.entrySet()) {
-            price += entry.getKey().getPrice() * entry.getValue();
+        for (Map.Entry<SaleMenuItem, Integer> entry : this.orderItemInfo.entrySet()) {
+            price += entry.getKey().getSalePrice() * entry.getValue();
         }
         return price;
     }
 
+    // Calculate the profit of this order;
+    public int calculateProfit() {
+        int profit = 0;
+        for (Map.Entry<SaleMenuItem, Integer> entry : this.orderItemInfo.entrySet()) {
+            profit += (entry.getKey().getSalePrice() - entry.getKey().getInPrice()) * entry.getValue();
+        }
+        return profit;
+    }
+
+    public void chekoutOrder() {
+//        Transfer from orderItemInfo to DeliverItemInfo
+//        And orderItemInfo should not be used
+        for (Map.Entry<SaleMenuItem, Integer> entry : orderItemInfo.entrySet()) {
+            deliverItemsInfo.add(
+                    new DeliverItem(entry.getKey().getName(),
+                            entry.getKey().getSalePrice(),
+                            entry.getValue(),
+                            entry.getKey(),
+                            this
+                    )
+            );
+        }
+        this.orderItemInfo = null;
+    }
 }

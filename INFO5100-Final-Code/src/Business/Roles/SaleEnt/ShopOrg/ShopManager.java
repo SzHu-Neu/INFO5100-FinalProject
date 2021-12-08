@@ -5,6 +5,7 @@
 package Business.Roles.SaleEnt.ShopOrg;
 
 import Business.CommerceSystem;
+import Business.Order.SaleMenuItem;
 import Business.Roles.Role;
 import Business.UserAccount.UserAccount;
 import UI.ShopManagerWorkArea.ShopManagerAreaJPanel;
@@ -16,8 +17,15 @@ import javax.swing.JPanel;
  */
 public class ShopManager extends Role {
 
-    public ShopManager() {
+    public ShopOrg shopOrganization;
+
+    public ShopManager(ShopOrg so) {
         super(Role.Type.ShopManager);
+        this.shopOrganization = shopOrganization;
+    }
+
+    public void NotifyInStock(SaleMenuItem item) {
+        this.shopOrganization.getSaleEnterprise().notifyWareHouse(item);
     }
 
     @Override

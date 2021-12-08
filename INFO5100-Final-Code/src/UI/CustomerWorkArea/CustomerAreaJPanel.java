@@ -1,7 +1,7 @@
 package UI.CustomerWorkArea;
 
 import Business.CommerceSystem;
-import Business.Order.Item;
+import Business.Order.SaleMenuItem;
 import Business.Order.Order;
 import Business.Roles.PurchaseEnt.UserOrg.Customer;
 import Business.Roles.Role;
@@ -33,7 +33,7 @@ public class CustomerAreaJPanel extends WorkArea {
     private ShopOrg selectedShop;
 
     /**
-     * Creates new form DoctorWorkAreaJPanel
+     * Creates new form WorkAreaJPanel
      *
      * @param account
      * @param business
@@ -44,7 +44,6 @@ public class CustomerAreaJPanel extends WorkArea {
         initComponents();
         this.setBackground(Color.cyan);
         this.numberJSpinner.setModel(new SpinnerNumberModel(1, 1, 10, 1));
-
 //        this.refreshOrderTable();      
         this.addNumberJButton.setEnabled(false);
         this.minusNumberJButton.setEnabled(false);
@@ -65,12 +64,12 @@ public class CustomerAreaJPanel extends WorkArea {
         } else {
             this.placeOrderJButton.setEnabled(false);
         }
-        Item[] item = this.curOrder.getOrderItemInfo().keySet().toArray(new Item[this.curOrder.getOrderItemInfo().size()]);
+        SaleMenuItem[] item = this.curOrder.getOrderItemInfo().keySet().toArray(new SaleMenuItem[this.curOrder.getOrderItemInfo().size()]);
         Integer[] numbers = this.curOrder.getOrderItemInfo().values().toArray(new Integer[this.curOrder.getOrderItemInfo().size()]);
         Object rowDataPendingOrder[][] = new Object[tableColumnNum][3];
         for (int idx = 0; idx < item.length; idx++) {
             rowDataPendingOrder[idx][0] = item[idx].getName(); // Name
-            rowDataPendingOrder[idx][1] = item[idx].getPrice(); // Price
+            rowDataPendingOrder[idx][1] = item[idx].getSalePrice(); // Price
             rowDataPendingOrder[idx][2] = numbers[idx]; // Number
         }
         Object OrderColNames[] = {"Name", "Price", "Number"};
@@ -87,7 +86,6 @@ public class CustomerAreaJPanel extends WorkArea {
         cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                //                System.out.println("Selected: ");
                 addNumberJButton.setEnabled(true);
                 minusNumberJButton.setEnabled(true);
             }
@@ -103,7 +101,7 @@ public class CustomerAreaJPanel extends WorkArea {
         Object rowDataItems[][] = new Object[tableColumnNum][2];
         for (int idx = 0; idx < tableColumnNum; idx++) {
             rowDataItems[idx][0] = this.selectedShop.getSaleItemList().get(idx).getName(); // Name
-            rowDataItems[idx][1] = this.selectedShop.getSaleItemList().get(idx).getPrice(); // Price
+            rowDataItems[idx][1] = this.selectedShop.getSaleItemList().get(idx).getSalePrice(); // Price
         }
         Object MenuColNames[] = {"Name", "Price"};
         this.saleJtable.setModel(new DefaultTableModel(rowDataItems, MenuColNames) {
@@ -190,11 +188,6 @@ public class CustomerAreaJPanel extends WorkArea {
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-        });
-        orderJtable.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                orderJtableFocusLost(evt);
             }
         });
         jScrollPane2.setViewportView(orderJtable);
@@ -310,21 +303,17 @@ public class CustomerAreaJPanel extends WorkArea {
 
     private void addNumberJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNumberJButtonActionPerformed
         // TODO add your handling code here:
-//        if(this.curOrder.getRestaurant().getName() != this.restaurantJComboBox.getSelectedItem().toString()) {
-//             
-//        } 
         int index = this.orderJtable.getSelectedRow();
-        Item[] item = this.curOrder.getOrderItemInfo().keySet().toArray(new Item[this.curOrder.getOrderItemInfo().size()]);
+        SaleMenuItem[] item = this.curOrder.getOrderItemInfo().keySet().toArray(new SaleMenuItem[this.curOrder.getOrderItemInfo().size()]);
         int curNum = this.curOrder.getOrderItemInfo().get(item[index]);
         this.curOrder.getOrderItemInfo().put(item[index], curNum + 1);
-        //        refreshOrderTable();
         this.orderJtable.setValueAt(curNum + 1, index, 2);
     }//GEN-LAST:event_addNumberJButtonActionPerformed
 
     private void minusNumberJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minusNumberJButtonActionPerformed
         // TODO add your handling code here:
         int index = this.orderJtable.getSelectedRow();
-        Item[] item = this.curOrder.getOrderItemInfo().keySet().toArray(new Item[this.curOrder.getOrderItemInfo().size()]);
+        SaleMenuItem[] item = this.curOrder.getOrderItemInfo().keySet().toArray(new SaleMenuItem[this.curOrder.getOrderItemInfo().size()]);
         int curNum = this.curOrder.getOrderItemInfo().get(item[index]);
         if (curNum > 1) {
             this.curOrder.getOrderItemInfo().put(item[index], curNum - 1);
@@ -339,7 +328,7 @@ public class CustomerAreaJPanel extends WorkArea {
     private void checkAllOrderJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAllOrderJButtonActionPerformed
         // TODO add your handling code here:
         JDialog jdl = new JDialog();
-        jdl.add(new CheckOrderJPanel(this.curCustomer.getPlacedOrderInCustomer()));
+        jdl.add(new CheckOrderJPanel(this.curCustomer.getValidOrders()));
         jdl.setSize(800, 600);
         jdl.setModal(true);
         jdl.setLocationRelativeTo(null);
@@ -349,11 +338,11 @@ public class CustomerAreaJPanel extends WorkArea {
     private void placeOrderJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placeOrderJButtonActionPerformed
         // TODO add your handling code here:
         try {
-            this.curOrder.setRestaurant(selectedRest);
-            this.selectedRest.addOrderInRest(curOrder);
-            this.curOrder.setStatus(Order.StatusCode.ToBeProcessed);
-            this.curOrder.setOrderDate(new Date());
-            this.curOrder = new Order(this.curCustomer);
+            this.curOrder.chekoutOrder();
+            this.selectedShop.addOrderInshop(curOrder);
+//            this.curOrder.setStatus(Order.StatusCode.ToBeProcessed);
+            this.curOrder.setCheckoutDate(new Date());
+            this.curOrder = new Order(this.curCustomer); // Place a new unassigned order to be processed
             this.refreshOrderTable();
             JOptionPane.showMessageDialog(this, "SUCCESS", "Result", -1);
 //            JOptionPane.showMessageDialog(
@@ -369,7 +358,7 @@ public class CustomerAreaJPanel extends WorkArea {
         if (selectedIndex == -1) {
             // Selected first
         }
-        Item item = this.selectedRest.getMenu().getItem(selectedIndex);
+        SaleMenuItem item = this.selectedShop.getSaleItemList().get(selectedIndex);
 //        Integer number = (Integer) 
         int number = Integer.parseInt(this.numberJSpinner.getValue().toString());
         this.curOrder.addOrderItem(item, number);
@@ -385,11 +374,6 @@ public class CustomerAreaJPanel extends WorkArea {
         this.refreshOrderTable();
         this.refreshMenuTable();
     }//GEN-LAST:event_shopJComboBoxActionPerformed
-
-    private void orderJtableFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_orderJtableFocusLost
-        // TODO add your handling code here:
-        System.out.print("www");
-    }//GEN-LAST:event_orderJtableFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addNumberJButton;

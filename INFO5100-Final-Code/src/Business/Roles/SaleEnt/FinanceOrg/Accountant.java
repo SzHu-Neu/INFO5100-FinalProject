@@ -19,7 +19,8 @@ public class Accountant extends Role {
     public Accountant() {
         super(Role.Type.Accountant);
     }
-
+    
+    
     @Override
     public JPanel createWorkArea(UserAccount account, CommerceSystem business, Role role) {
         return new AccountantAreaJPanel(account, business, this);

@@ -4,7 +4,9 @@
  */
 package Business.Roles.SaleEnt.ShopOrg;
 
-import Business.Order.Item;
+import Business.Order.SaleMenuItem;
+import Business.Order.Order;
+import Business.Roles.SaleEnt.SaleEnt;
 import java.util.ArrayList;
 
 /**
@@ -14,24 +16,29 @@ import java.util.ArrayList;
 public class ShopOrg {
 
     // 
-    private ArrayList<ShopManager> shopManagerList;
-    private ArrayList<Item> saleItemList;
+    private SaleEnt saleEnterprise;
 
-    public ShopOrg() {
-        this.saleItemList = new ArrayList<Item>();
+    private ArrayList<ShopManager> shopManagerList;
+    private ArrayList<SaleMenuItem> saleItemList;
+    private ArrayList<Order> ordersInShop;
+
+    public ShopOrg(SaleEnt se) {
+        this.saleEnterprise = se;
+        this.saleItemList = new ArrayList<SaleMenuItem>();
         this.shopManagerList = new ArrayList<ShopManager>();
+        this.ordersInShop = new ArrayList<Order>();
     }
 
     public ArrayList<ShopManager> getShopManagerList() {
         return shopManagerList;
     }
 
-    public ArrayList<Item> getSaleItemList() {
+    public ArrayList<SaleMenuItem> getSaleItemList() {
         return saleItemList;
     }
 
     public ShopManager createShopManager() {
-        ShopManager tmp = new ShopManager();
+        ShopManager tmp = new ShopManager(this);
         this.shopManagerList.add(tmp);
         return tmp;
     }
@@ -46,5 +53,13 @@ public class ShopOrg {
 
     public void removeShopManager(ShopManager sm) {
         this.shopManagerList.remove(sm);
+    }
+
+    public void addOrderInshop(Order order) {
+        this.ordersInShop.add(order);
+    }
+
+    public SaleEnt getSaleEnterprise() {
+        return saleEnterprise;
     }
 }

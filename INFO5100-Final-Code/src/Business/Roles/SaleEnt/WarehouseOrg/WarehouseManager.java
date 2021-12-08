@@ -5,9 +5,11 @@
 package Business.Roles.SaleEnt.WarehouseOrg;
 
 import Business.CommerceSystem;
+import Business.Order.DeliverItem;
 import Business.Roles.Role;
 import Business.UserAccount.UserAccount;
 import UI.WarehouseManagerWorkArea.WarehouseManagerAreaJPanel;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 
 /**
@@ -16,8 +18,21 @@ import javax.swing.JPanel;
  */
 public class WarehouseManager extends Role {
 
-    public WarehouseManager() {
+    private WarehouseOrg warhouseOrg;
+
+    public WarehouseManager(WarehouseOrg wo) {
         super(Role.Type.WarehouseManager);
+        this.warhouseOrg = wo;
+    }
+    private ArrayList<DeliverItem> deliverItems;
+
+    public void packAndSend(ArrayList<DeliverItem> sentDeliverItems) {
+        // Send this to Delivery Enterprise;        
+        this.deliverItems.removeAll(deliverItems);
+    }
+
+    public void proccessInStock() {
+//        this.warhouseOrg
     }
 
     @Override

@@ -4,10 +4,14 @@
  */
 package Business.Roles.SaleEnt.FinanceOrg;
 
+import Business.Roles.SaleEnt.SaleEnt;
+
 /**
  *
  * @author Ekoxier
  */
 public class FinanceOrg {
-    
+
+    public FinanceOrg(SaleEnt se) {
+    }
 }

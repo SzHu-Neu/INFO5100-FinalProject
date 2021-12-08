@@ -4,11 +4,15 @@
  */
 package Business.Roles.SaleEnt.CustServiceOrg;
 
+import Business.Roles.SaleEnt.SaleEnt;
+
 /**
  *
  * @author sichengzhou
  */
-public class CustServiceOrg{
-    
-    
+public class CustServiceOrg {
+
+    public CustServiceOrg(SaleEnt se) {
+    }
+
 }
