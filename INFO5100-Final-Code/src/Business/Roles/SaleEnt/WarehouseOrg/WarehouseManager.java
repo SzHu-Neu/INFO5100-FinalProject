@@ -45,6 +45,14 @@ public class WarehouseManager extends Role {
         }
     }
 
+    public WarehouseOrg getWarhouseOrg() {
+        return warhouseOrg;
+    }
+
+    public ArrayList<DeliverItem> getDeliverItems() {
+        return deliverItems;
+    }
+
     public void requestInStock(SaleMenuItem msi, int number, FactoryEnt selectedFactoryEnt) {
         //        CommerceSystem system = this.warhouseOrg.getSaleEnterprise().getSystem();
         //        system.getFactoryEntDirectory()

@@ -50,10 +50,10 @@ public class CustomerAreaJPanel extends WorkArea {
         this.placeOrderJButton.setEnabled(false);
         this.curCustomer = (Customer) role;
         this.curOrder = new Order(this.curCustomer);
-        DefaultComboBoxModel shopComboBoxModel = new DefaultComboBoxModel();
+        DefaultComboBoxModel shopComboBoxModel = new DefaultComboBoxModel(business.getSaleEntDirectory().getAllShops().toArray());
         this.shopJComboBox.setModel(shopComboBoxModel);
 //        this.selectedRest = (Restaurant) this.restaurantJComboBox.getSelectedItem();
-        this.refreshMenuTable();
+//        this.refreshMenuTable();
 
     }
 

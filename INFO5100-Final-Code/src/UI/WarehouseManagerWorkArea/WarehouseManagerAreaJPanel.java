@@ -5,9 +5,14 @@
 package UI.WarehouseManagerWorkArea;
 
 import Business.CommerceSystem;
+import Business.Order.SaleMenuItem;
 import Business.Roles.Role;
+import Business.Roles.SaleEnt.SaleEnt;
+import Business.Roles.SaleEnt.WarehouseOrg.WarehouseManager;
 import Business.UserAccount.UserAccount;
 import UI.WorkArea;
+import javax.swing.JDialog;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,12 +20,18 @@ import UI.WorkArea;
  */
 public class WarehouseManagerAreaJPanel extends WorkArea {
 
+    WarehouseManager warehouseManager;
+    SaleEnt saleEnt;
+
     /**
      * Creates new form WarehouseManagerAreaJPanel
      */
     public WarehouseManagerAreaJPanel(UserAccount account, CommerceSystem business, Role role) {
         super(account, business, role);
         initComponents();
+        this.warehouseManager = (WarehouseManager) role;
+        this.saleEnt = this.warehouseManager.getWarhouseOrg().getSaleEnterprise();
+        refreshTable();
     }
 
     /**
@@ -32,19 +43,167 @@ public class WarehouseManagerAreaJPanel extends WorkArea {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableSaleItem = new javax.swing.JTable();
+        enterpriseLabel1 = new javax.swing.JLabel();
+        inStockBtn = new javax.swing.JButton();
+        checkDelivery = new javax.swing.JButton();
+        RequestInStock = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableDelivery = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+
+        jTableSaleItem.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableSaleItem);
+
+        enterpriseLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        enterpriseLabel1.setText("Warehouse manager Panel");
+
+        inStockBtn.setText("Request InStock");
+        inStockBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inStockBtnActionPerformed(evt);
+            }
+        });
+
+        checkDelivery.setText("Refresh");
+        checkDelivery.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkDeliveryActionPerformed(evt);
+            }
+        });
+
+        RequestInStock.setText("Check Delivery");
+
+        jTableDelivery.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTableDelivery);
+
+        jLabel1.setText("Delivery Table");
+
+        jButton1.setText("Accept");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(enterpriseLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(checkDelivery)
+                            .addComponent(RequestInStock)
+                            .addComponent(inStockBtn)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1))
+                    .addComponent(jLabel1))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(enterpriseLabel1)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(checkDelivery)
+                                .addGap(48, 48, 48)
+                                .addComponent(RequestInStock)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(inStockBtn)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void inStockBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inStockBtnActionPerformed
+        // TODO add your handling code here:
+        SaleMenuItem selectedItem = this.saleEnt.getSaleItemInNotDeleted(this.jTableSaleItem.getSelectedRow());
+        JDialog jdl = new JDialog();
+        jdl.add(new InStockOptionPanel(selectedItem));
+        jdl.setSize(400, 300);
+        jdl.setModal(true);
+        jdl.setLocationRelativeTo(null);
+        jdl.setVisible(true);
+    }//GEN-LAST:event_inStockBtnActionPerformed
+
+    private void checkDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkDeliveryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checkDeliveryActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void refreshTable() {
+        int tableColumnNum = this.saleEnt.getNotDeletedSaleItemList().size();
+        Object ColNames[] = {"Name", "In Price", "Remain Number",};
+        Object rowDataItems[][] = new Object[tableColumnNum][ColNames.length];
+        for (int idx = 0; idx < tableColumnNum; idx++) {
+            rowDataItems[idx][0] = this.saleEnt.getNotDeletedSaleItemList().get(idx).getName(); // Name
+            rowDataItems[idx][1] = this.saleEnt.getNotDeletedSaleItemList().get(idx).getInPrice(); // In Price
+            rowDataItems[idx][3] = this.saleEnt.getNotDeletedSaleItemList().get(idx).getRemainNumber(); // Remain Number
+        }
+
+        this.jTableSaleItem.setModel(new DefaultTableModel(rowDataItems, ColNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        }
+        );
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton RequestInStock;
+    private javax.swing.JButton checkDelivery;
+    private javax.swing.JLabel enterpriseLabel1;
+    private javax.swing.JButton inStockBtn;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableDelivery;
+    private javax.swing.JTable jTableSaleItem;
     // End of variables declaration//GEN-END:variables
+
 }

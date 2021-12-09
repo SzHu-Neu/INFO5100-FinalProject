@@ -4,6 +4,7 @@
  */
 package Business.Roles.SaleEnt.WarehouseOrg;
 
+import Business.Order.DeliverItem;
 import Business.Order.SaleMenuItem;
 import Business.Roles.Organization;
 import Business.Roles.SaleEnt.SaleEnt;
@@ -17,11 +18,13 @@ public class WarehouseOrg extends Organization {
 
     private ArrayList<WarehouseManager> warehouseManagerList;
     private SaleEnt saleEnterprise;
+    private ArrayList<DeliverItem> deliverItemsInWarehouse;
     private String address;
 
     public WarehouseOrg(SaleEnt se, String address) {
         this.saleEnterprise = se;
         this.warehouseManagerList = new ArrayList<WarehouseManager>();
+        this.deliverItemsInWarehouse = new ArrayList<DeliverItem>();
         this.address = address;
     }
 

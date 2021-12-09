@@ -22,6 +22,11 @@ public class ShopOrg {
 
     private ArrayList<Order> ordersInShop;
 
+    @Override
+    public String toString() {
+        return this.saleEnterprise.getName();
+    }
+
     public ShopOrg(SaleEnt se) {
         this.saleEnterprise = se;
 

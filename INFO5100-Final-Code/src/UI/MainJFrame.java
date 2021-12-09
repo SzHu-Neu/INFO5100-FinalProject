@@ -115,13 +115,13 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void loginJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginJButtonActionPerformed
         // Get user name
-        try {
+//        try {
             UserAccount curUser = getUser();
-            if (curUser == null) {
-                throw new Exception("Unexisted Account");
-            }
+//            if (curUser == null) {
+//                throw new Exception("Unexisted Account");
+//            }
             Role curRole = curUser.getRole();
-//            System.out.print();
+
             JPanel jpn = curRole.createWorkArea(curUser, system, curRole);
             this.jSplitPane1.setRightComponent(jpn);
             userNameJTextField.setEnabled(false);
@@ -129,10 +129,10 @@ public class MainJFrame extends javax.swing.JFrame {
             this.loginJButton.setEnabled(false);
             this.logoutJButton.setEnabled(true);
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(
-                    this, e.getMessage(), "Failure", JOptionPane.ERROR_MESSAGE);
-        }
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(
+//                    this, e.getMessage(), "Failure", JOptionPane.ERROR_MESSAGE);
+//        }
     }//GEN-LAST:event_loginJButtonActionPerformed
 
     private void logoutJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutJButtonActionPerformed

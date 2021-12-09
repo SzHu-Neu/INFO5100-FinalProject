@@ -79,32 +79,34 @@ public class SaleEnt {
     public SaleMenuItem addSaleItem(String name, int salePrice, int inPrice) {
         for (SaleMenuItem singleSMI : this.saleItemList) {
             if (singleSMI.getName().equals(name)) {
-                // Check if existed
                 if (!singleSMI.IsDeleted()) {
                     // Not Deleted
                     return null; // Already Exist
                 } else {
                     // Deleted
-                    this.saleItemList.remove(singleSMI);
                     singleSMI.setInPrice(inPrice);
                     singleSMI.setSalePrice(salePrice);
                     singleSMI.setName(name);
                     singleSMI.setIsDeleted(false);
                     return singleSMI;
                 }
-            } else {
-                SaleMenuItem tmp = new SaleMenuItem(name, salePrice, inPrice, 0);
-                this.saleItemList.add(tmp);
-                return tmp;
             }
         }
-        return null;
+        // Do not have existed 
+        SaleMenuItem tmp = new SaleMenuItem(name, salePrice, inPrice, 0);
+        this.saleItemList.add(tmp);
+        return tmp;
+
     }
 
     // delete item in filtered list
-    public void delSaleItem(int filteredIdx) {
+    public void delSaleItemInNotDeleted(int filteredIdx) {
         SaleMenuItem smi = getNotDeletedSaleItemList().get(filteredIdx);
         smi.setIsDeleted(true);
+    }
+
+    public SaleMenuItem getSaleItemInNotDeleted(int filteredIdx) {
+        return getNotDeletedSaleItemList().get(filteredIdx);
     }
 
     public SaleMenuItem getSaleMenuItemByName(String name) {

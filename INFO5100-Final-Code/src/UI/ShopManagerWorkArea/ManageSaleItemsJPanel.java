@@ -152,7 +152,7 @@ public class ManageSaleItemsJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         try {
             int idx = this.menuJTable.getSelectedRow();
-            this.saleEnt.delSaleItem(idx);
+            this.saleEnt.delSaleItemInNotDeleted(idx);
             this.refreshMenu();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(
