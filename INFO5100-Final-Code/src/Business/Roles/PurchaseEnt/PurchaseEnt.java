@@ -13,4 +13,12 @@ import Business.Roles.PurchaseEnt.UserOrg.UserOrg;
 public class PurchaseEnt {
 
     private UserOrg userOrg;
+
+    public PurchaseEnt(String address) {
+        this.userOrg = new UserOrg(address);
+    }
+
+    public UserOrg getUserOrg() {
+        return userOrg;
+    }
 }

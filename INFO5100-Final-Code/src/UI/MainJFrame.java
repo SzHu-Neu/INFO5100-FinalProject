@@ -121,6 +121,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 throw new Exception("Unexisted Account");
             }
             Role curRole = curUser.getRole();
+//            System.out.print();
             JPanel jpn = curRole.createWorkArea(curUser, system, curRole);
             this.jSplitPane1.setRightComponent(jpn);
             userNameJTextField.setEnabled(false);
