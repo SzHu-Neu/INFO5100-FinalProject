@@ -5,6 +5,7 @@
 package Business.Roles.FactoryEnt;
 
 import Business.CommerceSystem;
+import Business.Roles.FactoryEnt.ProductOrg.ProductOrg;
 import java.util.ArrayList;
 
 /**
@@ -19,6 +20,14 @@ public class FactoryEntDirectory {
     public FactoryEntDirectory(CommerceSystem system) {
         this.system = system;
         this.factoryEntList = new ArrayList<FactoryEnt>();
+    }
+
+    public ArrayList<ProductOrg> listAllProductOrgs() {
+        ArrayList<ProductOrg> tmp = new ArrayList<ProductOrg>();
+        for (FactoryEnt fe : factoryEntList) {
+            tmp.add(fe.getProductOrg());
+        }
+        return tmp;
     }
 
     public CommerceSystem getSystem() {

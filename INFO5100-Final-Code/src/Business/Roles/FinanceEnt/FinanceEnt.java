@@ -6,22 +6,24 @@ package Business.Roles.FinanceEnt;
 
 import Business.Roles.FinanceEnt.CreditPaymentOrg.CreditPaymentOrg;
 
-
 /**
  *
  * @author sichengzhou
  */
 public class FinanceEnt {
-    private CreditPaymentOrg creditpaymentorg;
-    
 
-    public CreditPaymentOrg getCreditpaymentorg() {
-        return creditpaymentorg;
+    private CreditPaymentOrg creditPaymentOrg;
+
+    public FinanceEnt() {
+        this.creditPaymentOrg = new CreditPaymentOrg();
     }
 
-    public void setCreditpaymentorg(CreditPaymentOrg creditpaymentorg) {
-        this.creditpaymentorg = creditpaymentorg;
+    public CreditPaymentOrg getCreditPaymentOrg() {
+        return creditPaymentOrg;
     }
 
-   
+    public void setCreditPaymentOrg(CreditPaymentOrg creditPaymentOrg) {
+        this.creditPaymentOrg = creditPaymentOrg;
+    }
+
 }

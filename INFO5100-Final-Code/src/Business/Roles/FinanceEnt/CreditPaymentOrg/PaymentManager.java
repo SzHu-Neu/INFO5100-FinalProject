@@ -15,8 +15,16 @@ import javax.swing.JPanel;
  * @author sichengzhou
  */
 public class PaymentManager extends Role {
-    public PaymentManager() {
-         super(Role.Type.PaymentManager);
+
+    CreditPaymentOrg creditPaymentOrg;
+
+    public PaymentManager(CreditPaymentOrg cpo) {
+        super(Role.Type.PaymentManager);
+        this.creditPaymentOrg = cpo;
+    }
+
+    public CreditPaymentOrg getCreditPaymentOrg() {
+        return creditPaymentOrg;
     }
 
     @Override
@@ -24,5 +32,3 @@ public class PaymentManager extends Role {
         return new PaymentManagerAreaJPanel(account, business, this);
     }
 }
-    
-

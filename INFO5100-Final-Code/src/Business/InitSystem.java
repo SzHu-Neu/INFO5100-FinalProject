@@ -26,7 +26,7 @@ public class InitSystem {
         system.getUserAccountDirectory().createUserAccount("shopmanager1", "123456", sm);
 
         // Customer Create;
-        PurchaseEnt purchaseEnt1 = system.getPurchaseEntDirectory().createPurchaseEnt("customer1");
+        PurchaseEnt purchaseEnt1 = system.getPurchaseEntDirectory().createPurchaseEnt("customer1", system);
         Customer cust = purchaseEnt1.getUserOrg().addCustomer("customer1", "1891333");
         system.getUserAccountDirectory().createUserAccount("customer1", "123456", cust);
 

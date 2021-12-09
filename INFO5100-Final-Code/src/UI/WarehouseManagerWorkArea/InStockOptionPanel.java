@@ -4,7 +4,11 @@
  */
 package UI.WarehouseManagerWorkArea;
 
+import Business.CommerceSystem;
 import Business.Order.SaleMenuItem;
+import Business.Roles.FactoryEnt.ProductOrg.ProductOrg;
+import Business.Roles.SaleEnt.WarehouseOrg.WarehouseOrg;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,13 +17,16 @@ import Business.Order.SaleMenuItem;
 public class InStockOptionPanel extends javax.swing.JPanel {
 
     SaleMenuItem saleMenuItem;
+    ArrayList<ProductOrg> productOrgs;
 
     /**
      * Creates new form InStockOptionPanel
      */
-    public InStockOptionPanel(SaleMenuItem smi) {
+    public InStockOptionPanel(SaleMenuItem smi, ArrayList<ProductOrg> pos) {
         initComponents();
         this.saleMenuItem = smi;
+        // list all factories and choose which one to request
+        this.productOrgs = pos;
     }
 
     /**

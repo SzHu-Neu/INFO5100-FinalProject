@@ -4,6 +4,7 @@
  */
 package Business.Roles.PurchaseEnt;
 
+import Business.CommerceSystem;
 import Business.Roles.PurchaseEnt.UserOrg.UserOrg;
 
 /**
@@ -13,9 +14,15 @@ import Business.Roles.PurchaseEnt.UserOrg.UserOrg;
 public class PurchaseEnt {
 
     private UserOrg userOrg;
+    private CommerceSystem system;
 
-    public PurchaseEnt(String address) {
-        this.userOrg = new UserOrg(address);
+    public PurchaseEnt(String address, CommerceSystem system) {
+        this.userOrg = new UserOrg(address, this);
+        this.system = system;
+    }
+
+    public CommerceSystem getSystem() {
+        return system;
     }
 
     public UserOrg getUserOrg() {

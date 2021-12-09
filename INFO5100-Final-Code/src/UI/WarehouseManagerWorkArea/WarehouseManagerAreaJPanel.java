@@ -159,7 +159,7 @@ public class WarehouseManagerAreaJPanel extends WorkArea {
         // TODO add your handling code here:
         SaleMenuItem selectedItem = this.saleEnt.getSaleItemInNotDeleted(this.jTableSaleItem.getSelectedRow());
         JDialog jdl = new JDialog();
-        jdl.add(new InStockOptionPanel(selectedItem));
+        jdl.add(new InStockOptionPanel(selectedItem, business.getFactoryEntDirectory().listAllProductOrgs()));
         jdl.setSize(400, 300);
         jdl.setModal(true);
         jdl.setLocationRelativeTo(null);

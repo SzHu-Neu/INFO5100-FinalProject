@@ -6,10 +6,12 @@
 package UI.PaymentManagerWorkArea;
 
 import Business.CommerceSystem;
+import Business.Roles.FinanceEnt.CreditPaymentOrg.CreditPaymentOrg;
 import Business.Roles.FinanceEnt.CreditPaymentOrg.PaymentManager;
 import Business.Roles.Role;
 import Business.UserAccount.UserAccount;
 import UI.WorkArea;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,15 +19,16 @@ import UI.WorkArea;
  */
 public class PaymentManagerAreaJPanel extends WorkArea {
 
+    PaymentManager paymentManager;
+
     /**
      * Creates new form PaymentManagerAreaJPanel
      */
     public PaymentManagerAreaJPanel(UserAccount account, CommerceSystem business, Role role) {
         super(account, business, role);
         initComponents();
+        this.paymentManager = (PaymentManager) role;
     }
-
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,7 +51,13 @@ public class PaymentManagerAreaJPanel extends WorkArea {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-
+    private void refreshTable() {
+        int length = this.paymentManager.getCreditPaymentOrg().getPaymentInfos().size();
+        for (int idx = 0; idx < length; idx++) {
+            CreditPaymentOrg.SinglePaymentInfo info = this.paymentManager.getCreditPaymentOrg().getPaymentInfos().get(idx);
+            info.getName();
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

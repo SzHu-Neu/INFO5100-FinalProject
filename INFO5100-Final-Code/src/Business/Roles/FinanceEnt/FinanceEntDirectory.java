@@ -12,17 +12,23 @@ import java.util.ArrayList;
  * @author sichengzhou
  */
 public class FinanceEntDirectory {
-    private ArrayList<FinanceEnt> financeEntList;
+//    private ArrayList<FinanceEnt> financeEntList;
+
+    private FinanceEnt financeEnt;
+
     CommerceSystem system;
 
     public FinanceEntDirectory(CommerceSystem system) {
         this.system = system;
-        this.financeEntList = new ArrayList<FinanceEnt>();
+        this.financeEnt = new FinanceEnt();
+    }
+
+    public FinanceEnt getFinanceEnt() {
+        return financeEnt;
     }
 
     public CommerceSystem getSystem() {
         return system;
     }
-    
-    
+
 }
