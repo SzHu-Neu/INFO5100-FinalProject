@@ -32,20 +32,25 @@ public class CreditPaymentOrg {
         return this.paymentInfos;
     }
 
-    public void addPaymentInfo(String name) {
-        this.paymentInfos.add(new SinglePaymentInfo(name));
+    public void addPaymentInfo(String name, int price) {
+        this.paymentInfos.add(new SinglePaymentInfo(name,price));
+        
     }
+   
 
     public class SinglePaymentInfo {
 
         private String name;
+        private int price;
 
-        SinglePaymentInfo(String name) {
+        SinglePaymentInfo(String name,int price) {
             this.name = name;
+            this.price = price;
         }
 
         public String getName() {
             return name;
         }
+        
     }
 }
