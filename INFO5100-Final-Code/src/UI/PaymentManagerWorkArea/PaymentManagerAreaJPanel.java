@@ -5,17 +5,25 @@
  */
 package UI.PaymentManagerWorkArea;
 
+import Business.CommerceSystem;
+import Business.Roles.FinanceEnt.CreditPaymentOrg.PaymentManager;
+import Business.UserAccount.UserAccount;
+
 /**
  *
  * @author sichengzhou
  */
-public class PaymentManagerWorkArea extends javax.swing.JPanel {
+public class PaymentManagerAreaJPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form PaymentManagerWorkArea
+     * Creates new form PaymentManagerAreaJPanel
      */
-    public PaymentManagerWorkArea() {
+    public PaymentManagerAreaJPanel() {
         initComponents();
+    }
+
+    public PaymentManagerAreaJPanel(UserAccount account, CommerceSystem business, PaymentManager aThis) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

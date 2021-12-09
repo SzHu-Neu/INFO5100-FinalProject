@@ -13,4 +13,15 @@ import Business.Roles.FinanceEnt.CreditPaymentOrg.CreditPaymentOrg;
  */
 public class FinanceEnt {
     private CreditPaymentOrg creditpaymentorg;
+    
+
+    public CreditPaymentOrg getCreditpaymentorg() {
+        return creditpaymentorg;
+    }
+
+    public void setCreditpaymentorg(CreditPaymentOrg creditpaymentorg) {
+        this.creditpaymentorg = creditpaymentorg;
+    }
+
+   
 }
