@@ -27,6 +27,10 @@ public class Accountant extends Role {
         return financeOrg;
     }
 
+    public void analyze() {
+//        analyze the transaction history 
+    }
+
     @Override
     public JPanel createWorkArea(UserAccount account, CommerceSystem business, Role role) {
         return new AccountantAreaJPanel(account, business, this);

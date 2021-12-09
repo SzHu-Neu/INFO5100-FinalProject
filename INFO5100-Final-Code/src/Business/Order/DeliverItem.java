@@ -4,6 +4,7 @@
  */
 package Business.Order;
 
+import Business.Roles.Organization;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -26,14 +27,14 @@ public class DeliverItem {
     private AdditionalInfo additionalInfo;
     private Order orderBelonged; // Order contains
 
-    public DeliverItem(String name, int price, int quantity, SaleMenuItem saleMenuItemBelonged, Order orderBelonged, String fromAddress, String toAddress) {
+    public DeliverItem(String name, int price, int quantity, SaleMenuItem saleMenuItemBelonged, Order orderBelonged, Organization fromOrg, Organization toOrg) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.currentStatus = DeliverItemStatus.NotDelivered;
         this.orderBelonged = orderBelonged;
         this.saleMenuItemBelonged = saleMenuItemBelonged;
-        this.additionalInfo = new AdditionalInfo(fromAddress, toAddress);
+        this.additionalInfo = new AdditionalInfo(fromOrg, toOrg);
     }
 
     public int getQuantity() {
@@ -72,22 +73,23 @@ class AdditionalInfo {
         private Date date;
         private String event;
     }
-    private String fromAddress;
-    private String toAddress;
+    private Organization fromOrg;
+    private Organization toOrg;
+
     private ArrayList<DeliverTimeline> timelines; // Timelines that record the delivery procedure
 
-    AdditionalInfo(String from, String to) {
-        this.fromAddress = from;
-        this.toAddress = to;
+    AdditionalInfo(Organization fromOrg, Organization toOrg) {
+        this.fromOrg = fromOrg;
+        this.toOrg = toOrg;
         this.timelines = new ArrayList<DeliverTimeline>();
     }
 
-    public String getFromAddress() {
-        return fromAddress;
+    public Organization getFromOrg() {
+        return fromOrg;
     }
 
-    public String getToAddress() {
-        return toAddress;
+    public Organization getToOrg() {
+        return toOrg;
     }
 
     public ArrayList<DeliverTimeline> getTimelines() {

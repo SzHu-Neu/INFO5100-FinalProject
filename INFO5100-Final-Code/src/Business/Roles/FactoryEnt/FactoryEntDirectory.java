@@ -4,10 +4,24 @@
  */
 package Business.Roles.FactoryEnt;
 
+import Business.CommerceSystem;
+import java.util.ArrayList;
+
 /**
  *
  * @author Ekoxier
  */
 public class FactoryEntDirectory {
-    
+
+    private CommerceSystem system;
+    private ArrayList<FactoryEnt> factoryEntList;
+
+    public FactoryEntDirectory(CommerceSystem system) {
+        this.system = system;
+        this.factoryEntList = new ArrayList<FactoryEnt>();
+    }
+
+    public CommerceSystem getSystem() {
+        return system;
+    }
 }

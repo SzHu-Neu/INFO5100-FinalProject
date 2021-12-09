@@ -4,6 +4,7 @@
  */
 package Business.Roles.PurchaseEnt;
 
+import Business.CommerceSystem;
 import java.util.ArrayList;
 
 /**
@@ -13,9 +14,15 @@ import java.util.ArrayList;
 public class PurchaseEntDirectory {
 
     private ArrayList<PurchaseEnt> purchaseEntList;
+    CommerceSystem system;
 
-    public PurchaseEntDirectory() {
+    public PurchaseEntDirectory(CommerceSystem system) {
+        this.system = system;
         this.purchaseEntList = new ArrayList<PurchaseEnt>();
+    }
+
+    public CommerceSystem getSystem() {
+        return system;
     }
 
     public PurchaseEnt createPurchaseEnt() {

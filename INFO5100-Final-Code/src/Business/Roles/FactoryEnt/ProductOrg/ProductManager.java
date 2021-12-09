@@ -15,8 +15,13 @@ import javax.swing.JPanel;
  * @author sichengzhou
  */
 public class ProductManager extends Role {
+
     public ProductManager() {
         super(Role.Type.ProductManager);
+    }
+
+    public void sendOut() {
+
     }
 
     @Override

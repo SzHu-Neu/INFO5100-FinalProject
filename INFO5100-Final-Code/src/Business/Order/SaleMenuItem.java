@@ -15,6 +15,7 @@ public class SaleMenuItem {
     private int inPrice; // In Stock Price
     private int soldNumber; // number of sold out
     private int remainNumber; // number of remain 
+    private boolean isDeleted; // is deleted from shop?
 
     public SaleMenuItem(String name, int salePrice, int inPrice, int number) {
         this.name = name;
@@ -22,6 +23,7 @@ public class SaleMenuItem {
         this.inPrice = inPrice;
         this.soldNumber = 0;
         this.remainNumber = number;
+        this.isDeleted = false;
     }
 
     public String getName() {

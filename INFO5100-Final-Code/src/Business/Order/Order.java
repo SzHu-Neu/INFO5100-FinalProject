@@ -49,6 +49,18 @@ public class Order {
         this.shop = shop;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public ShopOrg getShop() {
+        return shop;
+    }
+
+    public ArrayList<DeliverItem> getDeliverItemsInfo() {
+        return deliverItemsInfo;
+    }
+
     public void addOrderItem(SaleMenuItem item, int itemNumber) {
         if (this.orderItemInfo.containsKey(item)) {
             int newNumber = this.orderItemInfo.get(item) + itemNumber;
@@ -96,8 +108,8 @@ public class Order {
                             entry.getValue(),
                             entry.getKey(),
                             this,
-                            this.shop.getSaleEnterprise().getWarehouseAddress(),
-                            this.customer.getAddress()
+                            this.shop.getSaleEnterprise().getWarhouseOrg(),
+                            this.customer.getUserOrg()
                     ));
 
         }

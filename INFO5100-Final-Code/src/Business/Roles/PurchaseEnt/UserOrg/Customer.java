@@ -19,16 +19,16 @@ import UI.CustomerWorkArea.CustomerAreaJPanel;
 public class Customer extends Role {
 
     private ArrayList<Order> ordersInCustomer;
-    private String address;
     private String phone;
     private String name;
+    private UserOrg userOrg;
 
-    public Customer(String address, String name, String phone) {
+    public Customer(String name, String phone, UserOrg userOrg) {
         super(Role.Type.Customer);
         this.ordersInCustomer = new ArrayList<Order>();
-        this.address = address;
         this.name = name;
         this.phone = phone;
+        this.userOrg = userOrg;
     }
 
     public ArrayList<Order> getValidOrders() {
@@ -42,12 +42,28 @@ public class Customer extends Role {
         return tmpList;
     }
 
-    public ArrayList<Order> getOrdersInCustomer() {
-        return ordersInCustomer;
+    public void checkOut(Order order) {
+        this.ordersInCustomer.add(order);
+        // checkOutOrder
+        order.chekoutOrder();
+        // Add a transaction
+        order.getShop().getSaleEnterprise().getFinanceOrg().addTransaction(order.getTotalPrice(), "Bought Income");
     }
 
-    public String getAddress() {
-        return address;
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public UserOrg getUserOrg() {
+        return userOrg;
+    }
+
+    public ArrayList<Order> getOrdersInCustomer() {
+        return ordersInCustomer;
     }
 
     @Override

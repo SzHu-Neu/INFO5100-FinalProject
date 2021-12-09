@@ -1,14 +1,21 @@
 package Business.UserAccount;
 
+import Business.CommerceSystem;
 import Business.Roles.Role;
 import java.util.ArrayList;
 
 public class UserAccountDirectory {
 
+    CommerceSystem system;
     private ArrayList<UserAccount> userAccountList;
 
-    public UserAccountDirectory() {
+    public UserAccountDirectory(CommerceSystem system) {
         userAccountList = new ArrayList();
+        this.system = system;
+    }
+
+    public CommerceSystem getSystem() {
+        return system;
     }
 
     public ArrayList<UserAccount> getActiveUserAccountList() {

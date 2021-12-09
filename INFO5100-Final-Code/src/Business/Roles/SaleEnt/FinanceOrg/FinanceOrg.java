@@ -50,7 +50,7 @@ public class FinanceOrg {
 
         private Date time;
         private int moneyEarned;
-        private String additionalInfo;
+        private String additionalInfo; // 
 
         Transaction(int moneyEarned, String additionalInfo) {
             this.time = new Date();

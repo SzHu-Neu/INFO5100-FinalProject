@@ -8,6 +8,7 @@ import Business.CommerceSystem;
 import Business.Order.DeliverItem;
 import Business.Order.SaleMenuItem;
 import Business.Roles.DeliveryEnt.DeliveryEnt;
+import Business.Roles.FactoryEnt.FactoryEnt;
 import Business.Roles.Role;
 import Business.UserAccount.UserAccount;
 import UI.WarehouseManagerWorkArea.WarehouseManagerAreaJPanel;
@@ -44,8 +45,15 @@ public class WarehouseManager extends Role {
         }
     }
 
-    public void proccessInStock() {
-//        this.warhouseOrg
+    public void requestInStock(SaleMenuItem msi, int number, FactoryEnt selectedFactoryEnt) {
+        //        CommerceSystem system = this.warhouseOrg.getSaleEnterprise().getSystem();
+        //        system.getFactoryEntDirectory()
+        //        Select which facotoryEnt to request in stock
+        selectedFactoryEnt.getProductOrg().addReuqestHandleList(msi, number, this.warhouseOrg);
+
+        // Finance should record it as well
+        int totalPrice = msi.getInPrice() * number * (-1);
+        this.warhouseOrg.getSaleEnterprise().getFinanceOrg().addTransaction(totalPrice, "In Stock Cost");
     }
 
     @Override

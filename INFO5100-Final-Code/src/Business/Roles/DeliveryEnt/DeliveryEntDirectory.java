@@ -4,10 +4,21 @@
  */
 package Business.Roles.DeliveryEnt;
 
+import Business.CommerceSystem;
+
 /**
  *
  * @author Ekoxier
  */
 public class DeliveryEntDirectory {
-//    public 
+
+    CommerceSystem system;
+
+    public DeliveryEntDirectory(CommerceSystem system) {
+        this.system = system;
+    }
+
+    public CommerceSystem getSystem() {
+        return system;
+    }
 }

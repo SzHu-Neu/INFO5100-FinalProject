@@ -34,11 +34,11 @@ public class CommerceSystem {
     }
 
     private CommerceSystem() {
-        this.factoryEntDirectory = new FactoryEntDirectory();
-        this.deliveryEntDirectory = new DeliveryEntDirectory();
-        this.purchaseEntDirectory = new PurchaseEntDirectory();
-        this.saleEntDirectory = new SaleEntDirectory();
-        this.userAccountDirectory = new UserAccountDirectory();
+        this.factoryEntDirectory = new FactoryEntDirectory(this);
+        this.deliveryEntDirectory = new DeliveryEntDirectory(this);
+        this.purchaseEntDirectory = new PurchaseEntDirectory(this);
+        this.saleEntDirectory = new SaleEntDirectory(this);
+        this.userAccountDirectory = new UserAccountDirectory(this);
     }
 
     public UserAccountDirectory getUserAccountDirectory() {

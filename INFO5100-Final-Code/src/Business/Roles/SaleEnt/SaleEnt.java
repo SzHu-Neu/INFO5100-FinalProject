@@ -4,6 +4,7 @@
  */
 package Business.Roles.SaleEnt;
 
+import Business.CommerceSystem;
 import Business.Order.SaleMenuItem;
 import Business.Roles.SaleEnt.CustServiceOrg.CustServiceOrg;
 import Business.Roles.SaleEnt.FinanceOrg.FinanceOrg;
@@ -22,9 +23,12 @@ public class SaleEnt {
     private CustServiceOrg custServiceOrg;
     private WarehouseOrg warhouseOrg;
     private String name;
-    private ArrayList<SaleMenuItem> saleItemList;
 
-    public SaleEnt(String name, String warehouseAddress) {
+    private ArrayList<SaleMenuItem> saleItemList;
+    private CommerceSystem system;
+
+    public SaleEnt(String name, String warehouseAddress, CommerceSystem system) {
+        this.system = system;
         this.saleItemList = new ArrayList<SaleMenuItem>();
         this.name = name;
         this.shopOrg = new ShopOrg(this);
@@ -35,6 +39,14 @@ public class SaleEnt {
 
     public ShopOrg getShopOrg() {
         return shopOrg;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public CommerceSystem getSystem() {
+        return system;
     }
 
     public FinanceOrg getFinanceOrg() {

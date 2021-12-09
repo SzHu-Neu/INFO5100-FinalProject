@@ -5,6 +5,7 @@
 package Business.Roles.SaleEnt.WarehouseOrg;
 
 import Business.Order.SaleMenuItem;
+import Business.Roles.Organization;
 import Business.Roles.SaleEnt.SaleEnt;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author Ekoxier
  */
-public class WarehouseOrg {
+public class WarehouseOrg extends Organization {
 
     private ArrayList<WarehouseManager> warehouseManagerList;
     private SaleEnt saleEnterprise;
