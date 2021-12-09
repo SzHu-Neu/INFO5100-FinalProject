@@ -21,13 +21,12 @@ public class ShopManager extends Role {
 
     public ShopManager(ShopOrg so) {
         super(Role.Type.ShopManager);
-        this.shopOrganization = shopOrganization;
+        this.shopOrganization = so;
     }
 
-    public void NotifyInStock(SaleMenuItem item) {
-        this.shopOrganization.getSaleEnterprise().notifyWareHouse(item);
-    }
-
+//    public void NotifyInStock(SaleMenuItem item) {
+//        this.shopOrganization.getSaleEnterprise().notifyWareHouse(item);
+//    }
     @Override
     public JPanel createWorkArea(UserAccount account, CommerceSystem business, Role role) {
         return new ShopManagerAreaJPanel(account, business, this);

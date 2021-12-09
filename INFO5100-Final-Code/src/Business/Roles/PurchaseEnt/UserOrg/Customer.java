@@ -19,10 +19,16 @@ import UI.CustomerWorkArea.CustomerAreaJPanel;
 public class Customer extends Role {
 
     private ArrayList<Order> ordersInCustomer;
+    private String address;
+    private String phone;
+    private String name;
 
-    public Customer() {
+    public Customer(String address, String name, String phone) {
         super(Role.Type.Customer);
         this.ordersInCustomer = new ArrayList<Order>();
+        this.address = address;
+        this.name = name;
+        this.phone = phone;
     }
 
     public ArrayList<Order> getValidOrders() {
@@ -34,6 +40,14 @@ public class Customer extends Role {
             }
         }
         return tmpList;
+    }
+
+    public ArrayList<Order> getOrdersInCustomer() {
+        return ordersInCustomer;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     @Override

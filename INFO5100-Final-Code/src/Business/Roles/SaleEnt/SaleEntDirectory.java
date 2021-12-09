@@ -22,8 +22,8 @@ public class SaleEntDirectory {
         this.saleEntList = new ArrayList<SaleEnt>();
     }
 
-    public SaleEnt createSaleEnt(String name) {
-        SaleEnt tmp = new SaleEnt(name);
+    public SaleEnt createSaleEnt(String name, String warehouseAddress) {
+        SaleEnt tmp = new SaleEnt(name, warehouseAddress);
         saleEntList.add(tmp);
         return tmp;
     }

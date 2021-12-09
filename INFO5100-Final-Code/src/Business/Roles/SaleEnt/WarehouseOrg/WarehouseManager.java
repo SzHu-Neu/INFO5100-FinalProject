@@ -6,6 +6,8 @@ package Business.Roles.SaleEnt.WarehouseOrg;
 
 import Business.CommerceSystem;
 import Business.Order.DeliverItem;
+import Business.Order.SaleMenuItem;
+import Business.Roles.DeliveryEnt.DeliveryEnt;
 import Business.Roles.Role;
 import Business.UserAccount.UserAccount;
 import UI.WarehouseManagerWorkArea.WarehouseManagerAreaJPanel;
@@ -26,9 +28,20 @@ public class WarehouseManager extends Role {
     }
     private ArrayList<DeliverItem> deliverItems;
 
-    public void packAndSend(ArrayList<DeliverItem> sentDeliverItems) {
+    public void packAndSend(ArrayList<DeliverItem> sentDeliverItems, DeliveryEnt deliveryEnt) { // Pass these deliverItems to cerntain delivery enterprise;
         // Send this to Delivery Enterprise;        
-        this.deliverItems.removeAll(deliverItems);
+        this.deliverItems.removeAll(sentDeliverItems);
+        for (DeliverItem di : sentDeliverItems) {
+            SaleMenuItem smi = this.warhouseOrg.getSaleEnterprise().getSaleMenuItemByName(di.getName()); // get SaleMenuItem that 
+            if (smi != null) {
+                smi.sell(di.getQuantity()); // minus quantity
+            } else {
+                // NULL ERROR
+            }
+            //////////////////////////////////////////////////////
+            /// get this deliverItems to deliveryEnt (how?)
+            //////////////////////////////////////////////////////
+        }
     }
 
     public void proccessInStock() {

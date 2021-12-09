@@ -55,17 +55,11 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
+                // Set true
 
-                acceptJButton.setEnabled(true);
-                rejectJButton.setEnabled(true);
-                assignDJButton.setEnabled(true);
-                deliverManJComboBox.setEnabled(true);
             }
         });
-        this.acceptJButton.setEnabled(false);
-        this.rejectJButton.setEnabled(false);
-        this.assignDJButton.setEnabled(false);
-        this.deliverManJComboBox.setEnabled(false);
+        // Set false
     }
 
     /**
@@ -80,10 +74,6 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         ordersJTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        rejectJButton = new javax.swing.JButton();
-        acceptJButton = new javax.swing.JButton();
-        assignDJButton = new javax.swing.JButton();
-        deliverManJComboBox = new javax.swing.JComboBox<String>();
 
         ordersJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -100,104 +90,35 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Orders");
 
-        rejectJButton.setText("Reject");
-        rejectJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rejectJButtonActionPerformed(evt);
-            }
-        });
-
-        acceptJButton.setText("Accept");
-        acceptJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                acceptJButtonActionPerformed(evt);
-            }
-        });
-
-        assignDJButton.setText("Assign deliver man");
-        assignDJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                assignDJButtonActionPerformed(evt);
-            }
-        });
-
-        deliverManJComboBox.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(deliverManJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(assignDJButton))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(rejectJButton)
-                            .addGap(18, 18, 18)
-                            .addComponent(acceptJButton))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(63, 63, 63)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(288, 288, 288)
-                                .addComponent(jLabel1)))))
-                .addContainerGap(297, Short.MAX_VALUE))
+                        .addGap(51, 51, 51)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(272, 272, 272)
+                        .addComponent(jLabel1)))
+                .addContainerGap(309, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rejectJButton)
-                    .addComponent(acceptJButton))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(assignDJButton)
-                    .addComponent(deliverManJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(314, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rejectJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rejectJButtonActionPerformed
-        // TODO add your handling code here:
-//        this.orderList.get(this.ordersJTable.getSelectedRow()).setStatus(Order.StatusCode.Reject);
-//        this.refreshTable();
-    }//GEN-LAST:event_rejectJButtonActionPerformed
-
-    private void acceptJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptJButtonActionPerformed
-        // TODO add your handling code here:
-//        this.orderList.get(this.ordersJTable.getSelectedRow()).setStatus(Order.StatusCode.Accepted);
-//        assignDJButton.setEnabled(true);
-//        deliverManJComboBox.setEnabled(true);
-//        this.refreshTable();
-    }//GEN-LAST:event_acceptJButtonActionPerformed
-
-    private void assignDJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignDJButtonActionPerformed
-        // TODO add your handling code here:
-//        DeliveryMan selectedDM = (DeliveryMan) this.deliverManJComboBox.getSelectedItem();
-//        selectedDM.getOrdersInDeliveryMan().add(this.orderList.get(this.ordersJTable.getSelectedRow()));
-//        this.orderList.get(this.ordersJTable.getSelectedRow()).setDeliveryMan(selectedDM);
-//        this.refreshTable();
-    }//GEN-LAST:event_assignDJButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton acceptJButton;
-    private javax.swing.JButton assignDJButton;
-    private javax.swing.JComboBox<String> deliverManJComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable ordersJTable;
-    private javax.swing.JButton rejectJButton;
     // End of variables declaration//GEN-END:variables
 }

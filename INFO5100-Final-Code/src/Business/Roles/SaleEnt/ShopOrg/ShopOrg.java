@@ -19,12 +19,12 @@ public class ShopOrg {
     private SaleEnt saleEnterprise;
 
     private ArrayList<ShopManager> shopManagerList;
-    private ArrayList<SaleMenuItem> saleItemList;
+
     private ArrayList<Order> ordersInShop;
 
     public ShopOrg(SaleEnt se) {
         this.saleEnterprise = se;
-        this.saleItemList = new ArrayList<SaleMenuItem>();
+
         this.shopManagerList = new ArrayList<ShopManager>();
         this.ordersInShop = new ArrayList<Order>();
     }
@@ -34,7 +34,7 @@ public class ShopOrg {
     }
 
     public ArrayList<SaleMenuItem> getSaleItemList() {
-        return saleItemList;
+        return saleEnterprise.getSaleItemList();
     }
 
     public ShopManager createShopManager() {
@@ -62,4 +62,5 @@ public class ShopOrg {
     public SaleEnt getSaleEnterprise() {
         return saleEnterprise;
     }
+//    public String getWare
 }

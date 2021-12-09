@@ -22,6 +22,16 @@ public class SaleEnt {
     private CustServiceOrg custServiceOrg;
     private WarehouseOrg warhouseOrg;
     private String name;
+    private ArrayList<SaleMenuItem> saleItemList;
+
+    public SaleEnt(String name, String warehouseAddress) {
+        this.saleItemList = new ArrayList<SaleMenuItem>();
+        this.name = name;
+        this.shopOrg = new ShopOrg(this);
+        this.financeOrg = new FinanceOrg(this);
+        this.custServiceOrg = new CustServiceOrg(this);
+        this.warhouseOrg = new WarehouseOrg(this, warehouseAddress);
+    }
 
     public ShopOrg getShopOrg() {
         return shopOrg;
@@ -39,16 +49,20 @@ public class SaleEnt {
         return warhouseOrg;
     }
 
-    public SaleEnt(String name) {
-        this.name = name;
-        this.shopOrg = new ShopOrg(this);
-        this.financeOrg = new FinanceOrg(this);
-        this.custServiceOrg = new CustServiceOrg(this);
-        this.warhouseOrg = new WarehouseOrg(this);
+    public ArrayList<SaleMenuItem> getSaleItemList() {
+        return saleItemList;
     }
 
-    // notify the warehouse to in stock
-    public void notifyWareHouse(SaleMenuItem item) {
-        this.warhouseOrg.addNeedInStockItems(item);
+    public String getWarehouseAddress() {
+        return this.warhouseOrg.getAddress();
+    }
+
+    public SaleMenuItem getSaleMenuItemByName(String name) {
+        for (SaleMenuItem smi : this.saleItemList) {
+            if (smi.getName().equals(name)) {
+                return smi;
+            }
+        }
+        return null;
     }
 }

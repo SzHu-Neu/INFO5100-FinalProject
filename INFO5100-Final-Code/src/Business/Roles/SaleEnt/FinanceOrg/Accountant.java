@@ -16,11 +16,17 @@ import javax.swing.JPanel;
  */
 public class Accountant extends Role {
 
-    public Accountant() {
+    private FinanceOrg financeOrg;
+
+    Accountant(FinanceOrg fo) {
         super(Role.Type.Accountant);
+        this.financeOrg = fo;
     }
-    
-    
+
+    public FinanceOrg getFinanceOrg() {
+        return financeOrg;
+    }
+
     @Override
     public JPanel createWorkArea(UserAccount account, CommerceSystem business, Role role) {
         return new AccountantAreaJPanel(account, business, this);

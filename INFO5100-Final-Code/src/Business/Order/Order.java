@@ -22,6 +22,7 @@ public class Order {
 
     private HashMap<SaleMenuItem, Integer> orderItemInfo;
     private ArrayList<DeliverItem> deliverItemsInfo;
+
     private Date checkoutDate;
 
     public Order(Customer customer) {
@@ -94,9 +95,11 @@ public class Order {
                             entry.getKey().getSalePrice(),
                             entry.getValue(),
                             entry.getKey(),
-                            this
-                    )
-            );
+                            this,
+                            this.shop.getSaleEnterprise().getWarehouseAddress(),
+                            this.customer.getAddress()
+                    ));
+
         }
         this.orderItemInfo = null;
     }

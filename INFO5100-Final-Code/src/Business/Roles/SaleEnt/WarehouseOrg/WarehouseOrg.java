@@ -16,16 +16,16 @@ public class WarehouseOrg {
 
     private ArrayList<WarehouseManager> warehouseManagerList;
     private SaleEnt saleEnterprise;
-    private ArrayList<SaleMenuItem> needInStockItems;
+    private String address;
 
-    public WarehouseOrg(SaleEnt se) {
+    public WarehouseOrg(SaleEnt se, String address) {
         this.saleEnterprise = se;
         this.warehouseManagerList = new ArrayList<WarehouseManager>();
-        this.needInStockItems = new ArrayList<SaleMenuItem>();
+        this.address = address;
     }
 
-    public void addNeedInStockItems(SaleMenuItem it) {
-        this.needInStockItems.add(it);
+    public SaleEnt getSaleEnterprise() {
+        return saleEnterprise;
     }
 
     public WarehouseManager createWarehouseManager() {
@@ -46,4 +46,11 @@ public class WarehouseOrg {
         this.warehouseManagerList.remove(sm);
     }
 
+    public ArrayList<WarehouseManager> getWarehouseManagerList() {
+        return warehouseManagerList;
+    }
+
+    public String getAddress() {
+        return address;
+    }
 }

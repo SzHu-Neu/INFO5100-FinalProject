@@ -16,7 +16,7 @@ public class InitSystem {
 
         CommerceSystem system = CommerceSystem.getInstance();
         //        system.getUseraccountDirectory().createUserAccount("shopmanager1", "123456", new SystemAdmin());
-        ShopManager sm = system.getSaleEntDirectory().createSaleEnt("ent name 1").getShopOrg().createShopManager();
+        ShopManager sm = system.getSaleEntDirectory().createSaleEnt("ent name 1", "warehouse address 1").getShopOrg().createShopManager();
         system.getUserAccountDirectory().createUserAccount("shopmanager1", "123456", sm);
         return system;
     }

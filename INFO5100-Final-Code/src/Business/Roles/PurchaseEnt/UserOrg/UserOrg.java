@@ -14,4 +14,9 @@ public class UserOrg {
 
     private ArrayList<Customer> customerList;
 
+    public Customer addCustomer(String address, String name, String phone) {
+        Customer tmp = new Customer(address, name, phone);
+        this.customerList.add(tmp);
+        return tmp;
+    }
 }
