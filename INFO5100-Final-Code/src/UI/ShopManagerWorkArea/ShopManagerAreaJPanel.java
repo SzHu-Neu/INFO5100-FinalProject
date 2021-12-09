@@ -46,7 +46,7 @@ public class ShopManagerAreaJPanel extends WorkArea {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
-        manageMenuJButton.setText("Manage menu");
+        manageMenuJButton.setText("Manage sale items");
         manageMenuJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manageMenuJButtonActionPerformed(evt);
@@ -129,7 +129,7 @@ public class ShopManagerAreaJPanel extends WorkArea {
     private void manageMenuJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageMenuJButtonActionPerformed
         //
         JDialog jdl = new JDialog();
-//        jdl.add(new ManageMenuJPanel(restAdmin.getRestaurant()));
+        jdl.add(new ManageSaleItemsJPanel(this.shopManager));
         jdl.setSize(800, 600);
         jdl.setModal(true);
         jdl.setLocationRelativeTo(null);

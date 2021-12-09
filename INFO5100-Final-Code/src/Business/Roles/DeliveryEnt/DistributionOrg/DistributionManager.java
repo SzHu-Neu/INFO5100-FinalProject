@@ -15,9 +15,11 @@ import javax.swing.JPanel;
  * @author sichengzhou
  */
 public class DistributionManager extends Role {
+
     public DistributionManager() {
         super(Role.Type.DistributionManager);
     }
+
     @Override
     public JPanel createWorkArea(UserAccount account, CommerceSystem business, Role role) {
         return new DistributionManagerAreaJPanel(account, business, this);

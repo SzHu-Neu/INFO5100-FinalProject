@@ -34,7 +34,7 @@ public class ShopOrg {
     }
 
     public ArrayList<SaleMenuItem> getSaleItemList() {
-        return saleEnterprise.getSaleItemList();
+        return saleEnterprise.getNotDeletedSaleItemList();
     }
 
     public ShopManager createShopManager() {

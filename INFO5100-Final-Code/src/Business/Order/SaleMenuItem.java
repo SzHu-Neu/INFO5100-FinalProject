@@ -34,8 +34,20 @@ public class SaleMenuItem {
         this.name = name;
     }
 
+    public boolean IsDeleted() {
+        return isDeleted;
+    }
+
     public int getSalePrice() {
         return salePrice;
+    }
+
+    public void setRemainNumber(int remainNumber) {
+        this.remainNumber = remainNumber;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public void setSalePrice(int salePrice) {

@@ -24,6 +24,10 @@ public class ShopManager extends Role {
         this.shopOrganization = so;
     }
 
+    public ShopOrg getShopOrganization() {
+        return shopOrganization;
+    }
+
 //    public void NotifyInStock(SaleMenuItem item) {
 //        this.shopOrganization.getSaleEnterprise().notifyWareHouse(item);
 //    }

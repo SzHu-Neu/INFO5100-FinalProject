@@ -61,12 +61,50 @@ public class SaleEnt {
         return warhouseOrg;
     }
 
-    public ArrayList<SaleMenuItem> getSaleItemList() {
-        return saleItemList;
+    public ArrayList<SaleMenuItem> getNotDeletedSaleItemList() {
+        // Filter the deleted item;
+        ArrayList<SaleMenuItem> tmp = new ArrayList<SaleMenuItem>();
+        for (SaleMenuItem singleSMI : this.saleItemList) {
+            if (!singleSMI.IsDeleted()) {
+                tmp.add(singleSMI);
+            }
+        }
+        return tmp;
     }
 
     public String getWarehouseAddress() {
         return this.warhouseOrg.getAddress();
+    }
+
+    public SaleMenuItem addSaleItem(String name, int salePrice, int inPrice) {
+        for (SaleMenuItem singleSMI : this.saleItemList) {
+            if (singleSMI.getName().equals(name)) {
+                // Check if existed
+                if (!singleSMI.IsDeleted()) {
+                    // Not Deleted
+                    return null; // Already Exist
+                } else {
+                    // Deleted
+                    this.saleItemList.remove(singleSMI);
+                    singleSMI.setInPrice(inPrice);
+                    singleSMI.setSalePrice(salePrice);
+                    singleSMI.setName(name);
+                    singleSMI.setIsDeleted(false);
+                    return singleSMI;
+                }
+            } else {
+                SaleMenuItem tmp = new SaleMenuItem(name, salePrice, inPrice, 0);
+                this.saleItemList.add(tmp);
+                return tmp;
+            }
+        }
+        return null;
+    }
+
+    // delete item in filtered list
+    public void delSaleItem(int filteredIdx) {
+        SaleMenuItem smi = getNotDeletedSaleItemList().get(filteredIdx);
+        smi.setIsDeleted(true);
     }
 
     public SaleMenuItem getSaleMenuItemByName(String name) {

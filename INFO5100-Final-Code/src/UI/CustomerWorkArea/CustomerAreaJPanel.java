@@ -50,8 +50,8 @@ public class CustomerAreaJPanel extends WorkArea {
         this.placeOrderJButton.setEnabled(false);
         this.curCustomer = (Customer) role;
         this.curOrder = new Order(this.curCustomer);
-        DefaultComboBoxModel restaurantComboBoxModel = new DefaultComboBoxModel();
-        this.shopJComboBox.setModel(restaurantComboBoxModel);
+        DefaultComboBoxModel shopComboBoxModel = new DefaultComboBoxModel();
+        this.shopJComboBox.setModel(shopComboBoxModel);
 //        this.selectedRest = (Restaurant) this.restaurantJComboBox.getSelectedItem();
         this.refreshMenuTable();
 
@@ -98,12 +98,13 @@ public class CustomerAreaJPanel extends WorkArea {
     private void refreshMenuTable() {
         this.selectedShop = (ShopOrg) this.shopJComboBox.getSelectedItem();
         int tableColumnNum = this.selectedShop.getSaleItemList().size();
-        Object rowDataItems[][] = new Object[tableColumnNum][2];
+        Object rowDataItems[][] = new Object[tableColumnNum][3];
         for (int idx = 0; idx < tableColumnNum; idx++) {
             rowDataItems[idx][0] = this.selectedShop.getSaleItemList().get(idx).getName(); // Name
-            rowDataItems[idx][1] = this.selectedShop.getSaleItemList().get(idx).getSalePrice(); // Price
+            rowDataItems[idx][1] = this.selectedShop.getSaleItemList().get(idx).getSalePrice(); // SalePrice
+            rowDataItems[idx][2] = this.selectedShop.getSaleItemList().get(idx).getRemainNumber(); // RemainNumber
         }
-        Object MenuColNames[] = {"Name", "Price"};
+        Object MenuColNames[] = {"Name", "SalePrice", "RemainNumber"};
         this.saleJtable.setModel(new DefaultTableModel(rowDataItems, MenuColNames) {
             @Override
             public boolean isCellEditable(int row, int column) {
