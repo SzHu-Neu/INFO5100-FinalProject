@@ -4,10 +4,25 @@
  */
 package Business.Roles.FinanceEnt;
 
+import Business.CommerceSystem;
+import java.util.ArrayList;
+
 /**
  *
- * @author Ekoxier
+ * @author sichengzhou
  */
 public class FinanceEntDirectory {
+    private ArrayList<FinanceEnt> financeEntList;
+    CommerceSystem system;
+
+    public FinanceEntDirectory(CommerceSystem system) {
+        this.system = system;
+        this.financeEntList = new ArrayList<FinanceEnt>();
+    }
+
+    public CommerceSystem getSystem() {
+        return system;
+    }
+    
     
 }

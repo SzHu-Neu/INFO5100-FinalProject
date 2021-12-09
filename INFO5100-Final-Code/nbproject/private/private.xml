@@ -3,31 +3,34 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/DeliveryEnt/DistributionOrg/DistributionDelivers.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Order/OrderList.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/DeliveryEnt/TransportationOrg/TransportationManager.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/InitSystem.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/DeliveryEnt/DeliveryEntDirectory.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/SaleEnt/SaleEntDirectory.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/FactoryEnt/ProductOrg/ProductManager.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/DeliveryEnt/TransportationOrg/Driver.java</file>
             <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/DeliveryEnt/DistributionOrg/DistributionManager.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/UI/DriverWorkArea/DriverAreaJPanel.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Order/DeliverItem.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/DeliveryEnt/DeliveryEnt.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/UI/WarehouseManagerWorkArea/WarehouseManagerAreaJPanel.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/DeliveryEnt/DistributionOrg/DistributionDelivers.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/FactoryEnt/ProductOrg/ProductOrg.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/FactoryEnt/ProductOrg/ProductManager.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/UI/ShopManagerWorkArea/ShopManagerAreaJPanel.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/UI/ProductManagerWorkArea/ProductManagerAreaJPanel.java</file>
             <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/UI/ShopManagerWorkArea/ManageOrdersJPanel.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Item/Item.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/SaleEnt/CustServiceOrg/ServicePersonnel.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/UI/WorkArea.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/UI/ShopManagerWorkArea/ShopManagerWorkAreaJPanel.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/CommerceSystem.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/SaleEnt/FinanceOrg/Accountant.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/PurchaseEnt/PurchaseEntDirectory.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/Role.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/UI/MainJFrame.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/UserAccount/UserAccount.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/PurchaseEnt/UserOrg/Customer.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/DeliveryEnt/TransportationOrg/TransportationManager.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/UI/DistributionDeliversWorkArea/DistributionDeliversAreaJPanel.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/DeliveryEnt/DeliveryEntDirectory.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/SaleEnt/WarehouseOrg/WarehouseOrg.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/UI/CustomerWorkArea/CheckOrderJPanel.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/UI/ServicePersonnelWorkArea/ServicePersonnelAreaJPanel.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/UI/DistributionManagerWorkArea/DistributionManagerAreaJPanel.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/UI/CustomerWorkArea/CustomerAreaJPanel.java</file>
             <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/SystemOrg/SystemManager.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/UserAccount/UserAccountDirectory.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/DeliveryEnt/TransportationOrg/Driver.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/SaleEnt/CustServiceOrg/CustServiceOrg.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Utils/DB4OUtil/DB4OUtil.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/PurchaseEnt/UserOrg/Customer.java</file>
             <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Order/Order.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/FactoryEnt/FactoryEntDirectory.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/PurchaseEnt/UserOrg/UserOrg.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/UI/TransportationManagerWorkArea/TransportationManagerAreaJPanel.java</file>
+            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/SaleEnt/FinanceOrg/Accountant.java</file>
         </group>
     </open-files>
 </project-private>

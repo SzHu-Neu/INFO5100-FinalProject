@@ -7,7 +7,7 @@ package Business.Roles.FinanceEnt.CreditPaymentOrg;
 
 /**
  *
- * @author Ekoxier
+ * @author sichengzhou
  */
 public class CreditPaymentOrg {
     

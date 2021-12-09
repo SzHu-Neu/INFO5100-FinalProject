@@ -4,10 +4,13 @@
  */
 package Business.Roles.FinanceEnt;
 
+import Business.Roles.FinanceEnt.CreditPaymentOrg.CreditPaymentOrg;
+
+
 /**
  *
- * @author Ekoxier
+ * @author sichengzhou
  */
 public class FinanceEnt {
-    
+    private CreditPaymentOrg creditpaymentorg;
 }

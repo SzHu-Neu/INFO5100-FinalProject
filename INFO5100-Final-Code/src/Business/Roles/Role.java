@@ -26,6 +26,8 @@ public abstract class Role {
         TransportationManager,
         Driver,
         ProductManager,
+        PaymentManager,
+        
         
        
     }
