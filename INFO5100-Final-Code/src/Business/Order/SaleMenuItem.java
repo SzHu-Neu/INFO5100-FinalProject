@@ -16,14 +16,16 @@ public class SaleMenuItem {
     private int soldNumber; // number of sold out
     private int remainNumber; // number of remain 
     private boolean isDeleted; // is deleted from shop?
+    private String description;
 
-    public SaleMenuItem(String name, int salePrice, int inPrice, int number) {
+    public SaleMenuItem(String name, int salePrice, int inPrice, int number, String description) {
         this.name = name;
         this.salePrice = salePrice;
         this.inPrice = inPrice;
         this.soldNumber = 0;
         this.remainNumber = number;
         this.isDeleted = false;
+        this.description = description;
     }
 
     public String getName() {
@@ -38,12 +40,20 @@ public class SaleMenuItem {
         return isDeleted;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public int getSalePrice() {
         return salePrice;
     }
 
     public void setRemainNumber(int remainNumber) {
         this.remainNumber = remainNumber;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void inStock(int inStockNumber) {

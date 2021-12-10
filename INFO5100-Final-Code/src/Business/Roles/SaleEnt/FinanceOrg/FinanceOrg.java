@@ -45,7 +45,8 @@ public class FinanceOrg {
         this.transactionHistory.add(tmpTransaction);
         return tmpTransaction;
     }
-
+   
+    
     class Transaction {
 
         private Date time;
