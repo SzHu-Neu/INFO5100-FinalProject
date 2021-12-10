@@ -49,7 +49,7 @@ public class CustomerAreaJPanel extends WorkArea {
         this.minusNumberJButton.setEnabled(false);
         this.placeOrderJButton.setEnabled(false);
         this.curCustomer = (Customer) role;
-        this.curOrder = new Order(this.curCustomer);
+        this.curOrder = new Order(this.curCustomer.getUserOrg());
         DefaultComboBoxModel shopComboBoxModel = new DefaultComboBoxModel(business.getSaleEntDirectory().getAllShops().toArray());
         this.shopJComboBox.setModel(shopComboBoxModel);
 //        this.selectedRest = (Restaurant) this.restaurantJComboBox.getSelectedItem();
@@ -166,7 +166,7 @@ public class CustomerAreaJPanel extends WorkArea {
         jScrollPane1.setViewportView(saleJtable);
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enterpriseLabel.setText("CustomerPanel");
+        enterpriseLabel.setText("Customer Panel");
 
         shopJComboBox.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         shopJComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -343,7 +343,7 @@ public class CustomerAreaJPanel extends WorkArea {
             this.selectedShop.addOrderInshop(curOrder);
 //            this.curOrder.setStatus(Order.StatusCode.ToBeProcessed);
             this.curOrder.setCheckoutDate(new Date());
-            this.curOrder = new Order(this.curCustomer); // Place a new unassigned order to be processed
+            this.curOrder = new Order(this.curCustomer.getUserOrg()); // Place a new unassigned order to be processed
             this.refreshOrderTable();
             JOptionPane.showMessageDialog(this, "SUCCESS", "Result", -1);
 //            JOptionPane.showMessageDialog(
@@ -371,7 +371,7 @@ public class CustomerAreaJPanel extends WorkArea {
         // Refresh Menu and new order
 
 //        this.refreshMenuTable();
-        this.curOrder = new Order(this.curCustomer);
+        this.curOrder = new Order(this.curCustomer.getUserOrg());
         this.refreshOrderTable();
         this.refreshMenuTable();
     }//GEN-LAST:event_shopJComboBoxActionPerformed

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class ProductOrg extends Organization {
 
     private ArrayList<ProductManager> productManagerList;
+
     private ArrayList<RequestFactoryItem> requestHandleList; // List that handles incoming request about stock;
 
     public RequestFactoryItem addReuqestHandleList(SaleMenuItem smi, int number, WarehouseOrg warehouseOrg) {
@@ -24,12 +25,20 @@ public class ProductOrg extends Organization {
         return rfi;
     }
 
+    public ArrayList<ProductManager> getProductManagerList() {
+        return productManagerList;
+    }
+
+    public ArrayList<RequestFactoryItem> getRequestHandleList() {
+        return requestHandleList;
+    }
+
     public ProductOrg() {
         this.requestHandleList = new ArrayList<RequestFactoryItem>();
         this.productManagerList = new ArrayList<ProductManager>();
     }
 
-    class RequestFactoryItem {
+    public class RequestFactoryItem {
 //        private 
 
         private SaleMenuItem smi;
@@ -40,6 +49,18 @@ public class ProductOrg extends Organization {
             this.smi = smi;
             this.number = number;
             this.warehouseOrg = warehouseOrg;
+        }
+
+        public SaleMenuItem getSmi() {
+            return smi;
+        }
+
+        public WarehouseOrg getWarehouseOrg() {
+            return warehouseOrg;
+        }
+
+        public int getNumber() {
+            return number;
         }
     }
 }

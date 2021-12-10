@@ -64,7 +64,7 @@ public class ShopManagerAreaJPanel extends WorkArea {
         enterpriseLabel.setText("Shop :");
 
         enterpriseLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enterpriseLabel1.setText("Shop manager Panel");
+        enterpriseLabel1.setText("Shop Manager Panel");
 
         jLabel2.setText("Name:");
 

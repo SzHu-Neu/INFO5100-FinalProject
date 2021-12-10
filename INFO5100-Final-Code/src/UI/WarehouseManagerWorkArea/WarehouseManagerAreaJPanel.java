@@ -68,7 +68,7 @@ public class WarehouseManagerAreaJPanel extends WorkArea {
         jScrollPane1.setViewportView(jTableSaleItem);
 
         enterpriseLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enterpriseLabel1.setText("Warehouse manager Panel");
+        enterpriseLabel1.setText("Warehouse Manager Panel");
 
         inStockBtn.setText("Request InStock");
         inStockBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +128,7 @@ public class WarehouseManagerAreaJPanel extends WorkArea {
                         .addGap(18, 18, 18)
                         .addComponent(jButton1))
                     .addComponent(jLabel1))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,7 +151,7 @@ public class WarehouseManagerAreaJPanel extends WorkArea {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

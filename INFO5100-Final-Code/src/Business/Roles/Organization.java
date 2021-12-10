@@ -5,6 +5,8 @@
 package Business.Roles;
 
 import Business.Order.DeliverItem;
+import Business.Order.Order;
+import Business.Order.SaleMenuItem;
 import java.util.ArrayList;
 
 /**
@@ -24,7 +26,22 @@ public abstract class Organization {
         return relatedDeliverItems;
     }
 
-    public void addDeliveryItem(DeliverItem di) {
+    public DeliverItem addDeliveryItem(String name, SaleMenuItem saleMenuItemBelonged,
+            Order orderBelonged, int quantity, Organization fromOrg, Organization toOrg) {
+        DeliverItem tmp
+                = new DeliverItem(name,
+                        quantity,
+                        saleMenuItemBelonged, //
+                        orderBelonged,
+                        fromOrg,
+                        toOrg
+                );
+        this.relatedDeliverItems.add(tmp);
+        return tmp;
+    }
+
+    public DeliverItem addDeliveryItem(DeliverItem di) {
         this.relatedDeliverItems.add(di);
+        return di;
     }
 }

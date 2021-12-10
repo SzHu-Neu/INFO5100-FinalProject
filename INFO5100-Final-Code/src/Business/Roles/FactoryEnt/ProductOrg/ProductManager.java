@@ -16,12 +16,20 @@ import javax.swing.JPanel;
  */
 public class ProductManager extends Role {
 
-    public ProductManager() {
+    ProductOrg productOrg;
+
+    public ProductManager(ProductOrg po) {
         super(Role.Type.ProductManager);
+        this.productOrg = po;
+
     }
 
     public void sendOut() {
 
+    }
+
+    public ProductOrg getProductOrg() {
+        return productOrg;
     }
 
     @Override

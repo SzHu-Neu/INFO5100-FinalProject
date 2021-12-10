@@ -1,6 +1,7 @@
 package Business.Order;
 
 import Business.Roles.PurchaseEnt.UserOrg.Customer;
+import Business.Roles.PurchaseEnt.UserOrg.UserOrg;
 import Business.Roles.SaleEnt.ShopOrg.ShopOrg;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,7 +18,7 @@ import java.util.Map;
  */
 public class Order {
 
-    private Customer customer; // Customer who ordered
+    private UserOrg userOrg; // Customer who ordered
     private ShopOrg shop; // In which shop
 
     private HashMap<SaleMenuItem, Integer> orderItemInfo;
@@ -25,8 +26,8 @@ public class Order {
 
     private Date checkoutDate;
 
-    public Order(Customer customer) {
-        this.customer = customer;
+    public Order(UserOrg uo) {
+        this.userOrg = uo;
         this.shop = null;
         this.orderItemInfo = new HashMap<SaleMenuItem, Integer>();
         this.deliverItemsInfo = new ArrayList<DeliverItem>();
@@ -47,10 +48,6 @@ public class Order {
 
     public void setShop(ShopOrg shop) {
         this.shop = shop;
-    }
-
-    public Customer getCustomer() {
-        return customer;
     }
 
     public ShopOrg getShop() {
@@ -102,15 +99,16 @@ public class Order {
 //        Transfer from orderItemInfo to DeliverItemInfo
 //        And orderItemInfo should not be used
         for (Map.Entry<SaleMenuItem, Integer> entry : orderItemInfo.entrySet()) {
-            deliverItemsInfo.add(
-                    new DeliverItem(entry.getKey().getName(),
-                            entry.getKey().getSalePrice(),
-                            entry.getValue(),
-                            entry.getKey(),
-                            this,
-                            this.shop.getSaleEnterprise().getWarhouseOrg(),
-                            this.customer.getUserOrg()
-                    ));
+//            
+//            deliverItemsInfo.add(
+//                    entry.getKey().getName(),
+//                    entry.getKey().getSalePrice(),
+//                    entry.getValue(),
+//                    entry.getKey(),
+//                    this,
+//                    this.shop.getSaleEnterprise().getWarhouseOrg(),
+//                    this.customer.getUserOrg()
+//            )
 
         }
         this.orderItemInfo = null;

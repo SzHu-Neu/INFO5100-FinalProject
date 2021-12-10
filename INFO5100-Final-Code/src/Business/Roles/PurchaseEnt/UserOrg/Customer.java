@@ -45,7 +45,7 @@ public class Customer extends Role {
     public void checkOut(Order order) {
         this.ordersInCustomer.add(order);
         CommerceSystem system = this.userOrg.getPurchaseEnt().getSystem();
-        system.getFinanceEntDirectory().getFinanceEnt().getCreditPaymentOrg().addPaymentInfo("Sdasdas");
+//        system.getFinanceEntDirectory().getFinanceEnt().getCreditPaymentOrg().addPaymentInfo("Sdasdas");
         // checkOutOrder
         order.chekoutOrder();
         // Add a transaction
