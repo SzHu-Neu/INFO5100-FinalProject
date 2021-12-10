@@ -10,7 +10,7 @@ import Business.Order.DeliverItem;
 import Business.Roles.Role;
 import Business.Roles.FactoryEnt.ProductOrg.ProductManager;
 import Business.Roles.FactoryEnt.ProductOrg.ProductOrg;
-import Business.Roles.Organization;
+import Business.Roles.InDeliverOrganization;
 import Business.UserAccount.UserAccount;
 import UI.WorkArea;
 import java.util.ArrayList;
@@ -103,16 +103,16 @@ public class ProductManagerAreaJPanel extends WorkArea {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(enterpriseLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(18, 18, 18)
                         .addComponent(jButton1))
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jScrollPane2))
                 .addContainerGap(201, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -144,9 +144,12 @@ public class ProductManagerAreaJPanel extends WorkArea {
         ArrayList<DeliverItem> deliverItems = this.productOrg.getRelatedDeliverItems();
         String name = requestFactoryItem.getSmi().getName();
         int number = requestFactoryItem.getNumber();
-        Organization fromOrg = this.productOrg;
-        Organization toOrg = requestFactoryItem.getWarehouseOrg();
+        InDeliverOrganization fromOrg = this.productOrg;
+        InDeliverOrganization toOrg = requestFactoryItem.getWarehouseOrg();
+        this.productOrg.getRequestHandleList().remove(selectedIdx);
         this.productOrg.addDeliveryItem(name, null, null, number, fromOrg, toOrg);
+        this.refreshJTableDelivery();
+        this.refreshJTableRequest();
 
     }//GEN-LAST:event_jButton1ActionPerformed
     private void refreshJTableRequest() {
@@ -182,7 +185,7 @@ public class ProductManagerAreaJPanel extends WorkArea {
             rowDataItems[idx][4] = deliverItems.get(idx).getDeliveryOrderNum() != -1 ? deliverItems.get(idx).getDeliveryOrderNum() : "NotAvaNow";
 //            rowDataItems[idx][4] = deliverItems
         }
-        this.jTableRequest.setModel(new DefaultTableModel(rowDataItems, ColNames) {
+        this.jTableDelivery.setModel(new DefaultTableModel(rowDataItems, ColNames) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;

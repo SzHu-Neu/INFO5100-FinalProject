@@ -14,12 +14,24 @@ import java.util.ArrayList;
  *
  * @author Ekoxier
  */
-public abstract class Organization {
+public abstract class InDeliverOrganization {
 
     private ArrayList<DeliverItem> relatedDeliverItems;
+    private String name;
+    private String address;
 
-    public Organization() {
+    public InDeliverOrganization(String name, String address) {
         this.relatedDeliverItems = new ArrayList<DeliverItem>();
+        this.name = name;
+        this.address = address;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     public ArrayList<DeliverItem> getRelatedDeliverItems() {
@@ -27,7 +39,7 @@ public abstract class Organization {
     }
 
     public DeliverItem addDeliveryItem(String name, SaleMenuItem saleMenuItemBelonged,
-            Order orderBelonged, int quantity, Organization fromOrg, Organization toOrg) {
+            Order orderBelonged, int quantity, InDeliverOrganization fromOrg, InDeliverOrganization toOrg) {
         DeliverItem tmp
                 = new DeliverItem(name,
                         quantity,
@@ -36,12 +48,20 @@ public abstract class Organization {
                         fromOrg,
                         toOrg
                 );
-        this.relatedDeliverItems.add(tmp);
         return tmp;
     }
 
     public DeliverItem addDeliveryItem(DeliverItem di) {
         this.relatedDeliverItems.add(di);
         return di;
+    }
+
+    public DeliverItem getDeliveryItem(int idx) {
+        return this.relatedDeliverItems.get(idx);
+    }
+
+    @Override
+    public String toString() {
+        return this.getName();
     }
 }

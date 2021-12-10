@@ -5,7 +5,7 @@
 package Business.Order;
 
 import Business.Roles.DeliveryEnt.DeliveryEnt;
-import Business.Roles.Organization;
+import Business.Roles.InDeliverOrganization;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -21,12 +21,12 @@ public class AdditionalInfo {
         private String event;
     }
     private DeliverItem deliverItemBelonged;
-    private Organization fromOrg;
-    private Organization toOrg;
+    private InDeliverOrganization fromOrg;
+    private InDeliverOrganization toOrg;
     private DeliveryEnt deliveryEnt;
     private ArrayList<DeliverTimeline> timelines; // Timelines that record the delivery procedure
 
-    AdditionalInfo(Organization fromOrg, Organization toOrg, DeliverItem deliverItemBelonged) {
+    AdditionalInfo(InDeliverOrganization fromOrg, InDeliverOrganization toOrg, DeliverItem deliverItemBelonged) {
         this.fromOrg = fromOrg;
         this.toOrg = toOrg;
         this.deliveryEnt = null;
@@ -34,11 +34,11 @@ public class AdditionalInfo {
         this.deliverItemBelonged = deliverItemBelonged;
     }
 
-    public Organization getFromOrg() {
+    public InDeliverOrganization getFromOrg() {
         return fromOrg;
     }
 
-    public Organization getToOrg() {
+    public InDeliverOrganization getToOrg() {
         return toOrg;
     }
 

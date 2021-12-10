@@ -22,6 +22,12 @@ public class FactoryEntDirectory {
         this.factoryEntList = new ArrayList<FactoryEnt>();
     }
 
+    public FactoryEnt createFactoryEnt(String name, String address) {
+        FactoryEnt tmp = new FactoryEnt(name, address);
+        this.factoryEntList.add(tmp);
+        return tmp;
+    }
+
     public ArrayList<ProductOrg> listAllProductOrgs() {
         ArrayList<ProductOrg> tmp = new ArrayList<ProductOrg>();
         for (FactoryEnt fe : factoryEntList) {

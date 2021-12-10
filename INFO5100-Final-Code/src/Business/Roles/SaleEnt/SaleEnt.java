@@ -34,7 +34,7 @@ public class SaleEnt {
         this.shopOrg = new ShopOrg(this);
         this.financeOrg = new FinanceOrg(this);
         this.custServiceOrg = new CustServiceOrg(this);
-        this.warhouseOrg = new WarehouseOrg(this, warehouseAddress);
+        this.warhouseOrg = new WarehouseOrg(this, name, warehouseAddress);
     }
 
     public ShopOrg getShopOrg() {

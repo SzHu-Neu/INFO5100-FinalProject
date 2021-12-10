@@ -5,7 +5,7 @@
 package Business.Roles.FactoryEnt.ProductOrg;
 
 import Business.Order.SaleMenuItem;
-import Business.Roles.Organization;
+import Business.Roles.InDeliverOrganization;
 import Business.Roles.SaleEnt.WarehouseOrg.WarehouseOrg;
 import java.util.ArrayList;
 
@@ -13,16 +13,27 @@ import java.util.ArrayList;
  *
  * @author Ekoxier
  */
-public class ProductOrg extends Organization {
+public class ProductOrg extends InDeliverOrganization {
 
     private ArrayList<ProductManager> productManagerList;
-
     private ArrayList<RequestFactoryItem> requestHandleList; // List that handles incoming request about stock;
+
+    public ProductOrg(String name, String address) {
+        super(name, address);
+        this.productManagerList = new ArrayList<ProductManager>();
+        this.requestHandleList = new ArrayList<RequestFactoryItem>();
+    }
 
     public RequestFactoryItem addReuqestHandleList(SaleMenuItem smi, int number, WarehouseOrg warehouseOrg) {
         RequestFactoryItem rfi = new RequestFactoryItem(smi, number, warehouseOrg);
         this.requestHandleList.add(rfi);
         return rfi;
+    }
+
+    public ProductManager createProductManager() {
+        ProductManager tmp = new ProductManager(this);
+        this.productManagerList.add(tmp);
+        return tmp;
     }
 
     public ArrayList<ProductManager> getProductManagerList() {
@@ -31,11 +42,6 @@ public class ProductOrg extends Organization {
 
     public ArrayList<RequestFactoryItem> getRequestHandleList() {
         return requestHandleList;
-    }
-
-    public ProductOrg() {
-        this.requestHandleList = new ArrayList<RequestFactoryItem>();
-        this.productManagerList = new ArrayList<ProductManager>();
     }
 
     public class RequestFactoryItem {

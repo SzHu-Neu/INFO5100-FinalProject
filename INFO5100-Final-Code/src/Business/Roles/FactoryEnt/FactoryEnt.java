@@ -4,7 +4,9 @@
  */
 package Business.Roles.FactoryEnt;
 
+import Business.Roles.FactoryEnt.ProductOrg.ProductManager;
 import Business.Roles.FactoryEnt.ProductOrg.ProductOrg;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,8 +16,8 @@ public class FactoryEnt {
 
     ProductOrg productOrg;
 
-    public FactoryEnt() {
-        this.productOrg = new ProductOrg();
+    public FactoryEnt(String name, String address) {
+        this.productOrg = new ProductOrg(name, address);
     }
 
     public ProductOrg getProductOrg() {

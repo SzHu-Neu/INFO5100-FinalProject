@@ -9,6 +9,8 @@ import Business.Order.SaleMenuItem;
 import Business.Roles.FactoryEnt.ProductOrg.ProductOrg;
 import Business.Roles.SaleEnt.WarehouseOrg.WarehouseOrg;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,17 +20,22 @@ public class InStockOptionPanel extends javax.swing.JPanel {
 
     SaleMenuItem saleMenuItem;
     ArrayList<ProductOrg> productOrgs;
+    WarehouseOrg warehouseOrg;
 
     /**
      * Creates new form InStockOptionPanel
+     *
      * @param smi
      * @param pos
      */
-    public InStockOptionPanel(SaleMenuItem smi, ArrayList<ProductOrg> pos) {
+    public InStockOptionPanel(SaleMenuItem smi, ArrayList<ProductOrg> pos, WarehouseOrg warehouseOrg) {
         initComponents();
         this.saleMenuItem = smi;
         // list all factories and choose which one to request
         this.productOrgs = pos;
+        this.warehouseOrg = warehouseOrg;
+        DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel(pos.toArray());
+        this.jComboBox1.setModel(comboBoxModel);
     }
 
     /**
@@ -104,6 +111,16 @@ public class InStockOptionPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        try {
+            int quantity = Integer.parseInt(this.jTextField1.getText());
+            ProductOrg selectedProductOrg = (ProductOrg) this.jComboBox1.getSelectedItem();
+            selectedProductOrg.addReuqestHandleList(this.saleMenuItem, quantity, this.warehouseOrg);
+            JOptionPane.showMessageDialog(this, "SUCCESS", "Result", -1);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(
+                    this, "Input error", "Failure", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

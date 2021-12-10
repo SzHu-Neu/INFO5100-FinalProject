@@ -5,7 +5,7 @@
 package Business.Order;
 
 import Business.Roles.DeliveryEnt.DeliveryEnt;
-import Business.Roles.Organization;
+import Business.Roles.InDeliverOrganization;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -31,8 +31,8 @@ public class DeliverItem {
             int quantity,
             SaleMenuItem saleMenuItemBelonged,
             Order orderBelonged,
-            Organization fromOrg,
-            Organization toOrg) {
+            InDeliverOrganization fromOrg,
+            InDeliverOrganization toOrg) {
         this.name = name;
         this.deliveryOrderNum = -1; // Initialize
         this.quantity = quantity;

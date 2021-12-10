@@ -1,6 +1,6 @@
 package Business.Roles.FinanceEnt.CreditPaymentOrg;
 
-import Business.Roles.Organization;
+import Business.Roles.InDeliverOrganization;
 
 import java.util.ArrayList;
 

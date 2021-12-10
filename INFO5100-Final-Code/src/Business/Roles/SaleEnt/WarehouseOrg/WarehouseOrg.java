@@ -6,7 +6,7 @@ package Business.Roles.SaleEnt.WarehouseOrg;
 
 import Business.Order.DeliverItem;
 import Business.Order.SaleMenuItem;
-import Business.Roles.Organization;
+import Business.Roles.InDeliverOrganization;
 import Business.Roles.SaleEnt.SaleEnt;
 import java.util.ArrayList;
 
@@ -14,18 +14,17 @@ import java.util.ArrayList;
  *
  * @author Ekoxier
  */
-public class WarehouseOrg extends Organization {
+public class WarehouseOrg extends InDeliverOrganization {
 
     private ArrayList<WarehouseManager> warehouseManagerList;
     private SaleEnt saleEnterprise;
     private ArrayList<DeliverItem> deliverItemsInWarehouse;
-    private String address;
 
-    public WarehouseOrg(SaleEnt se, String address) {
+    public WarehouseOrg(SaleEnt se, String address, String name) {
+        super(name, address);
         this.saleEnterprise = se;
         this.warehouseManagerList = new ArrayList<WarehouseManager>();
         this.deliverItemsInWarehouse = new ArrayList<DeliverItem>();
-        this.address = address;
     }
 
     public SaleEnt getSaleEnterprise() {
@@ -55,6 +54,6 @@ public class WarehouseOrg extends Organization {
     }
 
     public String getAddress() {
-        return address;
+        return super.getAddress();
     }
 }

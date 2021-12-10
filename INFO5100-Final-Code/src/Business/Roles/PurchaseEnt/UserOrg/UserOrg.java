@@ -1,6 +1,6 @@
 package Business.Roles.PurchaseEnt.UserOrg;
 
-import Business.Roles.Organization;
+import Business.Roles.InDeliverOrganization;
 import Business.Roles.PurchaseEnt.PurchaseEnt;
 import java.util.ArrayList;
 
@@ -12,15 +12,14 @@ import java.util.ArrayList;
  *
  * @author Ekoxier
  */
-public class UserOrg extends Organization {
+public class UserOrg extends InDeliverOrganization {
 
     private ArrayList<Customer> customerList;
-    private String address;
     private PurchaseEnt purchaseEnt;
 
-    public UserOrg(String address, PurchaseEnt pe) {
+    public UserOrg(String name, String address, PurchaseEnt pe) {
+        super(name, address);
         this.customerList = new ArrayList<Customer>();
-        this.address = address;
         this.purchaseEnt = pe;
     }
 
@@ -34,11 +33,12 @@ public class UserOrg extends Organization {
         return customerList;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
     public PurchaseEnt getPurchaseEnt() {
         return purchaseEnt;
+    }
+
+    @Override
+    public String toString() {
+        return super.getName();
     }
 }

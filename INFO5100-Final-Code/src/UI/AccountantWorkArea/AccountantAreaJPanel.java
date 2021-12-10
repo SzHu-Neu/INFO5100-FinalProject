@@ -8,6 +8,7 @@ package UI.AccountantWorkArea;
 import Business.CommerceSystem;
 import Business.Roles.Role;
 import Business.Roles.SaleEnt.FinanceOrg.Accountant;
+import Business.Roles.SaleEnt.FinanceOrg.FinanceOrg;
 import Business.UserAccount.UserAccount;
 import UI.WorkArea;
 
@@ -17,15 +18,21 @@ import UI.WorkArea;
  */
 public class AccountantAreaJPanel extends WorkArea {
 
+    Accountant accountant;
+    FinanceOrg financeOrg;
+
     /**
      * Creates new form AccountantAreaJPanel
      */
     public AccountantAreaJPanel(UserAccount account, CommerceSystem business, Role role) {
         super(account, business, role);
         initComponents();
+        this.accountant = (Accountant) role;
+        this.financeOrg = this.accountant.getFinanceOrg();
     }
 
-    
+    private void refreshJTableFinanc() {
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,11 +45,11 @@ public class AccountantAreaJPanel extends WorkArea {
 
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableFinance = new javax.swing.JTable();
         enterpriseLabel1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableFinance.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -53,7 +60,7 @@ public class AccountantAreaJPanel extends WorkArea {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableFinance);
 
         enterpriseLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel1.setText(" Accountant Panel");
@@ -92,6 +99,6 @@ public class AccountantAreaJPanel extends WorkArea {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableFinance;
     // End of variables declaration//GEN-END:variables
 }

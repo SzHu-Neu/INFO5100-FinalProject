@@ -46,6 +46,10 @@ public class SaleMenuItem {
         this.remainNumber = remainNumber;
     }
 
+    public void inStock(int inStockNumber) {
+        this.remainNumber += inStockNumber;
+    }
+
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
