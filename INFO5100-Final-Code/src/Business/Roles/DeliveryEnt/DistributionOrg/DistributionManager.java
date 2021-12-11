@@ -9,15 +9,18 @@ import Business.Roles.Role;
 import Business.UserAccount.UserAccount;
 import UI.DistributionManagerWorkArea.DistributionManagerAreaJPanel;
 import javax.swing.JPanel;
-
+import Business.Roles.DeliveryEnt.DistributionOrg.DistributionOrg;
 /**
  *
  * @author sichengzhou
  */
 public class DistributionManager extends Role {
+    
+    private DistributionOrg distributionOrg;
 
-    public DistributionManager() {
+    public DistributionManager(DistributionOrg org){
         super(Role.Type.DistributionManager);
+        this.distributionOrg = org;
     }
 
     @Override

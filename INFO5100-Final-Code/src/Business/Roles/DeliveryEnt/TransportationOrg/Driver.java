@@ -9,14 +9,17 @@ import Business.Roles.Role;
 import Business.UserAccount.UserAccount;
 import UI.DriverWorkArea.DriverAreaJPanel;
 import javax.swing.JPanel;
-
+import Business.Roles.DeliveryEnt.TransportationOrg.TransportationOrg;
 /**
  *
  * @author sichengzhou
  */
 public class Driver extends Role {
-   public Driver() {
+   TransportationOrg transOrg;
+
+   public Driver(TransportationOrg org) {
         super(Role.Type.Driver);
+        this.transOrg = org;
     }
 
     @Override
