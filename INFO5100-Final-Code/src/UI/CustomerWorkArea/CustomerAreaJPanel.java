@@ -97,7 +97,7 @@ public class CustomerAreaJPanel extends WorkArea {
     private void refreshSaleItemsTable() {
         this.selectedShop = (ShopOrg) this.shopJComboBox.getSelectedItem();
         int tableColumnNum = this.selectedShop.getSaleItemList().size();
-        Object ColNames[] = {"Name", "SalePrice", "RemainNumber", "Description"};
+        Object ColNames[] = {"Name", "SalePrice", "Remains", "Description"};
         Object rowDataItems[][] = new Object[tableColumnNum][ColNames.length];
         for (int idx = 0; idx < tableColumnNum; idx++) {
             rowDataItems[idx][0] = this.selectedShop.getSaleItemList().get(idx).getName(); // Name
@@ -194,6 +194,7 @@ public class CustomerAreaJPanel extends WorkArea {
         });
         jScrollPane2.setViewportView(orderJtable);
 
+        menuJLable.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         menuJLable.setText("Sale Items");
 
         addToOrderJButton.setText("Add");
@@ -224,6 +225,7 @@ public class CustomerAreaJPanel extends WorkArea {
             }
         });
 
+        checkAllOrderJButton.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         checkAllOrderJButton.setText("View checkout order info");
         checkAllOrderJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,6 +233,7 @@ public class CustomerAreaJPanel extends WorkArea {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Order");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -238,74 +241,59 @@ public class CustomerAreaJPanel extends WorkArea {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(130, 130, 130)
-                                    .addComponent(numberJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(addToOrderJButton))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGap(78, 78, 78)
-                                    .addComponent(shopJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(83, 83, 83))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(145, 145, 145)))
+                        .addComponent(numberJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(addToOrderJButton))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(menuJLable)
+                        .addComponent(shopJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(checkAllOrderJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(checkoutJButton))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(addNumberJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(minusNumberJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(checkAllOrderJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(144, 144, 144)
-                .addComponent(menuJLable)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(280, 280, 280))
+                            .addComponent(checkoutJButton)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(minusNumberJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addNumberJButton))))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(checkAllOrderJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addComponent(shopJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(menuJLable))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(addNumberJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(minusNumberJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(checkoutJButton))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(shopJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(checkAllOrderJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(menuJLable)
+                    .addComponent(jLabel2))
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(addNumberJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(minusNumberJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addToOrderJButton)
-                    .addComponent(numberJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(87, Short.MAX_VALUE))
+                    .addComponent(numberJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(checkoutJButton))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -345,20 +333,18 @@ public class CustomerAreaJPanel extends WorkArea {
 
     private void checkoutJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutJButtonActionPerformed
         // TODO add your handling code here:
-        try {
-            this.curOrder.chekoutOrder();
-            this.selectedShop.addOrderInshop(curOrder);
-//            this.curOrder.setStatus(Order.StatusCode.ToBeProcessed);
-            this.curOrder.setCheckoutDate(new Date());
-            this.curOrder = new Order(this.curCustomer.getUserOrg()); // Place a new unassigned order to be processed
-            this.refreshOrderTable();
-            JOptionPane.showMessageDialog(this, "SUCCESS", "Result", -1);
-//            JOptionPane.showMessageDialog(
-//                    this, "", "Failure", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception e) {
-            System.out.print(e);
-        }
-
+        JDialog jdl = new JDialog();
+        jdl.add(new CheckoutOrderJPanel(this.curCustomer.getUserOrg(), this.business, this.curOrder.getTotalPrice(), this.curOrder));
+        jdl.setSize(800, 600);
+        jdl.setModal(true);
+        jdl.setLocationRelativeTo(null);
+        jdl.setVisible(true);
+//            this.curOrder.chekoutOrder();
+//            this.selectedShop.addOrderInshop(curOrder);
+//            this.curOrder.setCheckoutDate(new Date());
+//            this.curOrder = new Order(this.curCustomer.getUserOrg()); // Place a new unassigned order to be processed
+//            this.refreshOrderTable();
+//            JOptionPane.showMessageDialog(this, "SUCCESS", "Result", -1);
     }//GEN-LAST:event_checkoutJButtonActionPerformed
 
     private void addToOrderJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToOrderJButtonActionPerformed
@@ -368,8 +354,14 @@ public class CustomerAreaJPanel extends WorkArea {
         }
         SaleMenuItem item = this.selectedShop.getSaleItemList().get(selectedIndex);
 //        Integer number = (Integer) 
-        int number = Integer.parseInt(this.numberJSpinner.getValue().toString());
-        this.curOrder.addOrderItem(item, number);
+        int addedNumber = Integer.parseInt(this.numberJSpinner.getValue().toString());
+        int alreadyInOrderNumber = this.curOrder.getOrderItemNumber(item);
+        if (addedNumber + alreadyInOrderNumber > item.getRemainNumber()) {
+            JOptionPane.showMessageDialog(
+                    this, "Exceeds Remain Number", "Failure", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        this.curOrder.addOrderItem(item, addedNumber);
         this.refreshOrderTable();
     }//GEN-LAST:event_addToOrderJButtonActionPerformed
 

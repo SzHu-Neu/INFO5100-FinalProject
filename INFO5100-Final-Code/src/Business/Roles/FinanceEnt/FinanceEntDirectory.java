@@ -5,6 +5,7 @@
 package Business.Roles.FinanceEnt;
 
 import Business.CommerceSystem;
+import Business.Roles.FinanceEnt.CreditPaymentOrg.CreditPaymentOrg;
 import java.util.ArrayList;
 
 /**
@@ -12,23 +13,27 @@ import java.util.ArrayList;
  * @author sichengzhou
  */
 public class FinanceEntDirectory {
-//    private ArrayList<FinanceEnt> financeEntList;
 
-    private FinanceEnt financeEnt;
+    private ArrayList<FinanceEnt> financeEntList;
 
+//    private FinanceEnt financeEnt;
     CommerceSystem system;
 
     public FinanceEntDirectory(CommerceSystem system) {
         this.system = system;
-        this.financeEnt = new FinanceEnt();
-    }
-
-    public FinanceEnt getFinanceEnt() {
-        return financeEnt;
+        this.financeEntList = new ArrayList<FinanceEnt>();
     }
 
     public CommerceSystem getSystem() {
         return system;
+    }
+
+    public ArrayList<CreditPaymentOrg> listAllCreditPaymentOrgs() {
+        ArrayList<CreditPaymentOrg> creditPaymentOrgs = new ArrayList<CreditPaymentOrg>();
+        for (FinanceEnt singleFe : financeEntList) {
+            creditPaymentOrgs.add(singleFe.getCreditPaymentOrg());
+        }
+        return creditPaymentOrgs;
     }
 
 }

@@ -1,6 +1,7 @@
 package Business.Roles.FinanceEnt.CreditPaymentOrg;
 
 import Business.Roles.InDeliverOrganization;
+import Business.Roles.PurchaseEnt.UserOrg.UserOrg;
 
 import java.util.ArrayList;
 
@@ -32,25 +33,32 @@ public class CreditPaymentOrg {
         return this.paymentInfos;
     }
 
-    public void addPaymentInfo(String name, int price) {
-        this.paymentInfos.add(new SinglePaymentInfo(name,price));
-        
+    public void addPaymentInfo(UserOrg userOrg, String description, int price) {
+        this.paymentInfos.add(new SinglePaymentInfo(userOrg, description, price));
     }
-   
 
     public class SinglePaymentInfo {
 
-        private String name;
+        private String description;
+        private UserOrg userOrg;
         private int price;
 
-        SinglePaymentInfo(String name,int price) {
-            this.name = name;
+        SinglePaymentInfo(UserOrg userOrg, String description, int price) {
+            this.userOrg = userOrg;
+            this.description = description;
             this.price = price;
         }
 
-        public String getName() {
-            return name;
+        public String getDescription() {
+            return description;
         }
-        
+
+        public UserOrg getUserOrg() {
+            return userOrg;
+        }
+
+        public int getPrice() {
+            return price;
+        }
     }
 }

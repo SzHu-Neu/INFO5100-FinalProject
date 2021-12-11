@@ -4,17 +4,39 @@
  */
 package UI.CustomerWorkArea;
 
+import Business.CommerceSystem;
+import Business.Order.Order;
+import Business.Roles.FinanceEnt.CreditPaymentOrg.CreditPaymentOrg;
+import Business.Roles.PurchaseEnt.UserOrg.UserOrg;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author Ekoxier
  */
 public class CheckoutOrderJPanel extends javax.swing.JPanel {
 
+    CommerceSystem business;
+    ArrayList<CreditPaymentOrg> cpos;
+    UserOrg userOrg;
+    int totalPrice;
+    Order selectedOrder;
+
     /**
      * Creates new form CheckoutOrderJPanel
      */
-    public CheckoutOrderJPanel() {
+    public CheckoutOrderJPanel(UserOrg userOrg, CommerceSystem business, int totalPrice, Order selectedOrder) {
         initComponents();
+        this.jTextField1.setText(String.valueOf(totalPrice));
+        this.jTextField1.setEnabled(false);
+        this.business = business;
+        this.cpos = business.getFinanceEntDirectory().listAllCreditPaymentOrgs();
+        DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel(cpos.toArray());
+        this.jComboBox1.setModel(comboBoxModel);
+        this.totalPrice = totalPrice;
+        this.userOrg = userOrg;
+        this.selectedOrder = selectedOrder;
     }
 
     /**
@@ -28,6 +50,11 @@ public class CheckoutOrderJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         jLabel1.setText("Total Price:");
 
@@ -37,25 +64,67 @@ public class CheckoutOrderJPanel extends javax.swing.JPanel {
             }
         });
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel2.setText("Select Payment:");
+
+        jButton1.setText("OK");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setText("Order");
+
+        jButton2.setText("Cancel");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel3)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)))
+                .addContainerGap(202, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(238, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -63,9 +132,33 @@ public class CheckoutOrderJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        CreditPaymentOrg selectedCreditPaymentOrg = (CreditPaymentOrg) this.jComboBox1.getSelectedItem();
+        selectedCreditPaymentOrg.addPaymentInfo(this.userOrg, "Description", this.totalPrice);
+        this.selectedOrder.chekoutOrder();
+//        this.selectedOrder.
+//            this.selectedShop.addOrderInshop(curOrder);
+//            this.curOrder.setCheckoutDate(new Date());
+//            this.curOrder = new Order(this.curCustomer.getUserOrg()); // Place a new unassigned order to be processed
+//            this.refreshOrderTable();
+//            JOptionPane.showMessageDialog(this, "SUCCESS", "Result", -1);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

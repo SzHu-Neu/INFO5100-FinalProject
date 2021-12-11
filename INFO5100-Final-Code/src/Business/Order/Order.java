@@ -58,6 +58,14 @@ public class Order {
         return deliverItemsInfo;
     }
 
+    public int getOrderItemNumber(SaleMenuItem item) {
+        if (this.orderItemInfo.containsKey(item)) {
+            return this.orderItemInfo.get(item);
+        } else {
+            return 0;
+        }
+    }
+
     public void addOrderItem(SaleMenuItem item, int itemNumber) {
         if (this.orderItemInfo.containsKey(item)) {
             int newNumber = this.orderItemInfo.get(item) + itemNumber;

@@ -60,6 +60,12 @@ public abstract class InDeliverOrganization {
         return this.relatedDeliverItems.get(idx);
     }
 
+    // FOR TEST ONLY
+    public void setDeliveredForTest(int idx) {
+        this.relatedDeliverItems.get(idx).setDelivered();
+        this.relatedDeliverItems.get(idx).setDeliveryOrderNum(114514);
+    }
+
     @Override
     public String toString() {
         return this.getName();

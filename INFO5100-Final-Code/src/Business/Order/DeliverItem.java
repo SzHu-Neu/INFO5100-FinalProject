@@ -50,6 +50,14 @@ public class DeliverItem {
         this.currentStatus = DeliverItemStatus.Received;
     }
 
+    public void setDelivered() {
+        this.currentStatus = DeliverItemStatus.Delivered;
+    }
+
+    public void setInDelivery() {
+        this.currentStatus = DeliverItemStatus.InDelivery;
+    }
+
     public int getQuantity() {
         return quantity;
     }
@@ -68,6 +76,10 @@ public class DeliverItem {
 
     public int getDeliveryOrderNum() {
         return deliveryOrderNum;
+    }
+
+    public void setDeliveryOrderNum(int num) {
+        this.deliveryOrderNum = num;
     }
 
     public Order getOrderBelonged() {

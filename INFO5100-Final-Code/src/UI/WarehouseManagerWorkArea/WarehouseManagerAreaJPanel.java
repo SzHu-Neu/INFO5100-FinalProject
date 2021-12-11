@@ -15,6 +15,9 @@ import Business.UserAccount.UserAccount;
 import UI.WorkArea;
 import java.util.ArrayList;
 import javax.swing.JDialog;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -58,6 +61,7 @@ public class WarehouseManagerAreaJPanel extends WorkArea {
         jTableDelivery = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jBtAccept = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         jTableSaleItem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -95,6 +99,7 @@ public class WarehouseManagerAreaJPanel extends WorkArea {
         ));
         jScrollPane2.setViewportView(jTableDelivery);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Delivery Table");
 
         jBtAccept.setText("Accept");
@@ -103,6 +108,9 @@ public class WarehouseManagerAreaJPanel extends WorkArea {
                 jBtAcceptActionPerformed(evt);
             }
         });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Sale Items");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -113,15 +121,16 @@ public class WarehouseManagerAreaJPanel extends WorkArea {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(enterpriseLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBtRequest))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jBtAccept))
-                    .addComponent(jLabel1))
-                .addContainerGap(100, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtRequest)))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,15 +140,17 @@ public class WarehouseManagerAreaJPanel extends WorkArea {
                     .addComponent(jBtAccept)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(enterpriseLabel1)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jBtRequest))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1)
+                        .addGap(13, 13, 13)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -203,16 +214,17 @@ public class WarehouseManagerAreaJPanel extends WorkArea {
     }
 
     private void refreshJTableDelivery() {
-        ArrayList<DeliverItem> deliverItems = this.warehouseOrg.getRelatedDeliverItems();
+        final ArrayList<DeliverItem> deliverItems = this.warehouseOrg.getRelatedDeliverItems();
         int tableColumnNum = deliverItems.size();
-        Object ColNames[] = {"Name", "FromOrganization", "ToOrganization", " Status", "DeliveryOrderNum"};
+        Object ColNames[] = {"ItemName", "ItemNum", "FromOrganization", "ToOrganization", " Status", "DeliveryOrderNum"};
         Object rowDataItems[][] = new Object[tableColumnNum][ColNames.length];
         for (int idx = 0; idx < tableColumnNum; idx++) {
             rowDataItems[idx][0] = deliverItems.get(idx).getName(); // Name
-            rowDataItems[idx][1] = deliverItems.get(idx).getAdditionalInfo().getFromOrg(); // From which Org
-            rowDataItems[idx][2] = deliverItems.get(idx).getAdditionalInfo().getToOrg(); // To which Org
-            rowDataItems[idx][3] = deliverItems.get(idx).getCurrentStatus();
-            rowDataItems[idx][4] = deliverItems.get(idx).getDeliveryOrderNum() != -1 ? deliverItems.get(idx).getDeliveryOrderNum() : "NotAvaNow";
+            rowDataItems[idx][1] = deliverItems.get(idx).getQuantity(); // Quantity;
+            rowDataItems[idx][2] = deliverItems.get(idx).getAdditionalInfo().getFromOrg(); // From which Org
+            rowDataItems[idx][3] = deliverItems.get(idx).getAdditionalInfo().getToOrg(); // To which Org
+            rowDataItems[idx][4] = deliverItems.get(idx).getCurrentStatus();
+            rowDataItems[idx][5] = deliverItems.get(idx).getDeliveryOrderNum() != -1 ? deliverItems.get(idx).getDeliveryOrderNum() : "NotAvaNow";
 //            rowDataItems[idx][4] = deliverItems
         }
         this.jTableDelivery.setModel(new DefaultTableModel(rowDataItems, ColNames) {
@@ -222,6 +234,21 @@ public class WarehouseManagerAreaJPanel extends WorkArea {
             }
         }
         );
+        ListSelectionModel cellSelectionModel = this.jTableDelivery.getSelectionModel();
+        cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int selectedRow = jTableDelivery.getSelectedRow();
+                if (selectedRow == -1) {
+                    return;
+                }
+                if (deliverItems.get(selectedRow).getCurrentStatus() == DeliverItem.DeliverItemStatus.Delivered) {
+                    jBtAccept.setEnabled(true);
+                }
+            }
+        });
+        this.jBtAccept.setEnabled(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -229,6 +256,7 @@ public class WarehouseManagerAreaJPanel extends WorkArea {
     private javax.swing.JButton jBtAccept;
     private javax.swing.JButton jBtRequest;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableDelivery;

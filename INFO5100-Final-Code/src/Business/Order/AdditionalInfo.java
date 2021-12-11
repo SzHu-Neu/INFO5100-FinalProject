@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
+ * Additional Info in DeliverItem
  *
  * @author Ekoxier
  */
@@ -45,7 +46,7 @@ public class AdditionalInfo {
     public ArrayList<DeliverTimeline> getTimelines() {
         return timelines;
     }
-
+//    public void set
     public void assignDeliveryEnt(DeliveryEnt deliveryEnt) {
         this.deliveryEnt = deliveryEnt;
         deliveryEnt.addWorkRequest(this.deliverItemBelonged);
