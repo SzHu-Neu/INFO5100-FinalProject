@@ -30,6 +30,7 @@ public class DistributionOrg {
         this.name = name;
         this.managerList = new ArrayList<DistributionManager>();
         this.transOrgList = new ArrayList<TransportationOrg>();
+        this.deliverItems = new ArrayList<DeliverItem>();
         
     }
     public List<DistributionManager> getManagerList() {

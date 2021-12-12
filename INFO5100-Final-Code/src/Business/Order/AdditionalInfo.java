@@ -20,6 +20,18 @@ public class AdditionalInfo {
 
         private Date date;
         private String event;
+        DeliverTimeline(Date date, String event){
+            this.date = date;
+            this.event = event;
+        }
+        
+        public Date getDate(){
+            return date;
+        }
+        
+        public String getEvent(){
+            return event;
+        }
     }
     private DeliverItem deliverItemBelonged;
     private InDeliverOrganization fromOrg;
@@ -45,6 +57,10 @@ public class AdditionalInfo {
 
     public ArrayList<DeliverTimeline> getTimelines() {
         return timelines;
+    }
+    
+    public void createTimeLine(Date date , String event){
+        this.timelines.add(new DeliverTimeline(date,event));
     }
 //    public void set
     public void assignDeliveryEnt(DistributionOrg distributionOrg) {
