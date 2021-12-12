@@ -7,6 +7,7 @@ package UI.ProductManagerWorkArea;
 
 import Business.CommerceSystem;
 import Business.Order.DeliverItem;
+import Business.Roles.DeliveryEnt.DeliveryEnt;
 import Business.Roles.Role;
 import Business.Roles.FactoryEnt.ProductOrg.ProductManager;
 import Business.Roles.FactoryEnt.ProductOrg.ProductOrg;
@@ -14,6 +15,7 @@ import Business.Roles.InDeliverOrganization;
 import Business.UserAccount.UserAccount;
 import UI.WorkArea;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,6 +26,7 @@ public class ProductManagerAreaJPanel extends WorkArea {
 
     ProductManager productManager;
     ProductOrg productOrg;
+    DeliveryEnt selectedDeliveryEnt;
 
     /**
      * Creates new form ProductManagerAreaJPanel
@@ -32,6 +35,9 @@ public class ProductManagerAreaJPanel extends WorkArea {
         super(account, business, role);
         this.productManager = (ProductManager) role;
         this.productOrg = this.productManager.getProductOrg();
+        DefaultComboBoxModel deliveryComboBoxModel = new DefaultComboBoxModel();
+        this.jComboBox1.setModel(deliveryComboBoxModel);
+        this.selectedDeliveryEnt = (DeliveryEnt) this.jComboBox1.getSelectedItem();
         initComponents();
         refreshJTableRequest();
         refreshJTableDelivery();
@@ -55,6 +61,8 @@ public class ProductManagerAreaJPanel extends WorkArea {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton3 = new javax.swing.JButton();
 
         enterpriseLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel1.setText("Product Manager Panel");
@@ -98,10 +106,24 @@ public class ProductManagerAreaJPanel extends WorkArea {
             }
         });
 
-        jButton2.setText("For Test");
+        jButton2.setText("Test");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Send by");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -121,30 +143,36 @@ public class ProductManagerAreaJPanel extends WorkArea {
                         .addComponent(jButton1))
                     .addComponent(jLabel2)
                     .addComponent(jScrollPane2))
-                .addGap(35, 35, 35)
-                .addComponent(jButton2)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(enterpriseLabel1)
+                .addGap(26, 26, 26)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(enterpriseLabel1)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -178,6 +206,24 @@ public class ProductManagerAreaJPanel extends WorkArea {
         this.productOrg.setDeliveredForTest(selectedRow);
         refreshJTableDelivery();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = this.jTableDelivery.getSelectedRow();
+        if (selectedRow == -1) {
+            return;
+        }
+//        this.productOrg.getRelatedDeliverItems().get(selectedRow).getAdditionalInfo().setDeliveryEnt(selectedDeliveryEnt);
+        ///////////////////////////////
+
+        // Log
+        System.out.printf("Process the order \n");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        this.selectedDeliveryEnt = (DeliveryEnt) this.jComboBox1.getSelectedItem();
+    }//GEN-LAST:event_jComboBox1ActionPerformed
     private void refreshJTableRequest() {
         ArrayList<ProductOrg.RequestFactoryItem> requestHandleList = this.productOrg.getRequestHandleList();
         int tableColumnNum = requestHandleList.size();
@@ -225,6 +271,8 @@ public class ProductManagerAreaJPanel extends WorkArea {
     private javax.swing.JLabel enterpriseLabel1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

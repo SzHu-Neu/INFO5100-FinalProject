@@ -4,6 +4,7 @@
  */
 package Business.Order;
 
+import Business.Roles.DeliveryEnt.DeliveryEnt;
 import Business.Roles.DeliveryEnt.DistributionOrg.DistributionOrg;
 import Business.Roles.InDeliverOrganization;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.Date;
  */
 public class AdditionalInfo {
 
+
     class DeliverTimeline {
 
         private Date date;
@@ -26,9 +28,6 @@ public class AdditionalInfo {
     private InDeliverOrganization toOrg;
     private DistributionOrg disOrg;
 
-    public void setDeliveryEnt(DeliveryEnt deliveryEnt) {
-        this.deliveryEnt = deliveryEnt;
-    }
     private ArrayList<DeliverTimeline> timelines; // Timelines that record the delivery procedure
 
     public AdditionalInfo(InDeliverOrganization fromOrg, InDeliverOrganization toOrg, DeliverItem deliverItemBelonged) {
@@ -51,6 +50,7 @@ public class AdditionalInfo {
         return timelines;
     }
 //    public void set
+
     public void assignDeliveryEnt(DistributionOrg distributionOrg) {
         this.disOrg = distributionOrg;
         distributionOrg.addDeliverItem(this.deliverItemBelonged);

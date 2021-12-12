@@ -134,10 +134,10 @@ public class Order {
         }
     }
 
-    public void orderSetDeliveryEnt(DeliveryEnt de) {
-        for (DeliverItem di : this.deliverItemsInfo) {
-            di.getAdditionalInfo().setDeliveryEnt(de);
-            /////// need to added this di to deliveryEnt list
-        }
-    }
+//    public void orderSetDeliveryEnt(DeliveryEnt de) {
+//        for (DeliverItem di : this.deliverItemsInfo) {
+//            di.getAdditionalInfo().setDeliveryEnt(de);
+//            /////// need to added this di to deliveryEnt list
+//        }
+//    }
 }
