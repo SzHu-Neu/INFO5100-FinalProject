@@ -14,8 +14,8 @@ public class FinanceEnt {
 
     private CreditPaymentOrg creditPaymentOrg;
 
-    public FinanceEnt() {
-        this.creditPaymentOrg = new CreditPaymentOrg();
+    public FinanceEnt(String name) {
+        this.creditPaymentOrg = new CreditPaymentOrg(name);
     }
 
     public CreditPaymentOrg getCreditPaymentOrg() {

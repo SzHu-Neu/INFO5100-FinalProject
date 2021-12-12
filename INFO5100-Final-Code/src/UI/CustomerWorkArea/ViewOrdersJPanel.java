@@ -4,8 +4,10 @@
  */
 package UI.CustomerWorkArea;
 
+import Business.Order.DeliverItem;
 import Business.Order.Order;
 import java.util.ArrayList;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -21,38 +23,18 @@ import javax.swing.table.DefaultTableModel;
 public class ViewOrdersJPanel extends javax.swing.JPanel {
 
     private ArrayList<Order> orderList;
+    private JDialog jdl;
+    private Order selectedOrder;
 
     /**
      * Creates new form CheckOrderJPanel
      */
-    public ViewOrdersJPanel(ArrayList<Order> orderList) {
+    public ViewOrdersJPanel(ArrayList<Order> orderList, JDialog jdl) {
         initComponents();
+        this.selectedOrder = null;
+        this.jdl = jdl;
         this.orderList = orderList;
-        Object OrderColNames[] = {"Date", "TotalPrice"};
-        Object ordersDisplayData[][] = new Object[this.orderList.size()][OrderColNames.length];
-        for (int idx = 0; idx < orderList.size(); idx++) {
-            ordersDisplayData[idx][0] = this.orderList.get(idx).getCheckoutDate() != null ? orderList.get(idx).getCheckoutDate() : ""; // Date
-            ordersDisplayData[idx][1] = this.orderList.get(idx).getTotalPrice(); // Price
-        }
-
-        this.jTable1.setModel(new DefaultTableModel(ordersDisplayData, OrderColNames) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        }
-        );
-        ListSelectionModel cellSelectionModel = this.jTable1.getSelectionModel();
-//        cellSelectionModel.clearSelection();
-//        cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-//        cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
-//            @Override
-//            public void valueChanged(ListSelectionEvent e) {
-//            }
-//        }
-//    }
-//
-//);
+        refreshJTableOrders();
     }
 
     /**
@@ -65,11 +47,14 @@ public class ViewOrdersJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableOrders = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableOrderDetail = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableOrders.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -80,7 +65,7 @@ public class ViewOrdersJPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableOrders);
 
         jButton1.setText("View Detail");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +75,20 @@ public class ViewOrdersJPanel extends javax.swing.JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Orders");
+        jLabel1.setText("Details");
+
+        jTableOrderDetail.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ItemName", "ItemNum", "FromOrg", "ToOrg", "Status", "DeliveryOrderNum"
+            }
+        ));
+        jScrollPane2.setViewportView(jTableOrderDetail);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Orders");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -99,37 +97,105 @@ public class ViewOrdersJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 804, Short.MAX_VALUE))
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel1)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        int selectedRow = this.jTableOrders.getSelectedRow();
+        if (selectedRow == -1) {
+            return;
+        }
+        this.selectedOrder = this.orderList.get(selectedRow);
+        refreshJTableOrderDetail();
     }//GEN-LAST:event_jButton1ActionPerformed
+    private void refreshJTableOrders() {
+        Object OrderColNames[] = {"Date", "TotalPrice", "Shop"};
+        Object ordersDisplayData[][] = new Object[this.orderList.size()][OrderColNames.length];
+        for (int idx = 0; idx < orderList.size(); idx++) {
+            ordersDisplayData[idx][0] = this.orderList.get(idx).getCheckoutDate() != null ? orderList.get(idx).getCheckoutDate() : ""; // Date
+            ordersDisplayData[idx][1] = this.orderList.get(idx).getTotalPrice(); // Price
+            ordersDisplayData[idx][2] = this.orderList.get(idx).getShop(); // Shop
+        }
 
+        this.jTableOrders.setModel(new DefaultTableModel(ordersDisplayData, OrderColNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        }
+        );
+    }
+
+    private void refreshJTableOrderDetail() {
+        final ArrayList<DeliverItem> deliverItemsInfo = this.selectedOrder.getDeliverItemsInfo();
+        int tableColumnNum = deliverItemsInfo.size();
+        Object ColNames[] = {"ItemName", "ItemNum", "FromOrganization", "ToOrganization", " Status", "DeliveryOrderNum"};
+        Object rowDataItems[][] = new Object[tableColumnNum][ColNames.length];
+        for (int idx = 0; idx < tableColumnNum; idx++) {
+            rowDataItems[idx][0] = deliverItemsInfo.get(idx).getName(); // Name
+            rowDataItems[idx][1] = deliverItemsInfo.get(idx).getQuantity(); // Quantity;
+            rowDataItems[idx][2] = deliverItemsInfo.get(idx).getAdditionalInfo().getFromOrg(); // From which Org
+            rowDataItems[idx][3] = deliverItemsInfo.get(idx).getAdditionalInfo().getToOrg(); // To which Org
+            rowDataItems[idx][4] = deliverItemsInfo.get(idx).getCurrentStatus();
+            rowDataItems[idx][5] = deliverItemsInfo.get(idx).getDeliveryOrderNum() != -1 ? deliverItemsInfo.get(idx).getDeliveryOrderNum() : "NotAvaNow";
+        }
+        this.jTableOrderDetail.setModel(new DefaultTableModel(rowDataItems, ColNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        }
+        );
+        ListSelectionModel cellSelectionModel = this.jTableOrderDetail.getSelectionModel();
+        cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int selectedRow = jTableOrderDetail.getSelectedRow();
+                if (selectedRow == -1) {
+                    return;
+                }
+                if (deliverItemsInfo.get(selectedRow).getCurrentStatus() == DeliverItem.DeliverItemStatus.Delivered) {
+//                    jBtAccept.setEnabled(true);
+                }
+            }
+        });
+//        this.jBtAccept.setEnabled(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableOrderDetail;
+    private javax.swing.JTable jTableOrders;
     // End of variables declaration//GEN-END:variables
 }

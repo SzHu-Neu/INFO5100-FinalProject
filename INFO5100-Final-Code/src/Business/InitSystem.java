@@ -2,6 +2,8 @@ package Business;
 
 import Business.Roles.FactoryEnt.FactoryEnt;
 import Business.Roles.FactoryEnt.ProductOrg.ProductManager;
+import Business.Roles.FinanceEnt.CreditPaymentOrg.PaymentManager;
+import Business.Roles.FinanceEnt.FinanceEnt;
 import Business.Roles.PurchaseEnt.PurchaseEnt;
 import Business.Roles.PurchaseEnt.UserOrg.Customer;
 import Business.Roles.SaleEnt.FinanceOrg.Accountant;
@@ -47,13 +49,16 @@ public class InitSystem {
         ProductManager pm = factoryEnt1.getProductOrg().createProductManager();
         system.getUserAccountDirectory().createUserAccount("product1", "123456", pm);
 
-        // Purchase Enterprise Create
-        PurchaseEnt purchaseEnt1 = system.getPurchaseEntDirectory().createPurchaseEnt("customer1", "customer address 1", system);
-
-        // Customer Create;
-        Customer cust = purchaseEnt1.getUserOrg().addCustomer("customer1", "1891333");
+        // Purchase Enterprise Create && Customer Create
+        PurchaseEnt purchaseEnt1 = system.getPurchaseEntDirectory().createPurchaseEnt("customer1", "customer address 1", "18971656637", system);
+        Customer cust = purchaseEnt1.getUserOrg().getCustomer();
         system.getUserAccountDirectory().createUserAccount("customer1", "123456", cust);
 
+        // Finance Enterprise Create
+        FinanceEnt financeEnt1 = system.getFinanceEntDirectory().createFinanceEnt("fo1");
+
+        PaymentManager paymentManager = financeEnt1.getCreditPaymentOrg().addPaymentManager();
+        system.getUserAccountDirectory().createUserAccount("finance1", "123456", paymentManager);
         return system;
     }
 

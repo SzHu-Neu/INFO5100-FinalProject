@@ -119,18 +119,21 @@ public class WarehouseManagerAreaJPanel extends WorkArea {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(enterpriseLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(jBtAccept))
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtRequest)))
-                .addContainerGap(108, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(enterpriseLabel1)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBtRequest)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,7 +219,7 @@ public class WarehouseManagerAreaJPanel extends WorkArea {
     private void refreshJTableDelivery() {
         final ArrayList<DeliverItem> deliverItems = this.warehouseOrg.getRelatedDeliverItems();
         int tableColumnNum = deliverItems.size();
-        Object ColNames[] = {"ItemName", "ItemNum", "FromOrganization", "ToOrganization", " Status", "DeliveryOrderNum"};
+        Object ColNames[] = {"ItemName", "ItemNum", "FromOrg", "ToOrg", " Status", "DeliveryOrderNum"};
         Object rowDataItems[][] = new Object[tableColumnNum][ColNames.length];
         for (int idx = 0; idx < tableColumnNum; idx++) {
             rowDataItems[idx][0] = deliverItems.get(idx).getName(); // Name

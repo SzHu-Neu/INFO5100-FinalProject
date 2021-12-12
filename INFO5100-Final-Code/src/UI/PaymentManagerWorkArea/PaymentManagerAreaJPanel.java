@@ -12,6 +12,7 @@ import Business.Roles.Role;
 import Business.UserAccount.UserAccount;
 import UI.WorkArea;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -28,6 +29,7 @@ public class PaymentManagerAreaJPanel extends WorkArea {
         super(account, business, role);
         initComponents();
         this.paymentManager = (PaymentManager) role;
+        refreshTable();
     }
 
     /**
@@ -40,10 +42,10 @@ public class PaymentManagerAreaJPanel extends WorkArea {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        menuJTable = new javax.swing.JTable();
+        JTableCreditPayment = new javax.swing.JTable();
         enterpriseLabel1 = new javax.swing.JLabel();
 
-        menuJTable.setModel(new javax.swing.table.DefaultTableModel(
+        JTableCreditPayment.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -54,7 +56,7 @@ public class PaymentManagerAreaJPanel extends WorkArea {
                 "Name", "Price"
             }
         ));
-        jScrollPane1.setViewportView(menuJTable);
+        jScrollPane1.setViewportView(JTableCreditPayment);
 
         enterpriseLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel1.setText("Credit Payment Panel");
@@ -66,9 +68,9 @@ public class PaymentManagerAreaJPanel extends WorkArea {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(enterpriseLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(197, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(enterpriseLabel1))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -76,22 +78,34 @@ public class PaymentManagerAreaJPanel extends WorkArea {
                 .addContainerGap()
                 .addComponent(enterpriseLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshTable() {
-        int length = this.paymentManager.getCreditPaymentOrg().getPaymentInfos().size();
-        for (int idx = 0; idx < length; idx++) {
-            CreditPaymentOrg.SinglePaymentInfo info = this.paymentManager.getCreditPaymentOrg().getPaymentInfos().get(idx);
-//            info.getName();
-//            info.getPrice();
+        ArrayList<CreditPaymentOrg.SinglePaymentInfo> paymentInfos = this.paymentManager.getCreditPaymentOrg().getPaymentInfos();
+        int tableColumnNum = paymentInfos.size();
+        Object ColNames[] = {"PaymentInfo", "Amount", "FromOrg"};
+        Object rowDataItems[][] = new Object[tableColumnNum][ColNames.length];
+        for (int idx = 0; idx < tableColumnNum; idx++) {
+            rowDataItems[idx][0] = paymentInfos.get(idx).getInfo(); // PaymentInfo
+            rowDataItems[idx][1] = paymentInfos.get(idx).getAmount(); // Amount
+            rowDataItems[idx][2] = paymentInfos.get(idx).getUserOrg(); // FromOrg
         }
+
+        this.JTableCreditPayment.setModel(new DefaultTableModel(rowDataItems, ColNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        }
+        );
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable JTableCreditPayment;
     private javax.swing.JLabel enterpriseLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable menuJTable;
     // End of variables declaration//GEN-END:variables
 }

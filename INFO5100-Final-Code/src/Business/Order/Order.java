@@ -107,18 +107,15 @@ public class Order {
 //        Transfer from orderItemInfo to DeliverItemInfo
 //        And orderItemInfo should not be used
         for (Map.Entry<SaleMenuItem, Integer> entry : orderItemInfo.entrySet()) {
-//            
-//            deliverItemsInfo.add(
-//                    entry.getKey().getName(),
-//                    entry.getKey().getSalePrice(),
-//                    entry.getValue(),
-//                    entry.getKey(),
-//                    this,
-//                    this.shop.getSaleEnterprise().getWarhouseOrg(),
-//                    this.customer.getUserOrg()
-//            )
-
+            entry.getKey().sell(entry.getValue()); // reduce the number of remain
+            DeliverItem tmp = new DeliverItem(
+                    entry.getKey().getName(),
+                    entry.getValue(),
+                    entry.getKey(),
+                    this,
+                    this.shop.getSaleEnterprise().getWarhouseOrg(), // from Warehouse Org
+                    this.userOrg); // to userOrg;
+            deliverItemsInfo.add(tmp);
         }
-        this.orderItemInfo = null;
     }
 }
