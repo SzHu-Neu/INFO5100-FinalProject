@@ -50,7 +50,7 @@ public class Customer extends Role {
         // checkOutOrder
         order.chekoutOrder();
         // Add a transaction
-        order.getShop().getSaleEnterprise().getFinanceOrg().addTransaction(order.getTotalPrice(), "Bought Income");
+        order.getShop().getSaleEnterprise().getFinanceOrg().addTransaction(order.getTotalPrice(), "Bought Income");  
     }
 
     public String getPhone() {

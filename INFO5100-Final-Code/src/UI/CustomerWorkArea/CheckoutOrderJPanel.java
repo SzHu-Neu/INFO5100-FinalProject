@@ -157,6 +157,8 @@ public class CheckoutOrderJPanel extends javax.swing.JPanel {
         this.caJpanel.processAfterCheckoutOk();
 //        this.selectedOrder.chekoutOrder();
         this.userOrg.getCustomer().checkOut(selectedOrder);
+        // Log
+        System.out.println("Ordered");
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

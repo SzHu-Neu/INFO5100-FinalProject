@@ -1,5 +1,6 @@
 package Business.Order;
 
+import Business.Roles.DeliveryEnt.DeliveryEnt;
 import Business.Roles.PurchaseEnt.UserOrg.Customer;
 import Business.Roles.PurchaseEnt.UserOrg.UserOrg;
 import Business.Roles.SaleEnt.ShopOrg.ShopOrg;
@@ -19,8 +20,9 @@ import java.util.Map;
 public class Order {
 
     private UserOrg userOrg; // Customer who ordered
-    private ShopOrg shop; // In which shop
 
+    private ShopOrg shop; // In which shop
+    private boolean isProcessed;
     private HashMap<SaleMenuItem, Integer> orderItemInfo;
     private ArrayList<DeliverItem> deliverItemsInfo;
 
@@ -32,6 +34,19 @@ public class Order {
         this.orderItemInfo = new HashMap<SaleMenuItem, Integer>();
         this.deliverItemsInfo = new ArrayList<DeliverItem>();
         this.checkoutDate = null;
+        this.isProcessed = false;
+    }
+
+    public UserOrg getUserOrg() {
+        return userOrg;
+    }
+
+    public void setProcessed() {
+        this.isProcessed = true;
+    }
+
+    public boolean getIsProcessed() {
+        return this.isProcessed;
     }
 
     public HashMap<SaleMenuItem, Integer> getOrderItemInfo() {
@@ -116,6 +131,13 @@ public class Order {
                     this.shop.getSaleEnterprise().getWarhouseOrg(), // from Warehouse Org
                     this.userOrg); // to userOrg;
             deliverItemsInfo.add(tmp);
+        }
+    }
+
+    public void orderSetDeliveryEnt(DeliveryEnt de) {
+        for (DeliverItem di : this.deliverItemsInfo) {
+            di.getAdditionalInfo().setDeliveryEnt(de);
+            /////// need to added this di to deliveryEnt list
         }
     }
 }

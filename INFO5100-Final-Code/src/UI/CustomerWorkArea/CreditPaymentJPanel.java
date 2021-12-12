@@ -17,7 +17,7 @@ import javax.swing.JDialog;
  * @author Ekoxier
  */
 public class CreditPaymentJPanel extends javax.swing.JPanel {
-
+    
     CustomerAreaJPanel caJpanel;
     JDialog jdl;
     CommerceSystem business;
@@ -45,10 +45,13 @@ public class CreditPaymentJPanel extends javax.swing.JPanel {
         this.userOrg = userOrg;
         refresh();
     }
-
+    
     private void refresh() {
         this.selectedCreditPaymentOrg = (CreditPaymentOrg) this.jComboBox1.getSelectedItem();
         int amount = this.selectedCreditPaymentOrg.checkMoneyOwed(this.userOrg);
+        if (amount == 0) {
+            this.jButton1.setEnabled(false);
+        }
         this.jTextField1.setText(String.valueOf(amount));
     }
 
