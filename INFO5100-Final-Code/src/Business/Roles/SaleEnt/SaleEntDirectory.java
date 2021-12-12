@@ -5,7 +5,6 @@
 package Business.Roles.SaleEnt;
 
 import Business.CommerceSystem;
-import Business.Roles.SaleEnt.CustServiceOrg.CustServiceOrg;
 import Business.Roles.SaleEnt.FinanceOrg.FinanceOrg;
 import Business.Roles.SaleEnt.ShopOrg.ShopOrg;
 import Business.Roles.SaleEnt.WarehouseOrg.WarehouseOrg;

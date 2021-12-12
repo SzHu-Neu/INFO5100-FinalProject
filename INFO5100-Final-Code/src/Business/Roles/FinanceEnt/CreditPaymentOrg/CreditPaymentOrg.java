@@ -4,6 +4,7 @@ import Business.Roles.InDeliverOrganization;
 import Business.Roles.PurchaseEnt.UserOrg.UserOrg;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -57,6 +58,7 @@ public class CreditPaymentOrg {
 
         private String info;
         private UserOrg userOrg;
+        private Date time;
 
         private int amount;
 
@@ -64,6 +66,7 @@ public class CreditPaymentOrg {
             this.userOrg = userOrg;
             this.info = description;
             this.amount = amount;
+            this.time = new Date();
         }
 
         public String getInfo() {
@@ -72,6 +75,10 @@ public class CreditPaymentOrg {
 
         public UserOrg getUserOrg() {
             return userOrg;
+        }
+
+        public Date getTime() {
+            return time;
         }
 
         public int getAmount() {

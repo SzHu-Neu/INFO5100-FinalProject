@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * @author sichengzhou
  */
 public class ProductManagerAreaJPanel extends WorkArea {
-    
+
     ProductManager productManager;
     ProductOrg productOrg;
 
@@ -165,7 +165,8 @@ public class ProductManagerAreaJPanel extends WorkArea {
         this.productOrg.addDeliveryItem(name, null, null, number, fromOrg, toOrg);
         this.refreshJTableDelivery();
         this.refreshJTableRequest();
-
+        // Log
+        System.out.println("Accept the request from warehouse organization");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -196,7 +197,7 @@ public class ProductManagerAreaJPanel extends WorkArea {
         }
         );
     }
-    
+
     private void refreshJTableDelivery() {
         ArrayList<DeliverItem> deliverItems = this.productOrg.getRelatedDeliverItems();
         int tableColumnNum = deliverItems.size();
@@ -217,7 +218,7 @@ public class ProductManagerAreaJPanel extends WorkArea {
             }
         }
         );
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

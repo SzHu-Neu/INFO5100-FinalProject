@@ -86,12 +86,13 @@ public class PaymentManagerAreaJPanel extends WorkArea {
     private void refreshTable() {
         ArrayList<CreditPaymentOrg.SinglePaymentInfo> paymentInfos = this.paymentManager.getCreditPaymentOrg().getPaymentInfos();
         int tableColumnNum = paymentInfos.size();
-        Object ColNames[] = {"PaymentInfo", "Amount", "FromOrg"};
+        Object ColNames[] = {"PaymentInfo", "Amount", "FromOrg", "Time"};
         Object rowDataItems[][] = new Object[tableColumnNum][ColNames.length];
         for (int idx = 0; idx < tableColumnNum; idx++) {
             rowDataItems[idx][0] = paymentInfos.get(idx).getInfo(); // PaymentInfo
             rowDataItems[idx][1] = paymentInfos.get(idx).getAmount(); // Amount
             rowDataItems[idx][2] = paymentInfos.get(idx).getUserOrg(); // FromOrg
+            rowDataItems[idx][3] = paymentInfos.get(idx).getTime(); // Time;
         }
 
         this.JTableCreditPayment.setModel(new DefaultTableModel(rowDataItems, ColNames) {

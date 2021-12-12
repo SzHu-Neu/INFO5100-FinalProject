@@ -42,11 +42,11 @@ public class ManageSaleItemsJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         nameJTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        priceJTextField = new javax.swing.JTextField();
+        inPriceJtf = new javax.swing.JTextField();
         createJButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        priceJTextField1 = new javax.swing.JTextField();
+        salePriceJTf = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextAreaDescription = new javax.swing.JTextArea();
@@ -88,6 +88,12 @@ public class ManageSaleItemsJPanel extends javax.swing.JPanel {
 
         jLabel4.setText("InPrice:");
 
+        salePriceJTf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salePriceJTfActionPerformed(evt);
+            }
+        });
+
         jLabel5.setText("Description:");
 
         jTextAreaDescription.setColumns(20);
@@ -104,17 +110,21 @@ public class ManageSaleItemsJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(390, 390, 390)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel6))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(390, 390, 390)
+                                .addComponent(jButton1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel6)))
+                        .addGap(79, 79, 79))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(createJButton)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(createJButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -123,14 +133,14 @@ public class ManageSaleItemsJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(priceJTextField)
-                            .addComponent(priceJTextField1)
+                            .addComponent(inPriceJtf)
+                            .addComponent(salePriceJTf)
                             .addComponent(nameJTextField)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane2))))
-                .addGap(82, 82, 82))
+                                .addGap(0, 84, Short.MAX_VALUE))))
+                    .addComponent(jScrollPane2))
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,33 +158,38 @@ public class ManageSaleItemsJPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(priceJTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(salePriceJTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(priceJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(inPriceJtf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel5)
+                        .addGap(7, 7, 7)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(createJButton))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)))
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void createJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createJButtonActionPerformed
         // TODO add your handling code here:
         String name = this.nameJTextField.getText();
-        int salePrice = Integer.parseInt(this.priceJTextField.getText());
-        int inPrice = Integer.parseInt(this.priceJTextField.getText());
+        int salePrice = Integer.parseInt(this.salePriceJTf.getText());
+        int inPrice = Integer.parseInt(this.inPriceJtf.getText());
         String description = this.jTextAreaDescription.getText();
         this.saleEnt.addSaleItem(name, salePrice, inPrice, description);
         refreshMenu();
+        // Log
+        System.out.printf("SaleItem created: Name: %s\n", name);
+        this.inPriceJtf.setText("");
+        this.salePriceJTf.setText("");
+        this.nameJTextField.setText("");
     }//GEN-LAST:event_createJButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -183,11 +198,17 @@ public class ManageSaleItemsJPanel extends javax.swing.JPanel {
             int idx = this.menuJTable.getSelectedRow();
             this.saleEnt.delSaleItemInNotDeleted(idx);
             this.refreshMenu();
+            // Log
+            System.out.printf("SaleItem deleted:\n");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(
                     this, "Select a row", "Failure", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void salePriceJTfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salePriceJTfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_salePriceJTfActionPerformed
 
     private void refreshMenu() {
         int tableColumnNum = this.saleEnt.getNotDeletedSaleItemList().size();
@@ -211,6 +232,7 @@ public class ManageSaleItemsJPanel extends javax.swing.JPanel {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createJButton;
+    private javax.swing.JTextField inPriceJtf;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -223,7 +245,6 @@ public class ManageSaleItemsJPanel extends javax.swing.JPanel {
     private javax.swing.JTextArea jTextAreaDescription;
     private javax.swing.JTable menuJTable;
     private javax.swing.JTextField nameJTextField;
-    private javax.swing.JTextField priceJTextField;
-    private javax.swing.JTextField priceJTextField1;
+    private javax.swing.JTextField salePriceJTf;
     // End of variables declaration//GEN-END:variables
 }

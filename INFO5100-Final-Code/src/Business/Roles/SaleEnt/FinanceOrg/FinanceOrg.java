@@ -45,9 +45,12 @@ public class FinanceOrg {
         this.transactionHistory.add(tmpTransaction);
         return tmpTransaction;
     }
-   
-    
-    class Transaction {
+
+    public ArrayList<Transaction> getTransactionList() {
+        return this.transactionHistory;
+    }
+
+    public class Transaction {
 
         private Date time;
         private int moneyEarned;

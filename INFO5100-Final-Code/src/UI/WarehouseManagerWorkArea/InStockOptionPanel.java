@@ -115,7 +115,9 @@ public class InStockOptionPanel extends javax.swing.JPanel {
             int quantity = Integer.parseInt(this.jTextField1.getText());
             ProductOrg selectedProductOrg = (ProductOrg) this.jComboBox1.getSelectedItem();
             selectedProductOrg.addReuqestHandleList(this.saleMenuItem, quantity, this.warehouseOrg);
-            // 
+            this.warehouseOrg.getSaleEnterprise().getFinanceOrg().addTransaction((-1) * quantity * this.saleMenuItem.getInPrice(), "In Stock");
+            // Log
+            System.out.println("Request sent to factory organization");
             JOptionPane.showMessageDialog(this, "SUCCESS", "Result", -1);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(

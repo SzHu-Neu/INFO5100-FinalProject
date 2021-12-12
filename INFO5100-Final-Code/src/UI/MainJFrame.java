@@ -120,8 +120,11 @@ public class MainJFrame extends javax.swing.JFrame {
                     this, "Unexisted Account", "Failure", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
         Role curRole = curUser.getRole();
         JPanel jpn = curRole.createWorkArea(curUser, system, curRole);
+        // Log
+        System.out.printf("Login as: %s\n", curRole.toString());
         this.jSplitPane1.setRightComponent(jpn);
         userNameJTextField.setEnabled(false);
         passwordField.setEnabled(false);
@@ -138,7 +141,8 @@ public class MainJFrame extends javax.swing.JFrame {
         passwordField.setText("");
 
         dB4OUtil.storeSystem(system);
-
+        // Log
+        System.out.println("Logout");
         this.jSplitPane1.setRightComponent(new JPanel());
     }//GEN-LAST:event_logoutJButtonActionPerformed
 
