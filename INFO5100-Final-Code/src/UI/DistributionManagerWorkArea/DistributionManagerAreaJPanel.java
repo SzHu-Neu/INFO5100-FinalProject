@@ -19,6 +19,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import Business.Order.AdditionalInfo;
+import java.util.Date;
 /**
  *
  * @author sichengzhou
@@ -28,6 +30,7 @@ public class DistributionManagerAreaJPanel extends WorkArea {
     DistributionManager distributionManager;
     DistributionOrg distributionOrg;
     DeliveryEnt deliverEnt;
+    int startNumber;
     /**
      * Creates new form DistributionManagerAreaJPanel
      */
@@ -37,9 +40,43 @@ public class DistributionManagerAreaJPanel extends WorkArea {
         this.distributionManager = (DistributionManager) role;
         this.distributionOrg = this.distributionManager.getDistributionOrg();
         this.deliverEnt = this.distributionManager.getDistributionOrg().getDeliveryEnt();
-
+        this.refreshJTableDelivery();
+        startNumber = 1;
     }
-
+    
+    private void refreshJTableDelivery() {
+        final ArrayList<DeliverItem> deliverItems = this.distributionOrg.getDeliverItems();
+        int tableColumnNum = deliverItems.size();
+        Object ColNames[] = {"ItemName", "ItemNum", "FromOrg", "ToOrg", " Status", "DeliveryNumber"};
+        Object rowDataItems[][] = new Object[tableColumnNum][ColNames.length];
+        for (int idx = 0; idx < tableColumnNum; idx++) {
+            rowDataItems[idx][0] = deliverItems.get(idx).getName(); // Name
+            rowDataItems[idx][1] = deliverItems.get(idx).getQuantity(); // Quantity;
+            rowDataItems[idx][2] = deliverItems.get(idx).getAdditionalInfo().getFromOrg(); // From which Org
+            rowDataItems[idx][3] = deliverItems.get(idx).getAdditionalInfo().getToOrg(); // To which Org
+            rowDataItems[idx][4] = deliverItems.get(idx).getCurrentStatus();
+            rowDataItems[idx][5] = deliverItems.get(idx).getDeliveryOrderNum() != -1 ? deliverItems.get(idx).getDeliveryOrderNum() : "NotAvaNow";
+//            rowDataItems[idx][4] = deliverItems
+        }
+        this.jDeliveryTable.setModel(new DefaultTableModel(rowDataItems, ColNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        }
+        );
+        ListSelectionModel cellSelectionModel = this.jDeliveryTable.getSelectionModel();
+        cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int selectedRow = jDeliveryTable.getSelectedRow();
+                if (selectedRow == -1) {
+                    return;
+                }
+            }
+        });
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,6 +89,10 @@ public class DistributionManagerAreaJPanel extends WorkArea {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jDeliveryTable = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         jDeliveryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -66,25 +107,137 @@ public class DistributionManagerAreaJPanel extends WorkArea {
         ));
         jScrollPane1.setViewportView(jDeliveryTable);
 
+        jButton1.setText("AssignNumber");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Deliver");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("checkTimeLine");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Delivered");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(190, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(31, 31, 31)
+                        .addComponent(jButton2)
+                        .addGap(34, 34, 34)
+                        .addComponent(jButton4)
+                        .addGap(52, 52, 52)
+                        .addComponent(jButton3)))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(64, 64, 64)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton4))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+       ArrayList<DeliverItem> items = this.distributionOrg.getDeliverItems();
+       int selectedIdx = this.jDeliveryTable.getSelectedRow();
+       if (selectedIdx == -1) {
+            return;
+        }
+       if(items.get(selectedIdx).getCurrentStatus() == DeliverItem.DeliverItemStatus.NotDelivered){
+           items.get(selectedIdx).setInDelivery();
+           items.get(selectedIdx).getAdditionalInfo().createTimeLine(new Date(),"InDelivery");
+           refreshJTableDelivery();
+       }else {
+            // Can not receive
+            return;
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+       ArrayList<DeliverItem> items = this.distributionOrg.getDeliverItems();
+       int selectedIdx = this.jDeliveryTable.getSelectedRow();
+       if (selectedIdx == -1) {
+            return;
+        }
+        JDialog jdl = new JDialog();
+        jdl.add(new TimeLineJPanel(items.get(selectedIdx)));
+        jdl.setSize(400, 300);
+        jdl.setModal(true);
+        jdl.setLocationRelativeTo(this);
+        jdl.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+       ArrayList<DeliverItem> items = this.distributionOrg.getDeliverItems();
+       int selectedIdx = this.jDeliveryTable.getSelectedRow();
+       if (selectedIdx == -1) {
+            return;
+        }
+       if(items.get(selectedIdx).getDeliveryOrderNum() == -1){
+           items.get(selectedIdx).setDeliveryOrderNum(this.startNumber++);
+           refreshJTableDelivery();
+       }else {
+            // Can not receive
+            return;
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+       ArrayList<DeliverItem> items = this.distributionOrg.getDeliverItems();
+       int selectedIdx = this.jDeliveryTable.getSelectedRow();
+       if (selectedIdx == -1) {
+            return;
+        }
+       if(items.get(selectedIdx).getCurrentStatus() == DeliverItem.DeliverItemStatus.InDelivery){
+           items.get(selectedIdx).setDelivered();
+           items.get(selectedIdx).getAdditionalInfo().createTimeLine(new Date(),"Delivered");
+           refreshJTableDelivery();
+       }else {
+            // Can not receive
+            return;
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JTable jDeliveryTable;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
