@@ -22,10 +22,21 @@ public class TransportationOrg {
        public TransportationOrg(String name){
             this.name = name;
         }
+        
+       public Driver createDriver(){
+            Driver driver = new Driver(this);
+            this.driverList.add(driver);
+            return driver;
+        }
        public void addDriver(Driver driver){
             this.driverList.add(driver);
         }
-        
+       
+       public TransportationManager createTransportationManager(){
+            TransportationManager tm = new TransportationManager(this);
+            this.transManagerList.add(tm);
+            return tm;
+        }
        public void addManager(TransportationManager tm){
             this.transManagerList.add(tm);
         }

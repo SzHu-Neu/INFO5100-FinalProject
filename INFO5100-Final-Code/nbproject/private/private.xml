@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/UI/CustomerWorkArea/CheckoutOrderJPanel.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/UI/PaymentManagerWorkArea/PaymentManagerAreaJPanel.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/UI/ServicePersonnelWorkArea/ServicePersonnelAreaJPanel.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/UI/CustomerWorkArea/CustomerAreaJPanel.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/UI/CustomerWorkArea/ViewOrdersJPanel.java</file>
-            <file>file:/Users/sichengzhou/Documents/GitHub/INFO5100-FinalProject/INFO5100-Final-Code/src/UI/CustomerWorkArea/CreditPaymentJPanel.java</file>
+            <file>file:/C:/Users/Dom/Desktop/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/DeliveryEnt/DistributionOrg/DistributionManager.java</file>
+            <file>file:/C:/Users/Dom/Desktop/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/SaleEnt/ShopOrg/ShopManager.java</file>
+            <file>file:/C:/Users/Dom/Desktop/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/DeliveryEnt/DistributionOrg/DistributionOrg.java</file>
+            <file>file:/C:/Users/Dom/Desktop/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/InitSystem.java</file>
+            <file>file:/C:/Users/Dom/Desktop/INFO5100-FinalProject/INFO5100-Final-Code/src/Business/Roles/FactoryEnt/ProductOrg/ProductManager.java</file>
         </group>
     </open-files>
 </project-private>
