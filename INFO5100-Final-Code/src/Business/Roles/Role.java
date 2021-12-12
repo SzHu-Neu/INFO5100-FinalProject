@@ -27,11 +27,8 @@ public abstract class Role {
         Driver,
         ProductManager,
         PaymentManager,
-        
-        
-       
     }
-    
+
     private Type role;
 
     public Role(Type role) {
@@ -40,6 +37,11 @@ public abstract class Role {
 
     public Type getRoleType() {
         return this.role;
+    }
+
+    @Override
+    public String toString() {
+        return this.role.toString();
     }
 
     public abstract JPanel createWorkArea(

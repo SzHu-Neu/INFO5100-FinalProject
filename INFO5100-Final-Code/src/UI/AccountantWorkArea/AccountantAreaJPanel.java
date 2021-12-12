@@ -11,6 +11,7 @@ import Business.Roles.SaleEnt.FinanceOrg.Accountant;
 import Business.Roles.SaleEnt.FinanceOrg.FinanceOrg;
 import Business.UserAccount.UserAccount;
 import UI.WorkArea;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -29,9 +30,25 @@ public class AccountantAreaJPanel extends WorkArea {
         initComponents();
         this.accountant = (Accountant) role;
         this.financeOrg = this.accountant.getFinanceOrg();
+        refreshJTableFinance();
     }
 
-    private void refreshJTableFinanc() {
+    private void refreshJTableFinance() {
+        int tableColumnNum = this.financeOrg.getTransactionList().size();
+        Object ColNames[] = {"Money", "Date", "AdditionalInfo"};
+        Object rowDataItems[][] = new Object[tableColumnNum][ColNames.length];
+        for (int idx = 0; idx < tableColumnNum; idx++) {
+            rowDataItems[idx][0] = this.financeOrg.getTransactionList().get(idx).getMoneyEarned(); // Money
+            rowDataItems[idx][1] = this.financeOrg.getTransactionList().get(idx).getTime(); // Date
+            rowDataItems[idx][2] = this.financeOrg.getTransactionList().get(idx).getAdditionalInfo(); // AdditionalInfo
+        }
+        this.jTableFinance.setModel(new DefaultTableModel(rowDataItems, ColNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        }
+        );
     }
 
     /**
@@ -85,11 +102,11 @@ public class AccountantAreaJPanel extends WorkArea {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(enterpriseLabel1)
-                .addGap(42, 42, 42)
-                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addContainerGap(223, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

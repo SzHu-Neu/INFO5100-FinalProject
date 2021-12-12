@@ -2,8 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package Business.Roles.DeliveryEnt.TransportationOrg;
+
 import Business.Roles.DeliveryEnt.TransportationOrg.Driver;
 import java.util.List;
 
@@ -11,6 +11,7 @@ import Business.Roles.DeliveryEnt.TransportationOrg.TransportationManager;
 import Business.Roles.DeliveryEnt.TransportationOrg.Driver;
 import java.util.List;
 import java.util.ArrayList;
+
 /**
  *
  * @author Dom
@@ -44,5 +45,4 @@ public class TransportationOrg {
             this.transManagerList.add(tm);
         }
 
-    
 }

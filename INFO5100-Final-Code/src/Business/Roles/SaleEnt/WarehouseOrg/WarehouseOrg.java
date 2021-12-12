@@ -20,7 +20,7 @@ public class WarehouseOrg extends InDeliverOrganization {
     private SaleEnt saleEnterprise;
     private ArrayList<DeliverItem> deliverItemsInWarehouse;
 
-    public WarehouseOrg(SaleEnt se, String address, String name) {
+    public WarehouseOrg(SaleEnt se, String name, String address) {
         super(name, address);
         this.saleEnterprise = se;
         this.warehouseManagerList = new ArrayList<WarehouseManager>();
