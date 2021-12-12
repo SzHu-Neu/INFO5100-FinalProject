@@ -9,14 +9,17 @@ import Business.Roles.Role;
 import Business.UserAccount.UserAccount;
 import UI.TransportationManagerWorkArea.TransportationManagerAreaJPanel;
 import javax.swing.JPanel;
-
+import Business.Roles.DeliveryEnt.TransportationOrg.TransportationOrg;
 /**
  *
  * @author sichengzhou
  */
 public class TransportationManager extends Role{
-   public TransportationManager() {
+   TransportationOrg transOrg;
+
+   public TransportationManager(TransportationOrg org) {
         super(Role.Type.TransportationManager);
+        this.transOrg = org;
     }
 
     @Override
