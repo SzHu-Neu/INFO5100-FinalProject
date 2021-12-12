@@ -4,6 +4,8 @@
  */
 
 package Business.Roles.DeliveryEnt.TransportationOrg;
+import Business.Roles.DeliveryEnt.TransportationOrg.Driver;
+import java.util.List;
 
 import Business.Roles.DeliveryEnt.TransportationOrg.TransportationManager;
 import Business.Roles.DeliveryEnt.TransportationOrg.Driver;
@@ -13,6 +15,31 @@ import java.util.List;
  * @author Dom
  */
 public class TransportationOrg {
+       private String name;
+       private List<Driver> driverList;
+       private List<TransportationManager> transManagerList;
+       
+       public TransportationOrg(String name){
+            this.name = name;
+        }
+        
+       public Driver createDriver(){
+            Driver driver = new Driver(this);
+            this.driverList.add(driver);
+            return driver;
+        }
+       public void addDriver(Driver driver){
+            this.driverList.add(driver);
+        }
+       
+       public TransportationManager createTransportationManager(){
+            TransportationManager tm = new TransportationManager(this);
+            this.transManagerList.add(tm);
+            return tm;
+        }
+       public void addManager(TransportationManager tm){
+            this.transManagerList.add(tm);
+        }
 
     private List<TransportationManager> managerList;
     private List<Driver> driverList;

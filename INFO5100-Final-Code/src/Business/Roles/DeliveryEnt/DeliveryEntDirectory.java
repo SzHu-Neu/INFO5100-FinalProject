@@ -5,7 +5,8 @@
 package Business.Roles.DeliveryEnt;
 
 import Business.CommerceSystem;
-
+import java.util.List;
+import java.util.ArrayList;
 /**
  *
  * @author Ekoxier
@@ -13,12 +14,20 @@ import Business.CommerceSystem;
 public class DeliveryEntDirectory {
 
     CommerceSystem system;
+    private List<DeliveryEnt> deliveryEntList;
 
     public DeliveryEntDirectory(CommerceSystem system) {
+        this.deliveryEntList = new ArrayList<DeliveryEnt>();
         this.system = system;
     }
 
     public CommerceSystem getSystem() {
         return system;
     }
+    public DeliveryEnt createDeliveryEnt(String name) {
+        DeliveryEnt tmp = new DeliveryEnt(name);
+        deliveryEntList.add(tmp);
+        return tmp;
+    }
+
 }
