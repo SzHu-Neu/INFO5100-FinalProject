@@ -4,11 +4,22 @@
  */
 
 package Business.Roles.DeliveryEnt.TransportationOrg;
+import Business.Roles.DeliveryEnt.TransportationOrg.Driver;
+import java.util.List;
 
 /**
  *
  * @author Dom
  */
 public class TransportationOrg {
+       private List<Driver> driverList;
+       private List<TransportationManager> transManagerList;
 
+       public void addDriver(Driver driver){
+            this.driverList.add(driver);
+        }
+        
+       public void addManager(TransportationManager tm){
+            this.transManagerList.add(tm);
+        }
 }

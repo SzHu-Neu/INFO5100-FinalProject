@@ -6,6 +6,8 @@
 package Business.Roles.DeliveryEnt.DistributionOrg;
 
 import Business.Roles.DeliveryEnt.DistributionOrg.DistributionManager;
+import Business.Roles.DeliveryEnt.DistributionOrg.DistributionOrg;
+import Business.Roles.DeliveryEnt.TransportationOrg.TransportationOrg;
 import java.util.List;
 /**
  *
@@ -13,5 +15,15 @@ import java.util.List;
  */
 public class DistributionOrg {
     private List<DistributionManager> managerList;
+    
+    private List<TransportationOrg> transOrgList;
+    
+    public void addManager(DistributionManager dm){
+        this.managerList.add(dm);
+    }
+    public void addTransOrg(TransportationOrg tOrg){
+        this.transOrgList.add(tOrg);
+    }
+
     
 }
