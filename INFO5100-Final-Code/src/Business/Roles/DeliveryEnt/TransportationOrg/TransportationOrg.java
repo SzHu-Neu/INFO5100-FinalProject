@@ -15,9 +15,13 @@ import java.util.List;
  * @author Dom
  */
 public class TransportationOrg {
+       private String name;
        private List<Driver> driverList;
        private List<TransportationManager> transManagerList;
-
+       
+       public TransportationOrg(String name){
+            this.name = name;
+        }
        public void addDriver(Driver driver){
             this.driverList.add(driver);
         }

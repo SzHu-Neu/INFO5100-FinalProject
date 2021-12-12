@@ -13,10 +13,18 @@ import java.util.ArrayList;
  * @author Ekoxier
  */
 public class DeliveryEnt {
-
+    
     private ArrayList<DeliverItem> deliverItems;
     
-    private ArrayList<DistributionOrg> dOrgList;
+    private DistributionOrg disOrg;
+    
+    public DeliveryEnt(String name){
+        this.disOrg = new DistributionOrg(name);
+    }
+
+    public DistributionOrg getDistributionOrg(){
+        return disOrg;
+    } 
 
     public void addWorkRequest(DeliverItem e) {
         this.deliverItems.add(e);

@@ -16,14 +16,17 @@ import java.util.List;
  * @author Dom
  */
 public class DistributionOrg {
-
+    private String name;
     private List<DistributionManager> managerList;
     private List<TransportationOrg> transOrgList;
-
+    
+    public DistributionOrg(String name){
+        this.name = name;
+    }
     public List<DistributionManager> getManagerList() {
         return managerList;
     }    
-
+    
     public List<TransportationOrg> getTransportationOrgList() {
         return transOrgList;
     }    
@@ -37,6 +40,11 @@ public class DistributionOrg {
     public void addManager(DistributionManager dm){
         this.managerList.add(dm);
     }
+
+    public void createTransOrg(){
+        Transportation t
+    }
+
     public void addTransOrg(TransportationOrg tOrg){
         this.transOrgList.add(tOrg);
     }
