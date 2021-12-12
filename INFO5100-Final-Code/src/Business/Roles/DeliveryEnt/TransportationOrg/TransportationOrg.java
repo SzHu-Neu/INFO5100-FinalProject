@@ -5,10 +5,16 @@
 
 package Business.Roles.DeliveryEnt.TransportationOrg;
 
+import Business.Roles.DeliveryEnt.TransportationOrg.TransportationManager;
+import Business.Roles.DeliveryEnt.TransportationOrg.Driver;
+import java.util.List;
 /**
  *
  * @author Dom
  */
 public class TransportationOrg {
 
+    private List<TransportationManager> managerList;
+    private List<Driver> driverList;
+    
 }
