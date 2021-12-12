@@ -42,7 +42,7 @@ public class CustomerAreaJPanel extends WorkArea {
     public CustomerAreaJPanel(UserAccount account, CommerceSystem business, Role role) {
         super(account, business, role);
         initComponents();
-        this.setBackground(Color.cyan);
+        this.setBackground(Color.pink);
         this.numberJSpinner.setModel(new SpinnerNumberModel(1, 1, 10, 1));
 //        this.refreshOrderTable();      
         this.addNumberJButton.setEnabled(false);

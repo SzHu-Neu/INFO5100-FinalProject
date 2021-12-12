@@ -190,6 +190,7 @@ public class ManageSaleItemsJPanel extends javax.swing.JPanel {
         this.inPriceJtf.setText("");
         this.salePriceJTf.setText("");
         this.nameJTextField.setText("");
+        this.jTextAreaDescription.setText("");
     }//GEN-LAST:event_createJButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

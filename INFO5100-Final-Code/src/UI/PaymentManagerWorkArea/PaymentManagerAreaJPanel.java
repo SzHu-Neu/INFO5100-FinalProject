@@ -11,6 +11,7 @@ import Business.Roles.FinanceEnt.CreditPaymentOrg.PaymentManager;
 import Business.Roles.Role;
 import Business.UserAccount.UserAccount;
 import UI.WorkArea;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,6 +29,7 @@ public class PaymentManagerAreaJPanel extends WorkArea {
     public PaymentManagerAreaJPanel(UserAccount account, CommerceSystem business, Role role) {
         super(account, business, role);
         initComponents();
+        this.setBackground(Color.yellow);
         this.paymentManager = (PaymentManager) role;
         refreshTable();
     }

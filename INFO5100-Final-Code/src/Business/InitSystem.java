@@ -15,6 +15,8 @@ import Business.Roles.DeliveryEnt.DistributionOrg.DistributionManager;
 import Business.Roles.DeliveryEnt.TransportationOrg.Driver;
 import Business.Roles.DeliveryEnt.TransportationOrg.TransportationOrg;
 import Business.Roles.DeliveryEnt.TransportationOrg.TransportationManager;
+import Business.Roles.SystemEnt.AccountOrg.SystemAdmin;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -28,7 +30,10 @@ public class InitSystem {
     public static CommerceSystem configure() {
 
         CommerceSystem system = CommerceSystem.getInstance();
-        //        system.getUseraccountDirectory().createUserAccount("shopmanager1", "123456", new SystemAdmin());
+
+        // SystemAdmin
+        SystemAdmin systemAdmin = system.getSystemEnt().getAccountOrg().getSystemAdmin();
+        system.getUserAccountDirectory().createUserAccount("sysadmin", "123456", systemAdmin);
 
         // Sale Enterprise create
         SaleEnt saleEnt1 = system.getSaleEntDirectory().createSaleEnt("ent name 1", "warehouse address 1");
@@ -69,6 +74,7 @@ public class InitSystem {
         DistributionManager dm = deliveryEnt1.getDistributionOrg().createManager();
         system.getUserAccountDirectory().createUserAccount("delivery1", "123456", dm);
         TransportationOrg tOrg = deliveryEnt1.getDistributionOrg().createTransOrg("SF Transportation");
+
         Driver driver1 = tOrg.createDriver();
         TransportationManager tm = tOrg.createTransportationManager();
         system.getUserAccountDirectory().createUserAccount("driver1", "123456", driver1);

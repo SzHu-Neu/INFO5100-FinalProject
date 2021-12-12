@@ -8,6 +8,8 @@ import Business.CommerceSystem;
 import Business.Order.Order;
 import Business.Roles.DeliveryEnt.DeliveryEnt;
 
+import Business.Roles.DeliveryEnt.DistributionOrg.DistributionOrg;
+
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ListSelectionModel;
@@ -22,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 public class ManageOrdersJPanel extends javax.swing.JPanel {
 
     ArrayList<Order> orderList;
-    DeliveryEnt selectedDeliveryEnt;
+    DistributionOrg selectedDisOrg;
 
     /**
      * Creates new form ManageOrdersJPanel
@@ -33,9 +35,9 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
     public ManageOrdersJPanel(ArrayList<Order> orderList, CommerceSystem system) {
         initComponents();
         this.orderList = orderList;
-        DefaultComboBoxModel deliveryComboBoxModel = new DefaultComboBoxModel();
+        DefaultComboBoxModel deliveryComboBoxModel = new DefaultComboBoxModel(system.getDeliveryEntDirectory().listDistributionOrgs().toArray());
         this.jComboBoxDelivery.setModel(deliveryComboBoxModel);
-        this.selectedDeliveryEnt = (DeliveryEnt) this.jComboBoxDelivery.getSelectedItem();
+        this.selectedDisOrg = (DistributionOrg) this.jComboBoxDelivery.getSelectedItem();
         refreshTable();
     }
 
@@ -151,15 +153,17 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
             return;
         }
 //        this.orderList.get(selectedRow).orderSetDeliveryEnt(this.selectedDeliveryEnt);
+        this.orderList.get(selectedRow).orderSetDeliveryEnt(this.selectedDisOrg);
         ///////////////////////////////////////////////
         this.orderList.get(selectedRow).setProcessed();
+        refreshTable();
         // Log
         System.out.printf("Process the order \n");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBoxDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDeliveryActionPerformed
         // TODO add your handling code here:
-        this.selectedDeliveryEnt = (DeliveryEnt) this.jComboBoxDelivery.getSelectedItem();
+        this.selectedDisOrg = (DistributionOrg) this.jComboBoxDelivery.getSelectedItem();
     }//GEN-LAST:event_jComboBoxDeliveryActionPerformed
 
 

@@ -11,6 +11,7 @@ import Business.Roles.SaleEnt.FinanceOrg.Accountant;
 import Business.Roles.SaleEnt.FinanceOrg.FinanceOrg;
 import Business.UserAccount.UserAccount;
 import UI.WorkArea;
+import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -28,6 +29,7 @@ public class AccountantAreaJPanel extends WorkArea {
     public AccountantAreaJPanel(UserAccount account, CommerceSystem business, Role role) {
         super(account, business, role);
         initComponents();
+        this.setBackground(Color.cyan);
         this.accountant = (Accountant) role;
         this.financeOrg = this.accountant.getFinanceOrg();
         refreshJTableFinance();

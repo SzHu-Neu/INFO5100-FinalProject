@@ -24,9 +24,11 @@ public class ShopManagerAreaJPanel extends WorkArea {
      */
     public ShopManagerAreaJPanel(UserAccount account, CommerceSystem business, Role role) {
         super(account, business, role);
-        this.setBackground(Color.PINK);
-        this.shopManager = (ShopManager) role;
         initComponents();
+//        this.setBackground(Color.PINK);
+        this.setBackground(Color.cyan);
+        this.shopManager = (ShopManager) role;
+        
 //        this.jTextField1.setText(restAdmin.getRestaurantName());
     }
 

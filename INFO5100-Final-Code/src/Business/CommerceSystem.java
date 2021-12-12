@@ -5,6 +5,7 @@ import Business.Roles.FactoryEnt.FactoryEntDirectory;
 import Business.Roles.FinanceEnt.FinanceEntDirectory;
 import Business.Roles.PurchaseEnt.PurchaseEntDirectory;
 import Business.Roles.SaleEnt.SaleEntDirectory;
+import Business.Roles.SystemEnt.SystemEnt;
 import Business.UserAccount.UserAccountDirectory;
 
 /*
@@ -25,6 +26,7 @@ public class CommerceSystem {
     private PurchaseEntDirectory purchaseEntDirectory;
     private SaleEntDirectory saleEntDirectory;
     private FinanceEntDirectory financeEntDirectory;
+    private SystemEnt systemEnt;
 
     //    Singleton
     public static CommerceSystem getInstance() {
@@ -42,6 +44,11 @@ public class CommerceSystem {
         this.saleEntDirectory = new SaleEntDirectory(this);
         this.userAccountDirectory = new UserAccountDirectory(this);
         this.financeEntDirectory = new FinanceEntDirectory(this);
+        this.systemEnt = new SystemEnt();
+    }
+
+    public SystemEnt getSystemEnt() {
+        return systemEnt;
     }
 
     public UserAccountDirectory getUserAccountDirectory() {

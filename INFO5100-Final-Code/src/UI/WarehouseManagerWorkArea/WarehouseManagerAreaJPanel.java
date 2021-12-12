@@ -13,6 +13,7 @@ import Business.Roles.SaleEnt.WarehouseOrg.WarehouseManager;
 import Business.Roles.SaleEnt.WarehouseOrg.WarehouseOrg;
 import Business.UserAccount.UserAccount;
 import UI.WorkArea;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JDialog;
 import javax.swing.ListSelectionModel;
@@ -36,6 +37,7 @@ public class WarehouseManagerAreaJPanel extends WorkArea {
     public WarehouseManagerAreaJPanel(UserAccount account, CommerceSystem business, Role role) {
         super(account, business, role);
         initComponents();
+        this.setBackground(Color.cyan);
         this.warehouseManager = (WarehouseManager) role;
         this.warehouseOrg = this.warehouseManager.getWarhouseOrg();
         this.saleEnt = this.warehouseManager.getWarhouseOrg().getSaleEnterprise();
@@ -219,7 +221,7 @@ public class WarehouseManagerAreaJPanel extends WorkArea {
     private void refreshJTableDelivery() {
         final ArrayList<DeliverItem> deliverItems = this.warehouseOrg.getRelatedDeliverItems();
         int tableColumnNum = deliverItems.size();
-        Object ColNames[] = {"ItemName", "ItemNum", "FromOrg", "ToOrg", " Status", "DeliveryOrderNum"};
+        Object ColNames[] = {"ItemName", "ItemNum", "FromOrg", "ToOrg", " Status", "DeliveryOrderNum", "Delivery"};
         Object rowDataItems[][] = new Object[tableColumnNum][ColNames.length];
         for (int idx = 0; idx < tableColumnNum; idx++) {
             rowDataItems[idx][0] = deliverItems.get(idx).getName(); // Name
@@ -228,6 +230,7 @@ public class WarehouseManagerAreaJPanel extends WorkArea {
             rowDataItems[idx][3] = deliverItems.get(idx).getAdditionalInfo().getToOrg(); // To which Org
             rowDataItems[idx][4] = deliverItems.get(idx).getCurrentStatus();
             rowDataItems[idx][5] = deliverItems.get(idx).getDeliveryOrderNum() != -1 ? deliverItems.get(idx).getDeliveryOrderNum() : "NotAvaNow";
+            rowDataItems[idx][6] = deliverItems.get(idx).getAdditionalInfo().getDisOrg() != null ? deliverItems.get(idx).getAdditionalInfo().getDisOrg() : "NotAvaNow";
 //            rowDataItems[idx][4] = deliverItems
         }
         this.jTableDelivery.setModel(new DefaultTableModel(rowDataItems, ColNames) {
@@ -249,6 +252,7 @@ public class WarehouseManagerAreaJPanel extends WorkArea {
                 if (deliverItems.get(selectedRow).getCurrentStatus() == DeliverItem.DeliverItemStatus.Delivered) {
                     jBtAccept.setEnabled(true);
                 }
+
             }
         });
         this.jBtAccept.setEnabled(false);

@@ -17,21 +17,21 @@ import java.util.Date;
  */
 public class AdditionalInfo {
 
-
-    class DeliverTimeline {
+    public class DeliverTimeline {
 
         private Date date;
         private String event;
-        DeliverTimeline(Date date, String event){
+
+        public DeliverTimeline(Date date, String event) {
             this.date = date;
             this.event = event;
         }
-        
-        public Date getDate(){
+
+        public Date getDate() {
             return date;
         }
-        
-        public String getEvent(){
+
+        public String getEvent() {
             return event;
         }
     }
@@ -39,6 +39,15 @@ public class AdditionalInfo {
     private InDeliverOrganization fromOrg;
     private InDeliverOrganization toOrg;
     private DistributionOrg disOrg;
+
+    public DistributionOrg getDisOrg() {
+        return disOrg;
+    }
+
+    public void setDisOrg(DistributionOrg disOrg) {
+        this.disOrg = disOrg;
+        disOrg.addDeliverItem(this.deliverItemBelonged);
+    }
 
     private ArrayList<DeliverTimeline> timelines; // Timelines that record the delivery procedure
 
@@ -61,9 +70,9 @@ public class AdditionalInfo {
     public ArrayList<DeliverTimeline> getTimelines() {
         return timelines;
     }
-    
-    public void createTimeLine(Date date , String event){
-        this.timelines.add(new DeliverTimeline(date,event));
+
+    public void createTimeLine(Date date, String event) {
+        this.timelines.add(new DeliverTimeline(date, event));
     }
 //    public void set
 

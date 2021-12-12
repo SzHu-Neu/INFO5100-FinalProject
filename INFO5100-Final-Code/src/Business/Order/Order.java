@@ -1,6 +1,7 @@
 package Business.Order;
 
 import Business.Roles.DeliveryEnt.DeliveryEnt;
+import Business.Roles.DeliveryEnt.DistributionOrg.DistributionOrg;
 import Business.Roles.PurchaseEnt.UserOrg.Customer;
 import Business.Roles.PurchaseEnt.UserOrg.UserOrg;
 import Business.Roles.SaleEnt.ShopOrg.ShopOrg;
@@ -134,10 +135,10 @@ public class Order {
         }
     }
 
-//    public void orderSetDeliveryEnt(DeliveryEnt de) {
-//        for (DeliverItem di : this.deliverItemsInfo) {
-//            di.getAdditionalInfo().setDeliveryEnt(de);
-//            /////// need to added this di to deliveryEnt list
-//        }
-//    }
+    public void orderSetDeliveryEnt(DistributionOrg disO) {
+        for (DeliverItem di : this.deliverItemsInfo) {
+            di.getAdditionalInfo().setDisOrg(disO);
+            /////// need to added this di to deliveryEnt list
+        }
+    }
 }

@@ -5,7 +5,7 @@
 package Business.Roles.DeliveryEnt;
 
 import Business.CommerceSystem;
-import Business.Roles.DeliveryEnt.DeliveryOrg.DeliveryOrg;
+import Business.Roles.DeliveryEnt.DistributionOrg.DistributionOrg;
 import Business.Roles.FinanceEnt.CreditPaymentOrg.CreditPaymentOrg;
 import Business.Roles.FinanceEnt.FinanceEnt;
 import java.util.List;
@@ -35,8 +35,8 @@ public class DeliveryEntDirectory {
         return tmp;
     }
 
-    public ArrayList<DeliveryOrg> listDistributionOrgs() {
-        ArrayList<DeliveryOrg> distributionOrgs = new ArrayList<DeliveryOrg>();
+    public ArrayList<DistributionOrg> listDistributionOrgs() {
+        ArrayList<DistributionOrg> distributionOrgs = new ArrayList<DistributionOrg>();
         for (DeliveryEnt singleDe : deliveryEntList) {
             distributionOrgs.add(singleDe.getDistributionOrg());
         }

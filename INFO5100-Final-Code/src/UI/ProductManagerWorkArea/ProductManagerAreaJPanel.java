@@ -8,6 +8,7 @@ package UI.ProductManagerWorkArea;
 import Business.CommerceSystem;
 import Business.Order.DeliverItem;
 import Business.Roles.DeliveryEnt.DeliveryEnt;
+import Business.Roles.DeliveryEnt.DistributionOrg.DistributionOrg;
 import Business.Roles.Role;
 import Business.Roles.FactoryEnt.ProductOrg.ProductManager;
 import Business.Roles.FactoryEnt.ProductOrg.ProductOrg;
@@ -16,6 +17,9 @@ import Business.UserAccount.UserAccount;
 import UI.WorkArea;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,21 +30,23 @@ public class ProductManagerAreaJPanel extends WorkArea {
 
     ProductManager productManager;
     ProductOrg productOrg;
-    DeliveryEnt selectedDeliveryEnt;
+    DistributionOrg selectedDisOrg;
 
     /**
      * Creates new form ProductManagerAreaJPanel
      */
     public ProductManagerAreaJPanel(UserAccount account, CommerceSystem business, Role role) {
         super(account, business, role);
+        initComponents();
         this.productManager = (ProductManager) role;
         this.productOrg = this.productManager.getProductOrg();
-        DefaultComboBoxModel deliveryComboBoxModel = new DefaultComboBoxModel();
+//        System.out.print(business.getDeliveryEntDirectory().listDistributionOrgs().toArray()[0]);
+        DefaultComboBoxModel deliveryComboBoxModel = new DefaultComboBoxModel(business.getDeliveryEntDirectory().listDistributionOrgs().toArray());
         this.jComboBox1.setModel(deliveryComboBoxModel);
-        this.selectedDeliveryEnt = (DeliveryEnt) this.jComboBox1.getSelectedItem();
-        initComponents();
+        this.selectedDisOrg = (DistributionOrg) this.jComboBox1.getSelectedItem();
         refreshJTableRequest();
         refreshJTableDelivery();
+        this.jButton3.setEnabled(false);
     }
 
     /**
@@ -193,6 +199,7 @@ public class ProductManagerAreaJPanel extends WorkArea {
         this.productOrg.addDeliveryItem(name, null, null, number, fromOrg, toOrg);
         this.refreshJTableDelivery();
         this.refreshJTableRequest();
+
         // Log
         System.out.println("Accept the request from warehouse organization");
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -213,16 +220,16 @@ public class ProductManagerAreaJPanel extends WorkArea {
         if (selectedRow == -1) {
             return;
         }
-//        this.productOrg.getRelatedDeliverItems().get(selectedRow).getAdditionalInfo().setDeliveryEnt(selectedDeliveryEnt);
+        this.productOrg.getRelatedDeliverItems().get(selectedRow).getAdditionalInfo().setDisOrg(this.selectedDisOrg);
+        refreshJTableDelivery();
         ///////////////////////////////
-
         // Log
         System.out.printf("Process the order \n");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-        this.selectedDeliveryEnt = (DeliveryEnt) this.jComboBox1.getSelectedItem();
+        this.selectedDisOrg = (DistributionOrg) this.jComboBox1.getSelectedItem();
     }//GEN-LAST:event_jComboBox1ActionPerformed
     private void refreshJTableRequest() {
         ArrayList<ProductOrg.RequestFactoryItem> requestHandleList = this.productOrg.getRequestHandleList();
@@ -245,9 +252,9 @@ public class ProductManagerAreaJPanel extends WorkArea {
     }
 
     private void refreshJTableDelivery() {
-        ArrayList<DeliverItem> deliverItems = this.productOrg.getRelatedDeliverItems();
+        final ArrayList<DeliverItem> deliverItems = this.productOrg.getRelatedDeliverItems();
         int tableColumnNum = deliverItems.size();
-        Object ColNames[] = {"Name", "FromOrganization", "ToOrganization", " Status", "DeliveryOrderNum"};
+        Object ColNames[] = {"Name", "FromOrganization", "ToOrganization", " Status", "DeliveryOrderNum", "Delivery"};
         Object rowDataItems[][] = new Object[tableColumnNum][ColNames.length];
         for (int idx = 0; idx < tableColumnNum; idx++) {
             rowDataItems[idx][0] = deliverItems.get(idx).getName(); // Name
@@ -255,6 +262,7 @@ public class ProductManagerAreaJPanel extends WorkArea {
             rowDataItems[idx][2] = deliverItems.get(idx).getAdditionalInfo().getToOrg(); // To which Org
             rowDataItems[idx][3] = deliverItems.get(idx).getCurrentStatus();
             rowDataItems[idx][4] = deliverItems.get(idx).getDeliveryOrderNum() != -1 ? deliverItems.get(idx).getDeliveryOrderNum() : "NotAvaNow";
+            rowDataItems[idx][5] = deliverItems.get(idx).getAdditionalInfo().getDisOrg() != null ? deliverItems.get(idx).getAdditionalInfo().getDisOrg() : "NotAvaNow";
 //            rowDataItems[idx][4] = deliverItems
         }
         this.jTableDelivery.setModel(new DefaultTableModel(rowDataItems, ColNames) {
@@ -264,7 +272,22 @@ public class ProductManagerAreaJPanel extends WorkArea {
             }
         }
         );
+        ListSelectionModel cellSelectionModel = this.jTableDelivery.getSelectionModel();
+        cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int selectedRow = jTableDelivery.getSelectedRow();
+                if (selectedRow == -1) {
+                    return;
+                }
+                if (deliverItems.get(selectedRow).getAdditionalInfo().getDisOrg() == null) {
+                    jButton3.setEnabled(true);
+                }
 
+            }
+        });
+        this.jButton3.setEnabled(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
