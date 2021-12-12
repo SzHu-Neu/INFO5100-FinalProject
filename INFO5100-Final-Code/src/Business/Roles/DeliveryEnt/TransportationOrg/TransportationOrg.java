@@ -41,4 +41,7 @@ public class TransportationOrg {
             this.transManagerList.add(tm);
         }
 
+    private List<TransportationManager> managerList;
+    private List<Driver> driverList;
+    
 }
