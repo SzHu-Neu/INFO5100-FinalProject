@@ -12,6 +12,8 @@ import Business.Roles.SaleEnt.FinanceOrg.FinanceOrg;
 import Business.UserAccount.UserAccount;
 import UI.WorkArea;
 import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,6 +24,7 @@ public class AccountantAreaJPanel extends WorkArea {
 
     Accountant accountant;
     FinanceOrg financeOrg;
+    int totalMoneyEarned;
 
     /**
      * Creates new form AccountantAreaJPanel
@@ -32,7 +35,19 @@ public class AccountantAreaJPanel extends WorkArea {
         this.setBackground(Color.cyan);
         this.accountant = (Accountant) role;
         this.financeOrg = this.accountant.getFinanceOrg();
+        this.jTextField1.setEnabled(false);
         refreshJTableFinance();
+        calculateMoneyEarned();
+    }
+
+    private void calculateMoneyEarned() {
+        int tmp = 0;
+        ArrayList<FinanceOrg.Transaction> list = this.accountant.getFinanceOrg().getTransactionList();
+        for (FinanceOrg.Transaction ts : list) {
+            tmp += ts.getMoneyEarned();
+        }
+        this.totalMoneyEarned = tmp;
+        this.jTextField1.setText(String.valueOf(totalMoneyEarned));
     }
 
     private void refreshJTableFinance() {
@@ -67,6 +82,9 @@ public class AccountantAreaJPanel extends WorkArea {
         jTableFinance = new javax.swing.JTable();
         enterpriseLabel1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         jTableFinance.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -87,16 +105,31 @@ public class AccountantAreaJPanel extends WorkArea {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Finance Record:");
 
+        jLabel2.setText("Money Earned:");
+
+        jButton1.setText("Send to ShopManager");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(enterpriseLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(enterpriseLabel1)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(298, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -108,16 +141,31 @@ public class AccountantAreaJPanel extends WorkArea {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(223, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(151, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.accountant.getFinanceOrg().getSaleEnt().getShopOrg().setCommentOnSale("Money Earned for now:" + String.valueOf(this.totalMoneyEarned));
+        JOptionPane.showMessageDialog(this, "SUCCESS", "Result", -1);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel enterpriseLabel1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTableFinance;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

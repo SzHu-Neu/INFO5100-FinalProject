@@ -22,16 +22,18 @@ import javax.swing.table.DefaultTableModel;
 import Business.Order.AdditionalInfo;
 import UI.DistributionDeliversWorkArea.TimeLineJPanel;
 import java.util.Date;
+
 /**
  *
  * @author sichengzhou
  */
 public class DistributionManagerAreaJPanel extends WorkArea {
-    
+
     DistributionManager distributionManager;
     DistributionOrg distributionOrg;
     DeliveryEnt deliverEnt;
     int startNumber;
+
     /**
      * Creates new form DistributionManagerAreaJPanel
      */
@@ -44,7 +46,7 @@ public class DistributionManagerAreaJPanel extends WorkArea {
         this.refreshJTableDelivery();
         startNumber = 1;
     }
-    
+
     private void refreshJTableDelivery() {
         final ArrayList<DeliverItem> deliverItems = this.distributionOrg.getDeliverItems();
         int tableColumnNum = deliverItems.size();
@@ -78,7 +80,7 @@ public class DistributionManagerAreaJPanel extends WorkArea {
             }
         });
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -172,16 +174,16 @@ public class DistributionManagerAreaJPanel extends WorkArea {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-       ArrayList<DeliverItem> items = this.distributionOrg.getDeliverItems();
-       int selectedIdx = this.jDeliveryTable.getSelectedRow();
-       if (selectedIdx == -1) {
+        ArrayList<DeliverItem> items = this.distributionOrg.getDeliverItems();
+        int selectedIdx = this.jDeliveryTable.getSelectedRow();
+        if (selectedIdx == -1) {
             return;
         }
-       if(items.get(selectedIdx).getCurrentStatus() == DeliverItem.DeliverItemStatus.NotDelivered){
-           items.get(selectedIdx).setInDelivery();
-           items.get(selectedIdx).getAdditionalInfo().createTimeLine(new Date(),"InDelivery");
-           refreshJTableDelivery();
-       }else {
+        if (items.get(selectedIdx).getCurrentStatus() == DeliverItem.DeliverItemStatus.NotDelivered) {
+            items.get(selectedIdx).setInDelivery();
+            items.get(selectedIdx).getAdditionalInfo().createTimeLine(new Date(), "InDelivery");
+            refreshJTableDelivery();
+        } else {
             // Can not receive
             return;
         }
@@ -189,9 +191,9 @@ public class DistributionManagerAreaJPanel extends WorkArea {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-       ArrayList<DeliverItem> items = this.distributionOrg.getDeliverItems();
-       int selectedIdx = this.jDeliveryTable.getSelectedRow();
-       if (selectedIdx == -1) {
+        ArrayList<DeliverItem> items = this.distributionOrg.getDeliverItems();
+        int selectedIdx = this.jDeliveryTable.getSelectedRow();
+        if (selectedIdx == -1) {
             return;
         }
         JDialog jdl = new JDialog();
@@ -204,15 +206,16 @@ public class DistributionManagerAreaJPanel extends WorkArea {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-       ArrayList<DeliverItem> items = this.distributionOrg.getDeliverItems();
-       int selectedIdx = this.jDeliveryTable.getSelectedRow();
-       if (selectedIdx == -1) {
+        ArrayList<DeliverItem> items = this.distributionOrg.getDeliverItems();
+        int selectedIdx = this.jDeliveryTable.getSelectedRow();
+        if (selectedIdx == -1) {
             return;
         }
-       if(items.get(selectedIdx).getDeliveryOrderNum() == -1){
-           items.get(selectedIdx).setDeliveryOrderNum(this.startNumber++);
-           refreshJTableDelivery();
-       }else {
+        if (items.get(selectedIdx).getDeliveryOrderNum() == -1) {
+            Date aa = new Date();
+            items.get(selectedIdx).setDeliveryOrderNum(aa.hashCode());
+            refreshJTableDelivery();
+        } else {
             // Can not receive
             return;
         }
@@ -220,16 +223,16 @@ public class DistributionManagerAreaJPanel extends WorkArea {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-       ArrayList<DeliverItem> items = this.distributionOrg.getDeliverItems();
-       int selectedIdx = this.jDeliveryTable.getSelectedRow();
-       if (selectedIdx == -1) {
+        ArrayList<DeliverItem> items = this.distributionOrg.getDeliverItems();
+        int selectedIdx = this.jDeliveryTable.getSelectedRow();
+        if (selectedIdx == -1) {
             return;
         }
-       if(items.get(selectedIdx).getCurrentStatus() == DeliverItem.DeliverItemStatus.InDelivery){
-           items.get(selectedIdx).setDelivered();
-           items.get(selectedIdx).getAdditionalInfo().createTimeLine(new Date(),"Delivered");
-           refreshJTableDelivery();
-       }else {
+        if (items.get(selectedIdx).getCurrentStatus() == DeliverItem.DeliverItemStatus.InDelivery) {
+            items.get(selectedIdx).setDelivered();
+            items.get(selectedIdx).getAdditionalInfo().createTimeLine(new Date(), "Delivered");
+            refreshJTableDelivery();
+        } else {
             // Can not receive
             return;
         }

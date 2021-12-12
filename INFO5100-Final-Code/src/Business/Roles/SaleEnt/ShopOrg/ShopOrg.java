@@ -22,9 +22,7 @@ public class ShopOrg {
 
     private ArrayList<Order> ordersInShop;
 
-    public ArrayList<Order> getOrdersInShop() {
-        return ordersInShop;
-    }
+    private String commentFromAccountant;
 
     @Override
     public String toString() {
@@ -33,9 +31,21 @@ public class ShopOrg {
 
     public ShopOrg(SaleEnt se) {
         this.saleEnterprise = se;
-
+        this.commentFromAccountant = "";
         this.shopManagerList = new ArrayList<ShopManager>();
         this.ordersInShop = new ArrayList<Order>();
+    }
+
+    public void setCommentOnSale(String comment) {
+        this.commentFromAccountant = comment;
+    }
+
+    public String getCommentFromAccountant() {
+        return commentFromAccountant;
+    }
+
+    public ArrayList<Order> getOrdersInShop() {
+        return ordersInShop;
     }
 
     public ArrayList<ShopManager> getShopManagerList() {

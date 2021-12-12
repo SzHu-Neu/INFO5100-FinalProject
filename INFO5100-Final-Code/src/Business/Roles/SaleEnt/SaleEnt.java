@@ -29,6 +29,7 @@ public class SaleEnt {
         this.system = system;
         this.saleItemList = new ArrayList<SaleMenuItem>();
         this.name = name;
+
         this.shopOrg = new ShopOrg(this);
         this.financeOrg = new FinanceOrg(this);
         this.warhouseOrg = new WarehouseOrg(this, name, warehouseAddress);

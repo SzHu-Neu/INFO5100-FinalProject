@@ -28,7 +28,12 @@ public class ShopManagerAreaJPanel extends WorkArea {
 //        this.setBackground(Color.PINK);
         this.setBackground(Color.cyan);
         this.shopManager = (ShopManager) role;
-        
+        this.jTextArea1.setEnabled(false);
+        String tmp = this.shopManager.getShopOrganization().getCommentFromAccountant().isEmpty()
+                ? "Not Available Now"
+                : this.shopManager.getShopOrganization().getCommentFromAccountant();
+        this.jTextArea1.setText(tmp);
+//        
 //        this.jTextField1.setText(restAdmin.getRestaurantName());
     }
 
@@ -44,6 +49,9 @@ public class ShopManagerAreaJPanel extends WorkArea {
         manageOrdersJButton = new javax.swing.JButton();
         enterpriseLabel1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         manageMenuJButton.setText("Manage Sale Items");
         manageMenuJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +73,12 @@ public class ShopManagerAreaJPanel extends WorkArea {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Shop:");
 
+        jLabel2.setText("Comment from Accountant:");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -80,8 +94,13 @@ public class ShopManagerAreaJPanel extends WorkArea {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(manageMenuJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(manageOrdersJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(508, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(manageOrdersJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(jLabel2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,10 +111,13 @@ public class ShopManagerAreaJPanel extends WorkArea {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(manageOrdersJButton)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(manageOrdersJButton)
+                            .addComponent(jLabel2))
                         .addGap(18, 18, 18)
-                        .addComponent(manageMenuJButton)))
-                .addContainerGap(327, Short.MAX_VALUE))
+                        .addComponent(manageMenuJButton))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(295, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -123,6 +145,9 @@ public class ShopManagerAreaJPanel extends WorkArea {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel enterpriseLabel1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton manageMenuJButton;
     private javax.swing.JButton manageOrdersJButton;
     // End of variables declaration//GEN-END:variables

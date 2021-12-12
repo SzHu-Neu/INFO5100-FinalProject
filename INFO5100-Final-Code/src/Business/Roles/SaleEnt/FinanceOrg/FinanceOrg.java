@@ -16,10 +16,16 @@ public class FinanceOrg {
 
     private ArrayList<Transaction> transactionHistory;
     private ArrayList<Accountant> accountantList;
+    private SaleEnt saleEnt;
+
+    public SaleEnt getSaleEnt() {
+        return saleEnt;
+    }
 
     public FinanceOrg(SaleEnt se) {
         this.transactionHistory = new ArrayList<Transaction>();
         this.accountantList = new ArrayList<Accountant>();
+        this.saleEnt = se;
     }
 
     public Accountant createAccountant() {

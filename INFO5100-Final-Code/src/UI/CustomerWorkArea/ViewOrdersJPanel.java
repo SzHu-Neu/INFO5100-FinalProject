@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Ekoxier
  */
 public class ViewOrdersJPanel extends javax.swing.JPanel {
-    
+
     private ArrayList<Order> orderList;
     private JDialog jdl;
     private Order selectedOrder;
@@ -151,6 +151,12 @@ public class ViewOrdersJPanel extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        int selectedRow = this.jTableOrderDetail.getSelectedRow();
+        if (selectedRow == -1) {
+            return;
+        }
+        this.selectedOrder.getDeliverItemsInfo().get(selectedRow).setReceived();
+        refreshJTableOrderDetail();
     }//GEN-LAST:event_jButton2ActionPerformed
     private void refreshJTableOrders() {
         Object OrderColNames[] = {"Date", "TotalPrice", "Shop"};
@@ -160,7 +166,7 @@ public class ViewOrdersJPanel extends javax.swing.JPanel {
             ordersDisplayData[idx][1] = this.orderList.get(idx).getTotalPrice(); // Price
             ordersDisplayData[idx][2] = this.orderList.get(idx).getShop(); // Shop
         }
-        
+
         this.jTableOrders.setModel(new DefaultTableModel(ordersDisplayData, OrderColNames) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -169,7 +175,7 @@ public class ViewOrdersJPanel extends javax.swing.JPanel {
         }
         );
     }
-    
+
     private void refreshJTableOrderDetail() {
         final ArrayList<DeliverItem> deliverItemsInfo = this.selectedOrder.getDeliverItemsInfo();
         int tableColumnNum = deliverItemsInfo.size();
@@ -201,10 +207,12 @@ public class ViewOrdersJPanel extends javax.swing.JPanel {
                 }
                 if (deliverItemsInfo.get(selectedRow).getCurrentStatus() == DeliverItem.DeliverItemStatus.Delivered) {
                     jButton2.setEnabled(true);
+                } else {
+                    jButton2.setEnabled(false);
                 }
             }
         });
-        this.jButton2.setEnabled(false);
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

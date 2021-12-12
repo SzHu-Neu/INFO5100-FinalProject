@@ -11,13 +11,14 @@ import Business.Roles.PurchaseEnt.UserOrg.UserOrg;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Ekoxier
  */
 public class CreditPaymentJPanel extends javax.swing.JPanel {
-    
+
     CustomerAreaJPanel caJpanel;
     JDialog jdl;
     CommerceSystem business;
@@ -45,7 +46,7 @@ public class CreditPaymentJPanel extends javax.swing.JPanel {
         this.userOrg = userOrg;
         refresh();
     }
-    
+
     private void refresh() {
         this.selectedCreditPaymentOrg = (CreditPaymentOrg) this.jComboBox1.getSelectedItem();
         int amount = this.selectedCreditPaymentOrg.checkMoneyOwed(this.userOrg);
@@ -149,6 +150,9 @@ public class CreditPaymentJPanel extends javax.swing.JPanel {
         // Pay the money
         int amount = Integer.parseInt(this.jTextField1.getText());
         selectedCreditPaymentOrg.addPaymentInfo(this.userOrg, "Pay", amount);
+        // Log
+        System.out.println("Pay money to credit payment org");
+        JOptionPane.showMessageDialog(this, "SUCCESS", "Result", -1);
         this.jdl.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -159,6 +163,7 @@ public class CreditPaymentJPanel extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+
         this.jdl.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
