@@ -10,6 +10,7 @@ import java.util.List;
 import Business.Roles.DeliveryEnt.TransportationOrg.TransportationManager;
 import Business.Roles.DeliveryEnt.TransportationOrg.Driver;
 import java.util.List;
+import java.util.ArrayList;
 /**
  *
  * @author Dom
@@ -21,6 +22,8 @@ public class TransportationOrg {
        
        public TransportationOrg(String name){
             this.name = name;
+            this.driverList = new ArrayList<Driver>();
+            this.transManagerList = new ArrayList<TransportationManager>();
         }
         
        public Driver createDriver(){

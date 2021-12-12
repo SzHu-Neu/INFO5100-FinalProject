@@ -9,6 +9,8 @@ import Business.CommerceSystem;
 import Business.Roles.DeliveryEnt.DistributionOrg.DistributionManager;
 import Business.Roles.Role;
 import Business.UserAccount.UserAccount;
+import Business.Roles.DeliveryEnt.DistributionOrg.DistributionOrg;
+import Business.Roles.DeliveryEnt.DeliveryEnt;
 import UI.WorkArea;
 
 /**
@@ -16,13 +18,20 @@ import UI.WorkArea;
  * @author sichengzhou
  */
 public class DistributionManagerAreaJPanel extends WorkArea {
-
+    
+    DistributionManager distributionManager;
+    DistributionOrg distributionOrg;
+    DeliveryEnt deliverEnt;
     /**
      * Creates new form DistributionManagerAreaJPanel
      */
     public DistributionManagerAreaJPanel(UserAccount account, CommerceSystem business, Role role) {
         super(account, business, role);
         initComponents();
+        this.distributionManager = (DistributionManager) role;
+        this.distributionOrg = this.distributionManager.getDistributionOrg();
+        this.deliverEnt = this.distributionManager.getDistributionOrg().getDeliveryEnt();
+
     }
 
     

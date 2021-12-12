@@ -12,6 +12,7 @@ import Business.Roles.DeliveryEnt.TransportationOrg.TransportationOrg;
 import Business.Roles.DeliveryEnt.TransportationOrg.TransportationManager;
 import Business.Roles.DeliveryEnt.DeliveryEnt;
 import java.util.List;
+import java.util.ArrayList;
 /**
  *
  * @author Dom
@@ -21,13 +22,20 @@ public class DistributionOrg {
     private List<DistributionManager> managerList;
     private List<TransportationOrg> transOrgList;
     private DeliveryEnt delivertEnterprise;
-    public DistributionOrg(String name){
+    public DistributionOrg(DeliveryEnt de, String name){
+        this.delivertEnterprise = de;
         this.name = name;
+        this.managerList = new ArrayList<DistributionManager>();
+        this.transOrgList = new ArrayList<TransportationOrg>();
+        
     }
     public List<DistributionManager> getManagerList() {
         return managerList;
     }    
     
+    public DeliveryEnt getDeliveryEnt(){
+        return delivertEnterprise;
+    }
     public List<TransportationOrg> getTransportationOrgList() {
         return transOrgList;
     }    

@@ -22,7 +22,10 @@ public class DistributionManager extends Role {
         super(Role.Type.DistributionManager);
         this.distributionOrg = org;
     }
-
+    
+    public DistributionOrg getDistributionOrg(){
+        return distributionOrg;
+    }
     @Override
     public JPanel createWorkArea(UserAccount account, CommerceSystem business, Role role) {
         return new DistributionManagerAreaJPanel(account, business, this);

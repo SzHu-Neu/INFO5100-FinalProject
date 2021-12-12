@@ -19,7 +19,7 @@ public class DeliveryEnt {
     private DistributionOrg disOrg;
     
     public DeliveryEnt(String name){
-        this.disOrg = new DistributionOrg(name);
+        this.disOrg = new DistributionOrg(this,name);
     }
 
     public DistributionOrg getDistributionOrg(){
