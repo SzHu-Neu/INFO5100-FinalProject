@@ -25,9 +25,13 @@ public class AdditionalInfo {
     private InDeliverOrganization fromOrg;
     private InDeliverOrganization toOrg;
     private DeliveryEnt deliveryEnt;
+
+    public void setDeliveryEnt(DeliveryEnt deliveryEnt) {
+        this.deliveryEnt = deliveryEnt;
+    }
     private ArrayList<DeliverTimeline> timelines; // Timelines that record the delivery procedure
 
-    AdditionalInfo(InDeliverOrganization fromOrg, InDeliverOrganization toOrg, DeliverItem deliverItemBelonged) {
+    public AdditionalInfo(InDeliverOrganization fromOrg, InDeliverOrganization toOrg, DeliverItem deliverItemBelonged) {
         this.fromOrg = fromOrg;
         this.toOrg = toOrg;
         this.deliveryEnt = null;

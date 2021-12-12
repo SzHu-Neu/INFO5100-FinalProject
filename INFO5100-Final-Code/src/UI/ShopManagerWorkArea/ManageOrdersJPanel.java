@@ -6,6 +6,7 @@ package UI.ShopManagerWorkArea;
 
 import Business.CommerceSystem;
 import Business.Order.Order;
+import Business.Roles.DeliveryEnt.DeliveryEnt;
 
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
@@ -21,28 +22,34 @@ import javax.swing.table.DefaultTableModel;
 public class ManageOrdersJPanel extends javax.swing.JPanel {
 
     ArrayList<Order> orderList;
+    DeliveryEnt selectedDeliveryEnt;
 
     /**
      * Creates new form ManageOrdersJPanel
+     *
+     * @param orderList
+     * @param system
      */
     public ManageOrdersJPanel(ArrayList<Order> orderList, CommerceSystem system) {
         initComponents();
         this.orderList = orderList;
-//        DefaultComboBoxModel restaurantComboBoxModel = new DefaultComboBoxModel(system.getDeliveryManDirectory().getDmList().toArray());
-//        this.deliverManJComboBox.setModel(restaurantComboBoxModel);
+        DefaultComboBoxModel deliveryComboBoxModel = new DefaultComboBoxModel();
+        this.jComboBoxDelivery.setModel(deliveryComboBoxModel);
+        this.selectedDeliveryEnt = (DeliveryEnt) this.jComboBoxDelivery.getSelectedItem();
         refreshTable();
     }
 
     private void refreshTable() {
         Object ordersDisplayData[][] = new Object[this.orderList.size()][4];
 
-//        for (int idx = 0; idx < orderList.size(); idx++) {
-//            ordersDisplayData[idx][0] = this.orderList.get(idx).getOrderDate(); // Date
-//            ordersDisplayData[idx][1] = this.orderList.get(idx).getTotalPrice(); // Price  
-//            ordersDisplayData[idx][2] = this.orderList.get(idx).getStatus().toString(); // Status
-//            ordersDisplayData[idx][3] = this.orderList.get(idx).getDeliveryMan() == null ? "None" : this.orderList.get(idx).getDeliveryMan().getNickName(); // Status
-//        }
-        Object OrderColNames[] = {"Date", "TotalPrice", "Status", "Delivery Man"};
+        for (int idx = 0; idx < orderList.size(); idx++) {
+            ordersDisplayData[idx][0] = this.orderList.get(idx).getCheckoutDate(); // Date
+            ordersDisplayData[idx][1] = this.orderList.get(idx).getTotalPrice(); // Price  
+            ordersDisplayData[idx][2] = this.orderList.get(idx).getUserOrg(); // Customer
+            ordersDisplayData[idx][3] = this.orderList.get(idx).getIsProcessed() ? "Processed" : "NotProcessed"; // isProcessed
+        }
+        Object OrderColNames[] = {"Date", "TotalPrice", "Customer", "IsProcessed"};
+        
         this.ordersJTable.setModel(new DefaultTableModel(ordersDisplayData, OrderColNames) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -75,7 +82,7 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         ordersJTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxDelivery = new javax.swing.JComboBox<>();
 
         ordersJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -94,8 +101,18 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
         jLabel1.setText("Orders");
 
         jButton1.setText("Send through");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxDelivery.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxDelivery.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxDeliveryActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -107,9 +124,9 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jButton1)
-                            .addGap(18, 18, 18)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jComboBoxDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(140, Short.MAX_VALUE))
         );
@@ -123,15 +140,32 @@ public class ManageOrdersJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxDelivery, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(98, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = this.ordersJTable.getSelectedRow();
+        if (selectedRow == -1) {
+            return;
+        }
+        this.orderList.get(selectedRow).orderSetDeliveryEnt(this.selectedDeliveryEnt);
+        this.orderList.get(selectedRow).setProcessed();
+        // Log
+        System.out.printf("Process the order \n");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBoxDeliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDeliveryActionPerformed
+        // TODO add your handling code here:
+        this.selectedDeliveryEnt = (DeliveryEnt) this.jComboBoxDelivery.getSelectedItem();
+    }//GEN-LAST:event_jComboBoxDeliveryActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBoxDelivery;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable ordersJTable;
