@@ -17,12 +17,12 @@ import UI.CustomerWorkArea.CustomerAreaJPanel;
  */
 
 public class Customer extends Role {
-    
+
     private ArrayList<Order> ordersInCustomer;
     private String phone;
     private String name;
     private UserOrg userOrg;
-    
+
     public Customer(String name, String phone, UserOrg userOrg) {
         super(Role.Type.Customer);
         this.ordersInCustomer = new ArrayList<Order>();
@@ -30,18 +30,19 @@ public class Customer extends Role {
         this.phone = phone;
         this.userOrg = userOrg;
     }
-    
-    public ArrayList<Order> getValidOrders() {
-        ArrayList<Order> tmpList = new ArrayList<Order>();
-        for (Order odr : ordersInCustomer) {
-            if (odr.getCheckoutDate() != null) {
-                // DID NOT CHECKOUT
-                tmpList.add(odr);
-            }
-        }
-        return tmpList;
+
+    public ArrayList<Order> getOrders() {
+//        ArrayList<Order> tmpList = new ArrayList<Order>();
+//        for (Order odr : ordersInCustomer) {
+//            if (odr.getCheckoutDate() != null) {
+//                // DID NOT CHECKOUT
+//                tmpList.add(odr);
+//            }
+//        }
+//        return tmpList;
+        return this.ordersInCustomer;
     }
-    
+
     public void checkOut(Order order) {
         this.ordersInCustomer.add(order);
         CommerceSystem system = this.userOrg.getPurchaseEnt().getSystem();
@@ -51,26 +52,26 @@ public class Customer extends Role {
         // Add a transaction
         order.getShop().getSaleEnterprise().getFinanceOrg().addTransaction(order.getTotalPrice(), "Bought Income");
     }
-    
+
     public String getPhone() {
         return phone;
     }
-    
+
     public String getName() {
         return name;
     }
-    
+
     public UserOrg getUserOrg() {
         return userOrg;
     }
-    
+
     public ArrayList<Order> getOrdersInCustomer() {
         return ordersInCustomer;
     }
-    
+
     @Override
     public JPanel createWorkArea(UserAccount account, CommerceSystem business, Role role) {
         return new CustomerAreaJPanel(account, business, this);
     }
-    
+
 }

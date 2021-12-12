@@ -16,8 +16,8 @@ public class PurchaseEnt {
     private UserOrg userOrg;
     private CommerceSystem system;
 
-    public PurchaseEnt(String name, String address, CommerceSystem system) {
-        this.userOrg = new UserOrg(name, address, this);
+    public PurchaseEnt(String name, String address, String phone, CommerceSystem system) {
+        this.userOrg = new UserOrg(name, address, phone, this);
         this.system = system;
     }
 

@@ -24,6 +24,12 @@ public class FinanceEntDirectory {
         this.financeEntList = new ArrayList<FinanceEnt>();
     }
 
+    public FinanceEnt createFinanceEnt(String name) {
+        FinanceEnt fe = new FinanceEnt(name);
+        this.financeEntList.add(fe);
+        return fe;
+    }
+
     public CommerceSystem getSystem() {
         return system;
     }

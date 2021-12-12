@@ -10,13 +10,16 @@ import Business.Roles.FinanceEnt.CreditPaymentOrg.CreditPaymentOrg;
 import Business.Roles.PurchaseEnt.UserOrg.UserOrg;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JDialog;
 
 /**
  *
  * @author Ekoxier
  */
 public class CheckoutOrderJPanel extends javax.swing.JPanel {
-
+    
+    CustomerAreaJPanel caJpanel;
+    JDialog jdl;
     CommerceSystem business;
     ArrayList<CreditPaymentOrg> cpos;
     UserOrg userOrg;
@@ -25,9 +28,18 @@ public class CheckoutOrderJPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form CheckoutOrderJPanel
+     *
+     * @param userOrg
+     * @param business
+     * @param totalPrice
+     * @param selectedOrder
+     * @param jdl
+     * @param caJPanel
      */
-    public CheckoutOrderJPanel(UserOrg userOrg, CommerceSystem business, int totalPrice, Order selectedOrder) {
+    public CheckoutOrderJPanel(UserOrg userOrg, CommerceSystem business, int totalPrice, Order selectedOrder, JDialog jdl, CustomerAreaJPanel caJPanel) {
         initComponents();
+        this.caJpanel = caJPanel;
+        this.jdl = jdl;
         this.jTextField1.setText(String.valueOf(totalPrice));
         this.jTextField1.setEnabled(false);
         this.business = business;
@@ -134,21 +146,17 @@ public class CheckoutOrderJPanel extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        this.jdl.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         CreditPaymentOrg selectedCreditPaymentOrg = (CreditPaymentOrg) this.jComboBox1.getSelectedItem();
         selectedCreditPaymentOrg.addPaymentInfo(this.userOrg, "Description", this.totalPrice);
-        this.selectedOrder.chekoutOrder();
-//        this.selectedOrder.
-//            this.selectedShop.addOrderInshop(curOrder);
-//            this.curOrder.setCheckoutDate(new Date());
-//            this.curOrder = new Order(this.curCustomer.getUserOrg()); // Place a new unassigned order to be processed
-//            this.refreshOrderTable();
-//            JOptionPane.showMessageDialog(this, "SUCCESS", "Result", -1);
-        this.setVisible(false);
+        this.jdl.dispose();
+        this.caJpanel.processAfterCheckoutOk();
+//        this.selectedOrder.chekoutOrder();
+        this.userOrg.getCustomer().checkOut(selectedOrder);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

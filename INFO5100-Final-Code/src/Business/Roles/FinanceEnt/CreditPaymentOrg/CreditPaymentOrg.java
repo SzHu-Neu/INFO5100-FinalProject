@@ -17,10 +17,12 @@ public class CreditPaymentOrg {
 
     private ArrayList<PaymentManager> paymentManagerList;
     private ArrayList<SinglePaymentInfo> paymentInfos;
+    private String name;
 
-    public CreditPaymentOrg() {
+    public CreditPaymentOrg(String name) {
         this.paymentManagerList = new ArrayList<PaymentManager>();
         this.paymentInfos = new ArrayList<SinglePaymentInfo>();
+        this.name = name;
     }
 
     public PaymentManager addPaymentManager() {
@@ -60,5 +62,10 @@ public class CreditPaymentOrg {
         public int getPrice() {
             return price;
         }
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }

@@ -14,23 +14,17 @@ import java.util.ArrayList;
  */
 public class UserOrg extends InDeliverOrganization {
 
-    private ArrayList<Customer> customerList;
+    private Customer customer; // Only one
     private PurchaseEnt purchaseEnt;
 
-    public UserOrg(String name, String address, PurchaseEnt pe) {
+    public UserOrg(String name, String address, String phone, PurchaseEnt pe) {
         super(name, address);
-        this.customerList = new ArrayList<Customer>();
+        this.customer = new Customer(name, phone, this);
         this.purchaseEnt = pe;
     }
 
-    public Customer addCustomer(String name, String phone) {
-        Customer tmp = new Customer(name, phone, this);
-        this.customerList.add(tmp);
-        return tmp;
-    }
-
-    public ArrayList<Customer> getCustomerList() {
-        return customerList;
+    public Customer getCustomer() {
+        return this.customer;
     }
 
     public PurchaseEnt getPurchaseEnt() {

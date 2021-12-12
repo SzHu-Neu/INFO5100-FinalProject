@@ -26,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
  * @author raunak
  */
 public class CustomerAreaJPanel extends WorkArea {
-
+    
     private ArrayList<ShopOrg> shops;
     private Order curOrder;
     private Customer curCustomer;
@@ -52,10 +52,24 @@ public class CustomerAreaJPanel extends WorkArea {
         this.curOrder = new Order(this.curCustomer.getUserOrg());
         DefaultComboBoxModel shopComboBoxModel = new DefaultComboBoxModel(business.getSaleEntDirectory().getAllShops().toArray());
         this.shopJComboBox.setModel(shopComboBoxModel);
-//        this.selectedRest = (Restaurant) this.restaurantJComboBox.getSelectedItem();
+        this.selectedShop = (ShopOrg) this.shopJComboBox.getSelectedItem();
         refreshSaleItemsTable();
     }
+    
+    public void setCurOrder(Order order) {
+        this.curOrder = order;
+    }
 
+    // This is a function that process after clicking OK in CheckoutOrderJPanel.
+    public void processAfterCheckoutOk() {
+        this.curOrder.setShop(selectedShop);
+        this.selectedShop.addOrderInshop(curOrder);
+        this.curOrder.setCheckoutDate(new Date());
+        this.curOrder = new Order(this.curCustomer.getUserOrg()); // Place a new unassigned order to be processed
+        this.refreshOrderTable();
+        JOptionPane.showMessageDialog(this, "SUCCESS", "Result", -1);
+    }
+    
     private void refreshOrderTable() {
         int tableColumnNum = this.curOrder.getOrderItemInfo().size();
         if (tableColumnNum != 0) {
@@ -76,7 +90,7 @@ public class CustomerAreaJPanel extends WorkArea {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
-
+                
             }
         }
         );
@@ -89,11 +103,11 @@ public class CustomerAreaJPanel extends WorkArea {
                 minusNumberJButton.setEnabled(true);
             }
         });
-
+        
         this.addNumberJButton.setEnabled(false);
         this.minusNumberJButton.setEnabled(false);
     }
-
+    
     private void refreshSaleItemsTable() {
         this.selectedShop = (ShopOrg) this.shopJComboBox.getSelectedItem();
         int tableColumnNum = this.selectedShop.getSaleItemList().size();
@@ -105,7 +119,7 @@ public class CustomerAreaJPanel extends WorkArea {
             rowDataItems[idx][2] = this.selectedShop.getSaleItemList().get(idx).getRemainNumber(); // RemainNumber
             rowDataItems[idx][3] = this.selectedShop.getSaleItemList().get(idx).getDescription(); // Description
         }
-
+        
         this.saleJtable.setModel(new DefaultTableModel(rowDataItems, ColNames) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -324,7 +338,7 @@ public class CustomerAreaJPanel extends WorkArea {
     private void checkAllOrderJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkAllOrderJButtonActionPerformed
         // TODO add your handling code here:
         JDialog jdl = new JDialog();
-        jdl.add(new ViewOrdersJPanel(this.curCustomer.getValidOrders()));
+        jdl.add(new ViewOrdersJPanel(this.curCustomer.getOrders(), jdl));
         jdl.setSize(800, 600);
         jdl.setModal(true);
         jdl.setLocationRelativeTo(null);
@@ -334,10 +348,10 @@ public class CustomerAreaJPanel extends WorkArea {
     private void checkoutJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutJButtonActionPerformed
         // TODO add your handling code here:
         JDialog jdl = new JDialog();
-        jdl.add(new CheckoutOrderJPanel(this.curCustomer.getUserOrg(), this.business, this.curOrder.getTotalPrice(), this.curOrder));
-        jdl.setSize(800, 600);
+        jdl.add(new CheckoutOrderJPanel(this.curCustomer.getUserOrg(), this.business, this.curOrder.getTotalPrice(), this.curOrder, jdl, this));
+        jdl.setSize(400, 300);
         jdl.setModal(true);
-        jdl.setLocationRelativeTo(null);
+        jdl.setLocationRelativeTo(this);
         jdl.setVisible(true);
 //            this.curOrder.chekoutOrder();
 //            this.selectedShop.addOrderInshop(curOrder);

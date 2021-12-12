@@ -25,8 +25,8 @@ public class PurchaseEntDirectory {
         return system;
     }
 
-    public PurchaseEnt createPurchaseEnt(String name, String address, CommerceSystem system) {
-        PurchaseEnt tmp = new PurchaseEnt(name, address, system);
+    public PurchaseEnt createPurchaseEnt(String name, String address, String phone, CommerceSystem system) {
+        PurchaseEnt tmp = new PurchaseEnt(name, address, phone, system);
         purchaseEntList.add(tmp);
         return tmp;
     }
