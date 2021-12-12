@@ -35,32 +35,47 @@ public class CreditPaymentOrg {
         return this.paymentInfos;
     }
 
+    public int checkMoneyOwed(UserOrg targetedUserOrg) {
+        int amount = 0;
+        for (SinglePaymentInfo spi : paymentInfos) {
+            if (spi.getUserOrg().equals(targetedUserOrg)) {
+                if (spi.info.equals("Buy")) {
+                    amount += spi.getAmount();
+                } else if (spi.info.equals("Pay") || spi.info.equals("Return")) {
+                    amount -= spi.getAmount();
+                }
+            }
+        }
+        return amount;
+    }
+
     public void addPaymentInfo(UserOrg userOrg, String description, int price) {
         this.paymentInfos.add(new SinglePaymentInfo(userOrg, description, price));
     }
 
     public class SinglePaymentInfo {
 
-        private String description;
+        private String info;
         private UserOrg userOrg;
-        private int price;
 
-        SinglePaymentInfo(UserOrg userOrg, String description, int price) {
+        private int amount;
+
+        SinglePaymentInfo(UserOrg userOrg, String description, int amount) {
             this.userOrg = userOrg;
-            this.description = description;
-            this.price = price;
+            this.info = description;
+            this.amount = amount;
         }
 
-        public String getDescription() {
-            return description;
+        public String getInfo() {
+            return info;
         }
 
         public UserOrg getUserOrg() {
             return userOrg;
         }
 
-        public int getPrice() {
-            return price;
+        public int getAmount() {
+            return amount;
         }
     }
 

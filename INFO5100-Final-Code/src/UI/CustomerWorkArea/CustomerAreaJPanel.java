@@ -26,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
  * @author raunak
  */
 public class CustomerAreaJPanel extends WorkArea {
-    
+
     private ArrayList<ShopOrg> shops;
     private Order curOrder;
     private Customer curCustomer;
@@ -55,7 +55,7 @@ public class CustomerAreaJPanel extends WorkArea {
         this.selectedShop = (ShopOrg) this.shopJComboBox.getSelectedItem();
         refreshSaleItemsTable();
     }
-    
+
     public void setCurOrder(Order order) {
         this.curOrder = order;
     }
@@ -69,7 +69,7 @@ public class CustomerAreaJPanel extends WorkArea {
         this.refreshOrderTable();
         JOptionPane.showMessageDialog(this, "SUCCESS", "Result", -1);
     }
-    
+
     private void refreshOrderTable() {
         int tableColumnNum = this.curOrder.getOrderItemInfo().size();
         if (tableColumnNum != 0) {
@@ -90,7 +90,7 @@ public class CustomerAreaJPanel extends WorkArea {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
-                
+
             }
         }
         );
@@ -103,11 +103,11 @@ public class CustomerAreaJPanel extends WorkArea {
                 minusNumberJButton.setEnabled(true);
             }
         });
-        
+
         this.addNumberJButton.setEnabled(false);
         this.minusNumberJButton.setEnabled(false);
     }
-    
+
     private void refreshSaleItemsTable() {
         this.selectedShop = (ShopOrg) this.shopJComboBox.getSelectedItem();
         int tableColumnNum = this.selectedShop.getSaleItemList().size();
@@ -119,7 +119,7 @@ public class CustomerAreaJPanel extends WorkArea {
             rowDataItems[idx][2] = this.selectedShop.getSaleItemList().get(idx).getRemainNumber(); // RemainNumber
             rowDataItems[idx][3] = this.selectedShop.getSaleItemList().get(idx).getDescription(); // Description
         }
-        
+
         this.saleJtable.setModel(new DefaultTableModel(rowDataItems, ColNames) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -127,15 +127,15 @@ public class CustomerAreaJPanel extends WorkArea {
             }
         }
         );
-        ListSelectionModel cellSelectionModel = this.saleJtable.getSelectionModel();
-        cellSelectionModel.clearSelection();
-        cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                System.out.println("Selected: ");
-            }
-        });
+//        ListSelectionModel cellSelectionModel = this.saleJtable.getSelectionModel();
+//        cellSelectionModel.clearSelection();
+//        cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//        cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
+//            @Override
+//            public void valueChanged(ListSelectionEvent e) {
+//                System.out.println("Selected: ");
+//            }
+//        });
     }
 
     /**
@@ -161,6 +161,7 @@ public class CustomerAreaJPanel extends WorkArea {
         checkAllOrderJButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         numberJSpinner = new javax.swing.JSpinner();
+        jbtViewCreditPayment = new javax.swing.JButton();
 
         saleJtable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -250,6 +251,14 @@ public class CustomerAreaJPanel extends WorkArea {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Order");
 
+        jbtViewCreditPayment.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        jbtViewCreditPayment.setText("View CreditPayment");
+        jbtViewCreditPayment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtViewCreditPaymentActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -268,17 +277,23 @@ public class CustomerAreaJPanel extends WorkArea {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(checkAllOrderJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(checkoutJButton)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(minusNumberJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(addNumberJButton))))
-                .addContainerGap(15, Short.MAX_VALUE))
+                            .addComponent(minusNumberJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(addNumberJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(checkAllOrderJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbtViewCreditPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,7 +304,9 @@ public class CustomerAreaJPanel extends WorkArea {
                         .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(shopJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(checkAllOrderJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(checkAllOrderJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbtViewCreditPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(menuJLable)
@@ -389,6 +406,17 @@ public class CustomerAreaJPanel extends WorkArea {
         this.refreshSaleItemsTable();
     }//GEN-LAST:event_shopJComboBoxActionPerformed
 
+    private void jbtViewCreditPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtViewCreditPaymentActionPerformed
+        // TODO add your handling code here:
+//        
+        JDialog jdl = new JDialog();
+        jdl.add(new CreditPaymentJPanel(this.curCustomer.getUserOrg(), this.business, jdl, this));
+        jdl.setSize(400, 300);
+        jdl.setModal(true);
+        jdl.setLocationRelativeTo(this);
+        jdl.setVisible(true);
+    }//GEN-LAST:event_jbtViewCreditPaymentActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addNumberJButton;
     private javax.swing.JButton addToOrderJButton;
@@ -398,6 +426,7 @@ public class CustomerAreaJPanel extends WorkArea {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton jbtViewCreditPayment;
     private javax.swing.JLabel menuJLable;
     private javax.swing.JButton minusNumberJButton;
     private javax.swing.JSpinner numberJSpinner;

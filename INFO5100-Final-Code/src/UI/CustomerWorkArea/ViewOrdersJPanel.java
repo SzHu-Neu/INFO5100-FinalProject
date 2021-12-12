@@ -135,11 +135,12 @@ public class ViewOrdersJPanel extends javax.swing.JPanel {
         refreshJTableOrderDetail();
     }//GEN-LAST:event_jButton1ActionPerformed
     private void refreshJTableOrders() {
-        Object OrderColNames[] = {"Date", "TotalPrice"};
+        Object OrderColNames[] = {"Date", "TotalPrice", "Shop"};
         Object ordersDisplayData[][] = new Object[this.orderList.size()][OrderColNames.length];
         for (int idx = 0; idx < orderList.size(); idx++) {
             ordersDisplayData[idx][0] = this.orderList.get(idx).getCheckoutDate() != null ? orderList.get(idx).getCheckoutDate() : ""; // Date
             ordersDisplayData[idx][1] = this.orderList.get(idx).getTotalPrice(); // Price
+            ordersDisplayData[idx][2] = this.orderList.get(idx).getShop(); // Shop
         }
 
         this.jTableOrders.setModel(new DefaultTableModel(ordersDisplayData, OrderColNames) {
