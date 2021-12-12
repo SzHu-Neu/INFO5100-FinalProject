@@ -4,7 +4,6 @@
  */
 package Business.Roles.DeliveryEnt;
 
-import Business.Order.DeliverItem;
 import Business.Roles.DeliveryEnt.DistributionOrg.DistributionOrg;
 import java.util.ArrayList;
 
@@ -14,24 +13,14 @@ import java.util.ArrayList;
  */
 public class DeliveryEnt {
     
-    private ArrayList<DeliverItem> deliverItems;
-    
     private DistributionOrg disOrg;
     
     public DeliveryEnt(String name){
-        this.disOrg = new DistributionOrg(name);
+        this.disOrg = new DistributionOrg(this,name);
     }
 
     public DistributionOrg getDistributionOrg(){
         return disOrg;
     } 
-
-    public void addWorkRequest(DeliverItem e) {
-        this.deliverItems.add(e);
-    }
-
-    public void addDeliverItem(DeliverItem di){
-        this.deliverItems.add(di);
-    }
 
 }
