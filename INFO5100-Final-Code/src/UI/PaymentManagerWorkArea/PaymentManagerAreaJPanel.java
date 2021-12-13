@@ -49,13 +49,13 @@ public class PaymentManagerAreaJPanel extends WorkArea {
 
         JTableCreditPayment.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Name", "Price"
+                "PaymentInfo", "Amount", "FromOrg", "Time"
             }
         ));
         jScrollPane1.setViewportView(JTableCreditPayment);
